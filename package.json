@@ -9,6 +9,8 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@maplibre/maplibre-gl-geocoder": "^1.9.0",
+    "@stadiamaps/maplibre-search-box": "^3.1.0",
     "maplibre-gl": "^5.7.3",
     "next": "15.5.3",
     "react": "19.1.0",
