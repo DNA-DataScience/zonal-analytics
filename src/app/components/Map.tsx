@@ -1,169 +1,185 @@
 "use client";
-import React, {useEffect, useRef} from 'react';
-import maplibregl, { Map as MapType } from 'maplibre-gl'
-//import 'maplibre-gl/dist/maplibre-gl.css';
-import MaplibreGeocoder, {
-    CarmenGeojsonFeature,
-    MaplibreGeocoderApiConfig,
-    MaplibreGeocoderFeatureResults
-} from '@maplibre/maplibre-gl-geocoder';
+import React, { useEffect, useRef } from "react";
+import maplibregl, { LngLatBoundsLike, Map as MapType } from "maplibre-gl";
+import { geoCoder } from "../lib/Geocoder";
+import MaplibreGeocoder from "@maplibre/maplibre-gl-geocoder";
 
-const geo = {
-    // required
-    forwardGeocode: async (config: MaplibreGeocoderApiConfig) => {
-        const features: MaplibreGeocoderFeatureResults = {
-            type: "FeatureCollection",
-            features: []
-        }
-        // const features = []
-        try {
-            // More info about the Nominatim API: https://nominatim.org/release-docs/develop/api/Search/
-            // Please respect their usage policy: https://operations.osmfoundation.org/policies/nominatim/
-            const request =
-            `https://nominatim.openstreetmap.org/search?q=${
-                config.query
-            }&format=geojson&polygon_geojson=1&addressdetails=1`;
-            const response = await fetch(request);
-            const geojson = await response.json();
-            for (const feature of geojson.features) {
-                const center = [
-                    feature.bbox[0] +
-                (feature.bbox[2] - feature.bbox[0]) / 2,
-                    feature.bbox[1] +
-                (feature.bbox[3] - feature.bbox[1]) / 2
-                ];
-                const point: CarmenGeojsonFeature = {
-                    id: "",
-                    type: 'Feature',
-                    geometry: {
-                        type: 'Point',
-                        coordinates: center,
-                    },
-                    place_name: feature.properties.display_name,
-                    properties: feature.properties,
-                    text: feature.properties.display_name,
-                    place_type: ['place']
-                    //center: center
-                };
-                features.features.push(point);
-                // features.push(point);
-            }
-        } catch (e) {
-            console.error(`Failed to forwardGeocode with error: ${e}`); 
-        }
-        return features;
-        // return {
-        //     features
-        // };
-    },
-    // optional
-    // reverseGeocode: async (config) => { /* definition here */ }, // reverse geocoding API
-    // getSuggestions: async (config) => { /* definition here */ }, // suggestion API
-    // searchByPlaceId: async (config) => { /* definition here */ } // search by Place ID API
-};
+const INDIA_BOUNDS: LngLatBoundsLike = [
+  [68.17665, 6.747139], // SW [lng, lat]
+  [97.40256, 35.495405], // NE [lng, lat]
+];
 
 const Map: React.FC = () => {
-    const mapContainerRef = useRef<HTMLDivElement>(null);
-    const mapRef = useRef<MapType | null>(null);
+  const mapContainerRef = useRef<HTMLDivElement>(null);
+  const mapRef = useRef<MapType | null>(null);
 
-    useEffect(() => {
-        if (mapRef.current || !mapContainerRef.current) return; // initialize only once
+  useEffect(() => {
+    if (mapRef.current || !mapContainerRef.current) return; // initialize only once
 
-        const map = new maplibregl.Map({
-            container: mapContainerRef.current,
-            // You can get a free key from https://www.maptiler.com/
-            // I recommend storing it in an environment variable.
-            style: `https://tiles.openfreemap.org/styles/bright`,
-            center: [78.9629, 20.5937], // India center [lng, lat]
-            zoom: 4,
-            pitch: 45,
-            bearing: -17.6,
-        });
-        mapRef.current = map;
+    const map = new maplibregl.Map({
+      container: mapContainerRef.current,
+      // You can get a free key from https://www.maptiler.com/
+      // I recommend storing it in an environment variable.
+      style: `https://tiles.openfreemap.org/styles/liberty`,
+      center: [78.9629, 20.5937], // India center [lng, lat]
+      zoom: 4,
+      // pitch: 45,
+      // bearing: -17.6,
+      //Performance helpers to load only India on map:
+      renderWorldCopies: false,
+      maxBounds: INDIA_BOUNDS,
+      // crossSourceCollisions: false,
+    });
+    mapRef.current = map;
 
-        map.on('load', () => {
-            if (!mapRef.current) return;
+    map.on("load", () => {
+      if (!mapRef.current) return;
 
-            map.addControl(new maplibregl.NavigationControl(), 'top-right');
+      map.addControl(new maplibregl.NavigationControl(), "top-right");
 
-            map.addControl(new MaplibreGeocoder(geo, {
-                maplibregl,
-            }), 'top-left');
+      map.addControl(
+        new MaplibreGeocoder(geoCoder, {
+          maplibregl,
+        }),
+        "top-left",
+      );
 
-            const layers = map.getStyle().layers;
-            let labelLayerId = '';
-            for (const layer of layers) {
-                if (layer.type === 'symbol' && layer.layout && layer.layout['text-field']) {
-                    labelLayerId = layer.id;
-                    break;
-                }
-            }
+      //Optional zoom limit
+      map.setMaxZoom(18);
 
-            // Add state boundaries
-            map.addLayer({
-                id: 'state-boundaries',
-                type: 'line',
-                source: 'openmaptiles',
-                'source-layer': 'boundary',
-                filter: ['==', 'admin_level', 4],
-                paint: {
-                    'line-color': '#4A5568', // A shade of gray
-                    'line-width': 1.5,
-                    'line-dasharray': [2, 1],
-                }
-            }, labelLayerId);
+      const layers = map.getStyle().layers;
+      let labelLayerId = "";
+      for (const layer of layers) {
+        if (
+          layer.type === "symbol" &&
+          layer.layout &&
+          layer.layout["text-field"]
+        ) {
+          labelLayerId = layer.id;
+          break;
+        }
+      }
 
-            // Helper to safely add a layer before labels
-            // const addBelowLabels = (layer: maplibregl.LayerSpecification) => {
-            //     if (labelLayerId) {
-            //         map.addLayer(layer, labelLayerId);
-            //     } else {
-            //         map.addLayer(layer);
-            //     }
-            // };
+      const addBelowLabels = (
+        layer: maplibregl.LayerSpecification,
+        beforeId?: string,
+      ) => {
+        if (beforeId) map.addLayer(layer, beforeId);
+        else map.addLayer(layer);
+      };
 
-            // Forests (from landuse, class=forest)
-            map.addLayer({
-                id: 'landuse-forest-fill',
-                type: 'fill',
-                source: 'openmaptiles',
-                'source-layer': 'landcover',
-                filter: ['==', ['get', 'class'], 'wood'],
-                paint: {
-                    'fill-color': '#1fcc31',
-                    'fill-opacity': 1.0,
-                    'fill-outline-color': '#000000',
-                },
-            });
+      // Add state boundaries
+      addBelowLabels(
+        {
+          id: "state-boundaries",
+          type: "line",
+          source: "openmaptiles",
+          "source-layer": "boundary",
+          // filter: ['==', 'admin_level', 4],
+          filter: [
+            "all",
+            ["==", ["to-string", ["get", "admin_level"]], "4"],
+            ["!=", ["get", "maritime"], 1],
+            ["!=", ["get", "disputed"], 1],
+          ],
+          paint: {
+            "line-color": "#4A5568", // A shade of gray
+            "line-width": [
+              "interpolate",
+              ["linear"],
+              ["zoom"],
+              4,
+              0.6,
+              8,
+              1.2,
+              12,
+              2,
+              16,
+              3,
+            ],
+            "line-dasharray": [2, 1],
+          },
+        },
+        labelLayerId,
+      );
 
-            // Military areas (from landuse, class=military)
-            map.addLayer({
-                id: 'landuse-military-fill',
-                type: 'fill',
-                source: 'openmaptiles',
-                'source-layer': 'landuse',
-                filter: ['==', ['get', 'class'], 'military'],
-                paint: {
-                    'fill-color': '#e74c3c',
-                    'fill-opacity': 1.0,
-                    'fill-outline-color': '#000000',
-                },
-            });
+      // Helper to safely add a layer before labels
+      // const addBelowLabels = (layer: maplibregl.LayerSpecification) => {
+      //     if (labelLayerId) {
+      //         map.addLayer(layer, labelLayerId);
+      //     } else {
+      //         map.addLayer(layer);
+      //     }
+      // };
 
+      // Forests (from landuse, class=forest)
+      addBelowLabels(
+        {
+          id: "landuse-forest-fill",
+          type: "fill",
+          source: "openmaptiles",
+          "source-layer": "landcover",
+          filter: ["==", ["get", "class"], "wood"],
+          minzoom: 6,
+          paint: {
+            "fill-color": "#1fcc31",
+            "fill-opacity": [
+              "interpolate",
+              ["linear"],
+              ["zoom"],
+              5,
+              0.4,
+              10,
+              0.6,
+              14,
+              0.7,
+            ],
+            //'fill-outline-color': '#000000', //This is costly
+          },
+        },
+        labelLayerId,
+      );
 
+      // Military areas (from landuse, class=military)
+      addBelowLabels(
+        {
+          id: "landuse-military-fill",
+          type: "fill",
+          source: "openmaptiles",
+          "source-layer": "landuse",
+          filter: ["==", ["get", "class"], "military"],
+          minzoom: 6,
+          paint: {
+            "fill-color": "#e74c3c",
+            "fill-opacity": [
+              "interpolate",
+              ["linear"],
+              ["zoom"],
+              5,
+              0.4,
+              10,
+              0.6,
+              14,
+              0.7,
+            ],
+            //'fill-outline-color': '#000000', //Costly
+          },
+        },
+        labelLayerId,
+      );
+    });
 
-        });
+    return () => {
+      if (mapRef.current) {
+        mapRef.current.remove();
+        mapRef.current = null;
+      }
+    };
+  }, []);
 
-        return () => {
-            if (mapRef.current) {
-                mapRef.current.remove();
-                mapRef.current = null;
-            }
-        };
-    }, []);
-
-    return <div ref={mapContainerRef} style={{width: '100vw', height: '100vh'}} />;
-
-}
+  return (
+    <div ref={mapContainerRef} style={{ width: "100vw", height: "100vh" }} />
+  );
+};
 
 export default Map;
