@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from "react";
 import maplibregl, { LngLatBoundsLike, Map as MapType } from "maplibre-gl";
 import { geoCoder } from "../lib/Geocoder";
 import MaplibreGeocoder from "@maplibre/maplibre-gl-geocoder";
+import { CoordsControl } from "@/app/components/CoordsControl";
 
 const INDIA_BOUNDS: LngLatBoundsLike = [
   [68.17665, 6.747139], // SW [lng, lat]
@@ -43,6 +44,8 @@ const Map: React.FC = () => {
         }),
         "top-left",
       );
+
+      map.addControl(new CoordsControl(), "bottom-left");
 
       //Optional zoom limit
       map.setMaxZoom(18);
@@ -113,56 +116,148 @@ const Map: React.FC = () => {
       // };
 
       // Forests (from landuse, class=forest)
-      addBelowLabels(
-        {
-          id: "landuse-forest-fill",
-          type: "fill",
-          source: "openmaptiles",
-          "source-layer": "landcover",
-          filter: ["==", ["get", "class"], "wood"],
-          minzoom: 6,
-          paint: {
-            "fill-color": "#1fcc31",
-            "fill-opacity": [
-              "interpolate",
-              ["linear"],
-              ["zoom"],
-              5,
-              0.4,
-              10,
-              0.6,
-              14,
-              0.7,
-            ],
-            //'fill-outline-color': '#000000', //This is costly
-          },
-        },
-        labelLayerId,
-      );
+      // addBelowLabels(
+      //   {
+      //     id: "landuse-forest-fill",
+      //     type: "fill",
+      //     source: "openmaptiles",
+      //     "source-layer": "landcover",
+      //     filter: ["==", ["get", "class"], "wood"],
+      //     minzoom: 6,
+      //     paint: {
+      //       "fill-color": "#1fcc31",
+      //       "fill-opacity": [
+      //         "interpolate",
+      //         ["linear"],
+      //         ["zoom"],
+      //         5,
+      //         0.4,
+      //         10,
+      //         0.6,
+      //         14,
+      //         0.7,
+      //       ],
+      //       //'fill-outline-color': '#000000', //This is costly
+      //     },
+      //   },
+      //   labelLayerId,
+      // );
+      //
+      // // Military areas (from landuse, class=military)
+      // addBelowLabels(
+      //   {
+      //     id: "landuse-military-fill",
+      //     type: "fill",
+      //     source: "openmaptiles",
+      //     "source-layer": "landuse",
+      //     filter: ["==", ["get", "class"], "military"],
+      //     minzoom: 6,
+      //     paint: {
+      //       "fill-color": "#e74c3c",
+      //       "fill-opacity": [
+      //         "interpolate",
+      //         ["linear"],
+      //         ["zoom"],
+      //         5,
+      //         0.4,
+      //         10,
+      //         0.6,
+      //         14,
+      //         0.7,
+      //       ],
+      //       //'fill-outline-color': '#000000', //Costly
+      //     },
+      //   },
+      //   labelLayerId,
+      // );
 
-      // Military areas (from landuse, class=military)
+      map.addSource("airport-tiles", {
+        type: "vector",
+        tiles: ["http://127.0.0.1:8000/tiles/{z}/{x}/{y}.mvt"],
+        minzoom: 0,
+        maxzoom: 14,
+      });
+
       addBelowLabels(
         {
-          id: "landuse-military-fill",
+          id: "airport-zones",
           type: "fill",
-          source: "openmaptiles",
-          "source-layer": "landuse",
-          filter: ["==", ["get", "class"], "military"],
-          minzoom: 6,
+          source: "airport-tiles",
+          "source-layer": "airport_layers",
+          filter: [
+            "all",
+            [
+              "any",
+              ["!=", ["get", "type"], "closed"],
+              [
+                "all",
+                ["==", ["get", "type"], "closed"],
+                ["==", ["get", "zone"], "inner"],
+              ],
+            ],
+          ],
+          layout: {
+            "fill-sort-key": [
+              "case",
+              ["==", ["get", "type"], "closed"],
+              0,
+              [
+                "match",
+                ["get", "zone"],
+                "outer",
+                1,
+                "middle",
+                2,
+                "inner",
+                3,
+                1,
+              ],
+            ],
+          },
           paint: {
-            "fill-color": "#e74c3c",
+            "fill-color": [
+              "case",
+              ["==", ["get", "type"], "closed"],
+              "#9ca3af",
+              [
+                "match",
+                ["get", "zone"],
+                "inner",
+                "#ef4444",
+                "middle",
+                "#f59e0b",
+                "outer",
+                "#22c55e",
+                "#9ca3af",
+              ],
+            ],
             "fill-opacity": [
               "interpolate",
               ["linear"],
               ["zoom"],
               5,
-              0.4,
+              0.1,
               10,
-              0.6,
+              0.2,
               14,
-              0.7,
+              0.4,
             ],
-            //'fill-outline-color': '#000000', //Costly
+            "fill-outline-color": [
+              "case",
+              ["==", ["get", "type"], "closed"],
+              "#6b7280",
+              [
+                "match",
+                ["get", "zone"],
+                "inner",
+                "#7f1d1d",
+                "middle",
+                "#92400e",
+                "outer",
+                "#166534",
+                "#6b7280",
+              ],
+            ],
           },
         },
         labelLayerId,
