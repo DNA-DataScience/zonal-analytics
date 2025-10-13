@@ -14,6 +14,15 @@ export class CoordsControl implements maplibregl.IControl {
     this._label.style.fontSize = "12px";
     this._label.style.lineHeight = "1";
     this._label.style.backgroundColor = "#fff";
+    this._label.style.borderRadius = "2px";
+    this._label.style.boxShadow =
+      "0 1px 2px rgba(0, 0, 0, 0.10), 0 2px 4px rgba(0, 0, 0, 0.05)";
+    this._label.style.whiteSpace = "nowrap";
+    this._label.style.userSelect = "none";
+    this._label.style.cursor = "default";
+    this._label.style.pointerEvents = "none";
+    this._label.style.fontFamily = "sans-serif";
+    this._label.style.textAlign = "center";
     this._label.style.color = "#000";
     this._label.textContent = "Lng: —, Lat: —";
 
