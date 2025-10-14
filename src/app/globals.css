@@ -33,3 +33,13 @@ body {
 .maplibre-search-box .results {
   color: #000;
 }
+
+/* Context menu popup styles */
+.maplibregl-popup.ctxmenu-popup .maplibregl-popup-content {
+  font-family: sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #000;
+  background-color: #fff;
+  min-width: 160px;
+}
