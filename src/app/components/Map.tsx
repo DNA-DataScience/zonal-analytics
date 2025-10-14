@@ -4,6 +4,7 @@ import maplibregl, { LngLatBoundsLike, Map as MapType } from "maplibre-gl";
 import { geoCoder } from "../lib/Geocoder";
 import MaplibreGeocoder from "@maplibre/maplibre-gl-geocoder";
 import { CoordsControl } from "@/app/components/CoordsControl";
+//import { HoverZones } from "@/app/lib/HoverZones";
 
 const INDIA_BOUNDS: LngLatBoundsLike = [
   [68.17665, 6.747139], // SW [lng, lat]
@@ -41,6 +42,14 @@ const Map: React.FC = () => {
       map.addControl(
         new MaplibreGeocoder(geoCoder, {
           maplibregl,
+          zoom: 14,
+          flyTo: {
+            padding: 15,
+            easing: (t: number) => {
+              return t;
+            },
+            zoom: 14,
+          },
         }),
         "top-left",
       );
@@ -49,6 +58,19 @@ const Map: React.FC = () => {
 
       //Optional zoom limit
       map.setMaxZoom(18);
+
+      map.addSource("dem", {
+        type: "raster-dem",
+        tiles: [
+          "https://elevation-tiles-prod.s3.amazonaws.com/terrarium/{z}/{x}/{y}.png",
+        ], // encoding: 'terrarium'
+        //tiles: ["https://tiles.openfreemap.org/tiles/srtm_30m/{z}/{x}/{y}.png"],
+        tileSize: 256,
+        maxzoom: 14,
+        encoding: "terrarium",
+      });
+
+      map.setTerrain({ source: "dem", exaggeration: 1.0 });
 
       const layers = map.getStyle().layers;
       let labelLayerId = "";
@@ -175,7 +197,7 @@ const Map: React.FC = () => {
         type: "vector",
         tiles: ["http://127.0.0.1:8000/tiles/{z}/{x}/{y}.mvt"],
         minzoom: 0,
-        maxzoom: 14,
+        maxzoom: 15,
       });
 
       addBelowLabels(
@@ -241,6 +263,8 @@ const Map: React.FC = () => {
               0.2,
               14,
               0.4,
+              16,
+              0.6,
             ],
             "fill-outline-color": [
               "case",

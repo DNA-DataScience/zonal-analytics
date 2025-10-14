@@ -3,7 +3,7 @@ import maplibregl from "maplibre-gl";
 export class CoordsControl implements maplibregl.IControl {
   private _container!: HTMLDivElement;
   private _label!: HTMLDivElement;
-  private _map!: maplibregl.Map;
+  private _map?: maplibregl.Map;
 
   onAdd(map: maplibregl.Map) {
     this._map = map;
@@ -24,7 +24,7 @@ export class CoordsControl implements maplibregl.IControl {
     this._label.style.fontFamily = "sans-serif";
     this._label.style.textAlign = "center";
     this._label.style.color = "#000";
-    this._label.textContent = "Lng: —, Lat: —";
+    this._label.textContent = "Lat: —, Lng: —, Elev: —";
 
     this._container.appendChild(this._label);
     map.on("mousemove", this._onMouseMove);
@@ -40,10 +40,10 @@ export class CoordsControl implements maplibregl.IControl {
     this._map = undefined;
   }
 
-  private _onMouseMove = (
-    e: maplibregl.MapMouseEvent & maplibregl.EventData,
-  ) => {
+  private _onMouseMove = (e: maplibregl.MapMouseEvent) => {
     const { lng, lat } = e.lngLat.wrap();
-    this._label.textContent = `Lng: ${lng.toFixed(5)}, Lat: ${lat.toFixed(5)}`;
+    const elev = this._map?.queryTerrainElevation(e.lngLat);
+    const elevText = elev != null ? `, Elev: ${Math.round(elev)}m` : "";
+    this._label.textContent = `Lat: ${lat.toFixed(5)}, Lng: ${lng.toFixed(5)}${elevText}`;
   };
 }
