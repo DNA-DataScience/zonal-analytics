@@ -1,5 +1,6 @@
 import maplibregl from "maplibre-gl";
 import { ReportPanelControl } from "@/app/components/ReportPanelControl";
+import { ReportGenerator } from "@/app/lib/ReportGenerator";
 
 export class ContextMenuControl implements maplibregl.IControl {
   private _map?: maplibregl.Map;
@@ -7,9 +8,11 @@ export class ContextMenuControl implements maplibregl.IControl {
   private _popup?: maplibregl.Popup;
   private _styleEl?: HTMLStyleElement;
   private _panel: ReportPanelControl;
+  private _generator: ReportGenerator;
 
   constructor(panel: ReportPanelControl) {
     this._panel = panel;
+    this._generator = new ReportGenerator();
   }
 
   onAdd(map: maplibregl.Map): HTMLElement {
@@ -107,10 +110,9 @@ export class ContextMenuControl implements maplibregl.IControl {
     const btn = this._popup
       .getElement()
       .querySelector(".ctxmenu-btn") as HTMLButtonElement | null;
+
     btn?.addEventListener("click", () => {
-      this._panel.setBodyHTML(
-        `<div>Lat: ${lat.toFixed(5)}, Lng: ${lng.toFixed(5)}</div>`,
-      );
+      this._generator.generate(this._panel, { lat, lng, elevation: elev });
 
       this._panel.show();
       this._popup?.remove();
