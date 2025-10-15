@@ -1,9 +1,16 @@
 import maplibregl from "maplibre-gl";
+import { ReportPanelControl } from "@/app/components/ReportPanelControl";
 
 export class ContextMenuControl implements maplibregl.IControl {
   private _map?: maplibregl.Map;
   private _container!: HTMLDivElement; // Invisible container to satisfy IControl
   private _popup?: maplibregl.Popup;
+  private _styleEl?: HTMLStyleElement;
+  private _panel: ReportPanelControl;
+
+  constructor(panel: ReportPanelControl) {
+    this._panel = panel;
+  }
 
   onAdd(map: maplibregl.Map): HTMLElement {
     this._map = map;
@@ -16,9 +23,41 @@ export class ContextMenuControl implements maplibregl.IControl {
     // Reuse a single popup instance
     this._popup = new maplibregl.Popup({
       closeButton: true,
-      closeOnClick: false,
+      closeOnClick: true,
       className: "ctxmenu-popup",
     });
+
+    if (!document.getElementById("ctxmenu-popup-style")) {
+      const style = document.createElement("style");
+      style.id = "ctxmenu-popup-style";
+      style.textContent = `
+        .maplibregl-popup.ctxmenu-popup .ctxmenu-btn {
+          padding: 6px 10px;
+          border: 1px solid #b6c2cf;
+          border-radius: 6px;
+          background: #f1f5f9;
+          color: #0f172a;
+          font: 500 12px/1 system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans";
+          cursor: pointer;
+          box-shadow: 0 1px 0 rgba(16, 24, 40, 0.04);
+          transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, transform 0.02s ease;
+        }
+        .maplibregl-popup.ctxmenu-popup .ctxmenu-btn:hover {
+          background: #e2e8f0;
+          border-color: #94a3b8;
+        }
+        .maplibregl-popup.ctxmenu-popup .ctxmenu-btn:active {
+          transform: translateY(1px);
+          box-shadow: 0 0 0 rgba(0,0,0,0);
+        }
+        .maplibregl-popup.ctxmenu-popup .ctxmenu-btn:focus {
+          outline: 2px solid #93c5fd;
+          outline-offset: 2px;
+        }
+      `;
+      document.head.appendChild(style);
+      this._styleEl = style;
+    }
 
     map.on("contextmenu", this._onContextMenu);
 
@@ -32,6 +71,10 @@ export class ContextMenuControl implements maplibregl.IControl {
     if (this._popup) {
       this._popup.remove();
       this._popup = undefined;
+    }
+    if (this._styleEl) {
+      this._styleEl.remove();
+      this._styleEl = undefined;
     }
     this._container?.remove();
     this._map = undefined;
@@ -52,9 +95,25 @@ export class ContextMenuControl implements maplibregl.IControl {
         <div><strong>Latitude:</strong> ${lat.toFixed(5)}</div>
         <div><strong>Longitude:</strong> ${lng.toFixed(5)}</div>
         <div><strong>Elevation:</strong> ${elevText}</div>
+        <div><strong>Zoom:</strong> ${this._map.getZoom().toFixed(2)}</div>
+        <div style="margin-top: 8px;">
+            <button type="button" class="ctxmenu-btn">Report</button>
+        </div>
       </div>
     `;
 
     this._popup.setLngLat(e.lngLat).setHTML(html).addTo(this._map);
+
+    const btn = this._popup
+      .getElement()
+      .querySelector(".ctxmenu-btn") as HTMLButtonElement | null;
+    btn?.addEventListener("click", () => {
+      this._panel.setBodyHTML(
+        `<div>Lat: ${lat.toFixed(5)}, Lng: ${lng.toFixed(5)}</div>`,
+      );
+
+      this._panel.show();
+      this._popup?.remove();
+    });
   };
 }

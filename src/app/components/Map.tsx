@@ -5,6 +5,7 @@ import { geoCoder } from "../lib/Geocoder";
 import MaplibreGeocoder from "@maplibre/maplibre-gl-geocoder";
 import { CoordsControl } from "@/app/components/CoordsControl";
 import { ContextMenuControl } from "@/app/components/ContextMenuControl";
+import { ReportPanelControl } from "@/app/components/ReportPanelControl";
 //import { HoverZones } from "@/app/lib/HoverZones";
 
 const INDIA_BOUNDS: LngLatBoundsLike = [
@@ -57,8 +58,11 @@ const Map: React.FC = () => {
 
       map.addControl(new CoordsControl(), "bottom-left");
 
+      const reportPanel = new ReportPanelControl();
+      map.addControl(reportPanel, "top-left");
+
       // Add right-click context menu popup
-      map.addControl(new ContextMenuControl());
+      map.addControl(new ContextMenuControl(reportPanel));
 
       //Optional zoom limit
       map.setMaxZoom(18);
