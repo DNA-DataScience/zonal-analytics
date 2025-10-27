@@ -113,7 +113,7 @@ export class ContextMenuControl implements maplibregl.IControl {
 
     btn?.addEventListener("click", () => {
       this._generator.generate(this._panel, { lat, lng, elevation: elev });
-
+      this._panel.addMarker(lat, lng);
       this._panel.show();
       this._popup?.remove();
     });

@@ -94,6 +94,19 @@ export class ReportPanelControl implements maplibregl.IControl {
       this._styleEl.remove();
       this._styleEl = undefined;
     }
+    if (this._marker) {
+      this._marker?.getPopup()?.remove();
+      this._marker.remove();
+      this._marker = undefined;
+    }
+  }
+
+  addMarker(lat: number, lng: number) {
+    if (this._map instanceof maplibregl.Map) {
+      this._marker = new maplibregl.Marker()
+        .setLngLat([lng, lat])
+        .addTo(this._map);
+    }
   }
 
   show() {
@@ -102,6 +115,9 @@ export class ReportPanelControl implements maplibregl.IControl {
 
   hide() {
     this._container.style.display = "none";
+    this._marker?.getPopup()?.remove();
+    this._marker?.remove();
+    this._marker = undefined;
   }
 
   setBodyHTML(html: string) {
