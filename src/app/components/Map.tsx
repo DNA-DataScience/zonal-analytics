@@ -296,6 +296,33 @@ const Map: React.FC = () => {
       );
     });
 
+    // map.on("click", (e) => {
+    //   const features = map.queryRenderedFeatures(e.point);
+    //
+    //   // Limit the number of properties we're displaying for
+    //   // legibility and performance
+    //   const displayProperties = [
+    //     "type",
+    //     "properties",
+    //     "id",
+    //     "layer",
+    //     "source",
+    //     "sourceLayer",
+    //   ];
+    //
+    //   const displayFeatures = features.map((feat) => {
+    //     const displayFeat = {};
+    //     displayProperties.forEach((prop) => {
+    //       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //       // @ts-expect-error
+    //       displayFeat[prop] = feat[prop];
+    //     });
+    //     return displayFeat;
+    //   });
+    //
+    //   console.log(JSON.stringify(displayFeatures, null, 2));
+    // });
+
     return () => {
       if (mapRef.current) {
         mapRef.current.remove();

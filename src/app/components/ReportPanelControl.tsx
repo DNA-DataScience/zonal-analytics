@@ -4,6 +4,7 @@ export class ReportPanelControl implements maplibregl.IControl {
   private _container!: HTMLDivElement;
   private _map?: maplibregl.Map;
   private _styleEl?: HTMLStyleElement;
+  private _marker?: maplibregl.Marker;
 
   onAdd(map: maplibregl.Map): HTMLElement {
     this._map = map;

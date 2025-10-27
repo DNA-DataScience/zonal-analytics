@@ -112,7 +112,9 @@ export class ContextMenuControl implements maplibregl.IControl {
       .querySelector(".ctxmenu-btn") as HTMLButtonElement | null;
 
     btn?.addEventListener("click", () => {
-      this._generator.generate(this._panel, { lat, lng, elevation: elev });
+      if (this._map) {
+        this._generator.generate(this._panel, this._map, lat, lng, elev);
+      }
       this._panel.addMarker(lat, lng);
       this._panel.show();
       this._popup?.remove();
