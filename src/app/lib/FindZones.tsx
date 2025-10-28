@@ -22,14 +22,17 @@ export function getZonesAt(
     [pt.x + tol, pt.y + tol],
   ];
 
-  let rules: string = `<div>Rule Checks:</div>`;
+  let rules: string = `<ul class="rules">`;
 
   const features = map.queryRenderedFeatures(queryBox, { layers });
   if (!features.length)
     return (
       rules +
-      `<div>No Zones</div>` +
-      `<div style="font-weight: bold; font-size: 20px; color: lawngreen">Feasibility: Feasible</div>`
+      `<li>
+          No Zones
+        </li>` +
+      `</ul>` +
+      `<div style="font-weight: bold; font-size: 20px;"><strong>Feasibility: </strong><span style="color: lawngreen">Yes</span></div></div>`
     );
 
   let found = 0;
@@ -74,24 +77,36 @@ export function getZonesAt(
 
     if (z) {
       found = 1;
-      rules += `<div>Airport: ${f.properties?.name}</div>
-              <div>Zone: ${z}</div>
-              <div>Note: ${note}</div>`;
+      rules += `
+                <li>
+                <strong>Airport:</strong> ${f.properties?.name}
+                <dl class="airport-info"
+                    <dt><strong>Zone:</strong></dt><dd>${z}</dd>
+                    <dt><strong>Note:</strong></dt><dd>${note}</dd>
+                </dl>
+                </li>
+                `;
     }
   }
 
-  if (found === 0) rules += `<div>No Zones</div>`;
+  if (found === 0)
+    rules += `<li>No Zones</li>
+              `;
+
+  rules += `</ul>
+            </div>`;
 
   if (height < 350)
-    rules += `<div>Maximum Allowed Windmill Height: ${height}m</div>`;
-  else rules += `<div>Maximum Allowed Windmill Height: No Restrictions</div>`;
+    rules += `<div><strong>Maximum Allowed Windmill Height:</strong> ${height.toFixed(0)}m</div>`;
+  else
+    rules += `<div><strong>Maximum Allowed Windmill Height:</strong> No Restrictions</div>`;
 
   if (inner === 1)
-    rules += `<div style="font-weight: bold; font-size: 20px; color: red">Feasibility: Not Feasible</div>`;
+    rules += `<div style="font-weight: bold; font-size: 20px;"><strong>Feasibility: </strong><span style="color: red">No</span></div>`;
   else if (inner === 2)
-    rules += `<div style="font-weight: bold; font-size: 20px; color: yellow">Feasibility: Feasible within Height Requirements</div>`;
+    rules += `<div style="font-weight: bold; font-size: 20px;"><strong>Feasibility: </strong><span style="color: orange">Yes with Height Requirements</span></div>`;
   else
-    rules += `<div style="font-weight: bold; font-size: 20px; color: lawngreen">Feasibility: Feasible</div>`;
+    rules += `<div style="font-weight: bold; font-size: 20px;"><strong>Feasibility: </strong><span style="color: lawngreen">Yes</span></div>`;
 
   return rules;
 }

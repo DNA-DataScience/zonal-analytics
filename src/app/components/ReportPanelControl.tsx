@@ -18,18 +18,20 @@ export class ReportPanelControl implements maplibregl.IControl {
       style.textContent = `
   .maplibregl-ctrl.report-panel {
     width: 320px;
-    max-height: 56vh;
     margin: 8px 0 0 8px;
   }
   .report-panel__card {
+    display: flex;
+    flex-direction: column;
     background: #ffffff;
     border-radius: 12px;
     border: 1px solid rgba(15, 23, 42, 0.08);
     box-shadow: 0 6px 24px rgba(16,24,40,0.08), 0 2px 4px rgba(16,24,40,0.06);
     overflow: hidden;
+    max-height: 56vh;                    /* cap total panel height */
   }
   .report-panel__header {
-    display: flex;                 /* enable flex layout */
+    display: flex;
     align-items: center;
     gap: 8px;
     padding: 12px 14px;
@@ -39,7 +41,7 @@ export class ReportPanelControl implements maplibregl.IControl {
     border-bottom: 1px solid #e2e8f0;
   }
   .report-panel__title {
-    flex: 1;                       /* title grows, keeping close button on the right */
+    flex: 1;
   }
   .report-panel__close {
     appearance: none;
@@ -54,13 +56,18 @@ export class ReportPanelControl implements maplibregl.IControl {
     align-items: center;
     justify-content: center;
     transition: background 0.15s ease, border-color 0.15s ease;
-    margin-left: auto;             /* push to the far right */
+    margin-left: auto;
   }
   .report-panel__close:hover {
     background: #f1f5f9;
     border-color: #cbd5e1;
   }
   .report-panel__body {
+    flex: 1 1 auto;                      /* fill remaining height */
+    min-height: 0;                        /* allow to shrink for scrolling */
+    overflow: auto;                       /* scroll when content is large */
+    overscroll-behavior: contain;         /* prevent scroll chaining to map */
+    -webkit-overflow-scrolling: touch;    /* smoother on iOS */
     padding: 12px 14px;
     color: #334155;
     font: 400 13px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans";
