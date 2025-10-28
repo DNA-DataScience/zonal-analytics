@@ -2,11 +2,16 @@
 import React, { useEffect, useRef } from "react";
 import maplibregl, { LngLatBoundsLike, Map as MapType } from "maplibre-gl";
 import { geoCoder } from "../lib/Geocoder";
-import MaplibreGeocoder from "@maplibre/maplibre-gl-geocoder";
+import MaplibreGeocoder, {
+  CarmenGeojsonFeature,
+} from "@maplibre/maplibre-gl-geocoder";
 import { CoordsControl } from "@/app/components/CoordsControl";
 import { ContextMenuControl } from "@/app/components/ContextMenuControl";
 import { ReportPanelControl } from "@/app/components/ReportPanelControl";
-//import { HoverZones } from "@/app/lib/HoverZones";
+
+type GeoCoderResultEvent = {
+  result: CarmenGeojsonFeature;
+};
 
 const INDIA_BOUNDS: LngLatBoundsLike = [
   [68.17665, 6.747139], // SW [lng, lat]
@@ -41,28 +46,55 @@ const Map: React.FC = () => {
 
       map.addControl(new maplibregl.NavigationControl(), "top-right");
 
-      map.addControl(
-        new MaplibreGeocoder(geoCoder, {
-          maplibregl,
-          zoom: 14,
-          flyTo: {
-            padding: 15,
-            easing: (t: number) => {
-              return t;
-            },
-            zoom: 14,
-          },
-        }),
-        "top-left",
-      );
-
-      map.addControl(new CoordsControl(), "bottom-left");
-
       const reportPanel = new ReportPanelControl();
+      const contextMenuCtrl = new ContextMenuControl(reportPanel);
       map.addControl(reportPanel, "top-left");
 
       // Add right-click context menu popup
-      map.addControl(new ContextMenuControl(reportPanel));
+      map.addControl(contextMenuCtrl);
+
+      // const geocoderControl = new MaplibreGeocoder(geoCoder, {
+      //   maplibregl,
+      //   zoom: 14,
+      //   flyTo: {
+      //     padding: 15,
+      //     easing: (t: number) => {
+      //       return t;
+      //     },
+      //     zoom: 14,
+      //   },
+      //   marker: false,
+      // });
+      //
+      // map.addControl(geocoderControl, "top-left");
+      //
+      // const handleGeocoderResult = (e: GeoCoderResultEvent) => {
+      //   const feature = e.result;
+      //   const coords =
+      //     feature.geometry?.type === "Point"
+      //       ? (feature.geometry.coordinates as [number, number])
+      //       : Array.isArray(feature.bbox) && feature.bbox.length === 4
+      //         ? ([
+      //             feature.bbox[0] + (feature.bbox[2] - feature.bbox[0]) / 2,
+      //             feature.bbox[1] + (feature.bbox[3] - feature.bbox[1]) / 2,
+      //           ] as [number, number])
+      //         : undefined;
+      //
+      //   if (!coords) return;
+      //
+      //   const target = { lng: coords[0], lat: coords[1] };
+      //
+      //   const onMoveEnd = () => {
+      //     contextMenuCtrl.showAt(target);
+      //   };
+      //   map.once("moveend", onMoveEnd);
+      // };
+      //
+      // geocoderControl.on("result", (e: GeoCoderResultEvent) =>
+      //   handleGeocoderResult(e),
+      // );
+
+      map.addControl(new CoordsControl(), "bottom-left");
 
       //Optional zoom limit
       map.setMaxZoom(18);
@@ -135,71 +167,6 @@ const Map: React.FC = () => {
         },
         labelLayerId,
       );
-
-      // Helper to safely add a layer before labels
-      // const addBelowLabels = (layer: maplibregl.LayerSpecification) => {
-      //     if (labelLayerId) {
-      //         map.addLayer(layer, labelLayerId);
-      //     } else {
-      //         map.addLayer(layer);
-      //     }
-      // };
-
-      // Forests (from landuse, class=forest)
-      // addBelowLabels(
-      //   {
-      //     id: "landuse-forest-fill",
-      //     type: "fill",
-      //     source: "openmaptiles",
-      //     "source-layer": "landcover",
-      //     filter: ["==", ["get", "class"], "wood"],
-      //     minzoom: 6,
-      //     paint: {
-      //       "fill-color": "#1fcc31",
-      //       "fill-opacity": [
-      //         "interpolate",
-      //         ["linear"],
-      //         ["zoom"],
-      //         5,
-      //         0.4,
-      //         10,
-      //         0.6,
-      //         14,
-      //         0.7,
-      //       ],
-      //       //'fill-outline-color': '#000000', //This is costly
-      //     },
-      //   },
-      //   labelLayerId,
-      // );
-      //
-      // // Military areas (from landuse, class=military)
-      // addBelowLabels(
-      //   {
-      //     id: "landuse-military-fill",
-      //     type: "fill",
-      //     source: "openmaptiles",
-      //     "source-layer": "landuse",
-      //     filter: ["==", ["get", "class"], "military"],
-      //     minzoom: 6,
-      //     paint: {
-      //       "fill-color": "#e74c3c",
-      //       "fill-opacity": [
-      //         "interpolate",
-      //         ["linear"],
-      //         ["zoom"],
-      //         5,
-      //         0.4,
-      //         10,
-      //         0.6,
-      //         14,
-      //         0.7,
-      //       ],
-      //       //'fill-outline-color': '#000000', //Costly
-      //     },
-      //   },
-      //   labelLayerId,
-      // );
 
       map.addSource("airport-tiles", {
         type: "vector",
@@ -294,6 +261,11 @@ const Map: React.FC = () => {
         },
         labelLayerId,
       );
+
+      // map.on("click", (e) => {
+      //   const lnglat = e.lngLat;
+      //   contextMenuCtrl.showAt(lnglat);
+      // });
     });
 
     // map.on("click", (e) => {

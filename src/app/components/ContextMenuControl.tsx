@@ -28,6 +28,7 @@ export class ContextMenuControl implements maplibregl.IControl {
       closeButton: true,
       closeOnClick: true,
       className: "ctxmenu-popup",
+      offset: 12,
     });
 
     if (!document.getElementById("ctxmenu-popup-style")) {
@@ -83,14 +84,26 @@ export class ContextMenuControl implements maplibregl.IControl {
     this._map = undefined;
   }
 
+  public showAt(lnglat: maplibregl.LngLatLike) {
+    if (!this._map || !this._popup) return;
+
+    this._openPopupAt(maplibregl.LngLat.convert(lnglat));
+  }
+
   private _onContextMenu = (e: maplibregl.MapMouseEvent) => {
     if (!this._map || !this._popup) return;
 
-    const wrapped = e.lngLat.wrap();
+    this._openPopupAt(e.lngLat);
+  };
+
+  private _openPopupAt(lnglat: maplibregl.LngLat) {
+    if (!this._map || !this._popup) return;
+
+    const wrapped = lnglat.wrap();
     const lng = wrapped.lng;
     const lat = wrapped.lat;
 
-    const elev = this._map.queryTerrainElevation(e.lngLat);
+    const elev = this._map.queryTerrainElevation(lnglat);
     const elevText = elev != null ? `${Math.round(elev)} m` : "N/A";
 
     const html = `
@@ -105,7 +118,7 @@ export class ContextMenuControl implements maplibregl.IControl {
       </div>
     `;
 
-    this._popup.setLngLat(e.lngLat).setHTML(html).addTo(this._map);
+    this._popup.setLngLat(lnglat).setHTML(html).addTo(this._map);
 
     const btn = this._popup
       .getElement()
@@ -119,5 +132,5 @@ export class ContextMenuControl implements maplibregl.IControl {
       this._panel.show();
       this._popup?.remove();
     });
-  };
+  }
 }
