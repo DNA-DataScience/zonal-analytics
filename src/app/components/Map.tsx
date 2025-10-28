@@ -8,6 +8,7 @@ import MaplibreGeocoder, {
 import { CoordsControl } from "@/app/components/CoordsControl";
 import { ContextMenuControl } from "@/app/components/ContextMenuControl";
 import { ReportPanelControl } from "@/app/components/ReportPanelControl";
+import { CoordinateSearchControl } from "@/app/components/CoordinateSearchControl";
 
 type GeoCoderResultEvent = {
   result: CarmenGeojsonFeature;
@@ -48,10 +49,12 @@ const Map: React.FC = () => {
 
       const reportPanel = new ReportPanelControl();
       const contextMenuCtrl = new ContextMenuControl(reportPanel);
-      map.addControl(reportPanel, "top-left");
 
       // Add right-click context menu popup
       map.addControl(contextMenuCtrl);
+
+      map.addControl(new CoordinateSearchControl(contextMenuCtrl), "top-left");
+      map.addControl(reportPanel, "top-left");
 
       // const geocoderControl = new MaplibreGeocoder(geoCoder, {
       //   maplibregl,
