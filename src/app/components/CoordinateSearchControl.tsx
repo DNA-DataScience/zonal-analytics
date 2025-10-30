@@ -80,10 +80,14 @@ export class CoordinateSearchControl implements maplibregl.IControl {
         }
       }
 
-      if (lat < -90 || lat > 90 || lng < -180 || lng > 180) {
+      if (
+        lat < 6.747139 ||
+        lat > 35.495405 ||
+        lng < 68.17665 ||
+        lng > 97.40256
+      ) {
         if (errorMsg) {
-          errorMsg.textContent =
-            "Latitude must be between -90 and 90, longitude between -180 and 180.";
+          errorMsg.textContent = "Enter Coords within India Bounds";
         }
         return;
       }
