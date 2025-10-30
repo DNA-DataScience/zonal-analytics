@@ -1,18 +1,14 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 import maplibregl, { LngLatBoundsLike, Map as MapType } from "maplibre-gl";
-import { geoCoder } from "../lib/Geocoder";
-import MaplibreGeocoder, {
-  CarmenGeojsonFeature,
-} from "@maplibre/maplibre-gl-geocoder";
+// import { geoCoder } from "../lib/Geocoder";
+// import MaplibreGeocoder, {
+//   CarmenGeojsonFeature,
+// } from "@maplibre/maplibre-gl-geocoder";
 import { CoordsControl } from "@/app/components/CoordsControl";
 import { ContextMenuControl } from "@/app/components/ContextMenuControl";
 import { ReportPanelControl } from "@/app/components/ReportPanelControl";
 import { CoordinateSearchControl } from "@/app/components/CoordinateSearchControl";
-
-type GeoCoderResultEvent = {
-  result: CarmenGeojsonFeature;
-};
 
 const INDIA_BOUNDS: LngLatBoundsLike = [
   [68.17665, 6.747139], // SW [lng, lat]
@@ -66,36 +62,9 @@ const Map: React.FC = () => {
       //     },
       //     zoom: 14,
       //   },
-      //   marker: false,
       // });
       //
       // map.addControl(geocoderControl, "top-left");
-      //
-      // const handleGeocoderResult = (e: GeoCoderResultEvent) => {
-      //   const feature = e.result;
-      //   const coords =
-      //     feature.geometry?.type === "Point"
-      //       ? (feature.geometry.coordinates as [number, number])
-      //       : Array.isArray(feature.bbox) && feature.bbox.length === 4
-      //         ? ([
-      //             feature.bbox[0] + (feature.bbox[2] - feature.bbox[0]) / 2,
-      //             feature.bbox[1] + (feature.bbox[3] - feature.bbox[1]) / 2,
-      //           ] as [number, number])
-      //         : undefined;
-      //
-      //   if (!coords) return;
-      //
-      //   const target = { lng: coords[0], lat: coords[1] };
-      //
-      //   const onMoveEnd = () => {
-      //     contextMenuCtrl.showAt(target);
-      //   };
-      //   map.once("moveend", onMoveEnd);
-      // };
-      //
-      // geocoderControl.on("result", (e: GeoCoderResultEvent) =>
-      //   handleGeocoderResult(e),
-      // );
 
       map.addControl(new CoordsControl(), "bottom-left");
 
@@ -264,39 +233,7 @@ const Map: React.FC = () => {
         },
         labelLayerId,
       );
-
-      // map.on("click", (e) => {
-      //   const lnglat = e.lngLat;
-      //   contextMenuCtrl.showAt(lnglat);
-      // });
     });
-
-    // map.on("click", (e) => {
-    //   const features = map.queryRenderedFeatures(e.point);
-    //
-    //   // Limit the number of properties we're displaying for
-    //   // legibility and performance
-    //   const displayProperties = [
-    //     "type",
-    //     "properties",
-    //     "id",
-    //     "layer",
-    //     "source",
-    //     "sourceLayer",
-    //   ];
-    //
-    //   const displayFeatures = features.map((feat) => {
-    //     const displayFeat = {};
-    //     displayProperties.forEach((prop) => {
-    //       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //       // @ts-expect-error
-    //       displayFeat[prop] = feat[prop];
-    //     });
-    //     return displayFeat;
-    //   });
-    //
-    //   console.log(JSON.stringify(displayFeatures, null, 2));
-    // });
 
     return () => {
       if (mapRef.current) {
