@@ -111,6 +111,11 @@ export class ReportPanelControl implements maplibregl.IControl {
 
   addMarker(lat: number, lng: number) {
     if (this._map instanceof maplibregl.Map) {
+      if (this._marker) {
+        this._marker.getPopup()?.remove();
+        this._marker.remove();
+        this._marker = undefined;
+      }
       this._marker = new maplibregl.Marker()
         .setLngLat([lng, lat])
         .addTo(this._map);
