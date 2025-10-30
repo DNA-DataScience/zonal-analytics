@@ -32,6 +32,7 @@ export function getZonesAt(
           No Zones
         </li>` +
       `</ul>` +
+      `</div>` +
       `<div style="font-weight: bold; font-size: 20px;"><strong>Feasibility: </strong><span style="color: lawngreen">Yes</span></div></div>`
     );
 
