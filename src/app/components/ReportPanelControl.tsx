@@ -28,7 +28,7 @@ export class ReportPanelControl implements maplibregl.IControl {
     border: 1px solid rgba(15, 23, 42, 0.08);
     box-shadow: 0 6px 24px rgba(16,24,40,0.08), 0 2px 4px rgba(16,24,40,0.06);
     overflow: hidden;
-    max-height: 56vh;                    /* cap total panel height */
+    max-height: 60vh;                    /* cap total panel height */
   }
   .report-panel__header {
     display: flex;
