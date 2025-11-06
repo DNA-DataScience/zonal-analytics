@@ -7,6 +7,7 @@ import { ReportPanelControl } from "@/app/components/ReportPanelControl";
 import { CoordinateSearchControl } from "@/app/components/CoordinateSearchControl";
 import { StyleToggleControl } from "@/app/components/StyleToggleControl";
 import { addLayers } from "@/app/lib/Layerer";
+import { LayerToggleControl } from "@/app/components/LayerToggleControl";
 
 const INDIA_BOUNDS: LngLatBoundsLike = [
   [68.17665, 6.747139], // SW [lng, lat]
@@ -51,10 +52,17 @@ const Map: React.FC = () => {
       map.addControl(reportPanel, "top-left");
 
       map.addControl(new CoordsControl(), "bottom-left");
-      map.addControl(new StyleToggleControl("bright"), "bottom-left");
+      map.addControl(new StyleToggleControl("bright"), "bottom-right");
 
       //Optional zoom limit
       map.setMaxZoom(18);
+
+      const toggle = new LayerToggleControl({
+        layerId: "airport-zones",
+        hiddenOpacity: 0.0001,
+        label: "Airport Layers",
+      });
+      map.addControl(toggle, "bottom-right");
 
       addLayers(map);
     });
