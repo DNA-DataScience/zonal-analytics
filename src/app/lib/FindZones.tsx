@@ -72,6 +72,10 @@ export function getZonesAt(
         } else if (val.includes("outer")) {
           z = "Outer Zone";
           note = "Outer Zones requires NOC, otherwise no restrictions";
+        } else if (val.includes("funnel")) {
+          z = "Funnel Zone";
+          note = "No Windmills Allowed in Funnel Zone";
+          inner = 1;
         }
       }
     }
@@ -82,6 +86,9 @@ export function getZonesAt(
                 <li>
                 <strong>Airport:</strong> ${f.properties?.name}
                 <dl class="airport-info"
+                    <dt><strong>Airport Elevation:</strong></dt><dd>${f.properties?.elevation}m</dd>
+                    <dt><strong>Airport Type:</strong></dt><dd>${f.properties?.type}</dd>
+                    <dt><strong>Radio Type:</strong></dt><dd>${f.properties?.radio}</dd>
                     <dt><strong>Zone:</strong></dt><dd>${z}</dd>
                     <dt><strong>Note:</strong></dt><dd>${note}</dd>
                 </dl>
@@ -99,8 +106,12 @@ export function getZonesAt(
 
   if (height < 350)
     rules += `<div><strong>Maximum Allowed Windmill Height:</strong> ${height.toFixed(0)}m</div>`;
-  else
-    rules += `<div><strong>Maximum Allowed Windmill Height:</strong> No Restrictions</div>`;
+  else {
+    if (inner === 1)
+      rules += `<div><strong>Maximum Allowed Windmill Height:</strong> Restricted</div>`;
+    else
+      rules += `<div><strong>Maximum Allowed Windmill Height:</strong> No Restrictions</div>`;
+  }
 
   if (inner === 1)
     rules += `<div style="font-weight: bold; font-size: 20px;"><strong>Feasibility: </strong><span style="color: red">No</span></div>`;
