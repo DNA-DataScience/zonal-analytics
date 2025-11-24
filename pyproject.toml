@@ -1,0 +1,21 @@
+[project]
+name = "map-back"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "camelot-py[cv]>=1.0.9",
+    "fastapi>=0.118.0",
+    "geoalchemy2>=0.18.0",
+    "geopandas>=1.1.1",
+    "mapbox-vector-tile>=2.2.0",
+    "matplotlib>=3.10.7",
+    "notebook>=7.4.7",
+    "polars>=1.33.1",
+    "psycopg2>=2.9.10",
+    "shapely>=2.1.2",
+    "sqlalchemy>=2.0.43",
+    "tabula-py>=2.10.0",
+    "uvicorn>=0.37.0",
+]
