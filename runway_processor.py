@@ -95,7 +95,10 @@ def process_runway_geometry(runway, airport):
                     updated_geom = shapely_geom.union(funnel_geometry)
                     funnel_exists = True
                 else:
-                    updated_geom = shapely_geom.difference(funnel_geometry)
+                    if (zone == 'inner'):
+                        funnel_geometry = funnel_geometry.difference(shapely_geom)
+                    else:
+                        updated_geom = shapely_geom.difference(funnel_geometry)  
                     
                 print(updated_geom)
                 
