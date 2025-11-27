@@ -63,7 +63,7 @@ export class CalibrationMenuControl implements maplibregl.IControl {
     // Apply button (don't add to panel here - it will be added in openMenu)
     this.calibrateButton = document.createElement("button");
     this.calibrateButton.type = "button";
-    this.calibrateButton.textContent = "Apply Calibration";
+    this.calibrateButton.textContent = "A";
     this.calibrateButton.style.cssText = `
   padding: 8px;
   font-size: 11px;
@@ -395,7 +395,7 @@ export class CalibrationMenuControl implements maplibregl.IControl {
       this.closeMenu();
     } catch (error) {
       // Reset button state in case of error
-      this.calibrateButton.textContent = "Apply Calibration";
+      this.calibrateButton.textContent = "A";
       this.calibrateButton.disabled = false;
 
       if (error instanceof Error) {
