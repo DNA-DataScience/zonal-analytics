@@ -1,11 +1,18 @@
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.responses import Response
 from fastapi.middleware.cors import CORSMiddleware
-from sqlalchemy import create_engine, text
-from sqlalchemy.orm import sessionmaker, Session
+from sqlalchemy import text
 from typing import Dict, Any
 from runway_processor import process_runway_geometry
-import json
+from dotenv import load_dotenv
+import os
+from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
+import asyncio
+
+# Load environment variables from .env
+load_dotenv("db.env")
+
+# TILE_SEMAPHORE = asyncio.Semaphore(5)
 
 app = FastAPI()
 
@@ -18,18 +25,39 @@ app.add_middleware(
     expose_headers=["*"],
 )
 
-DB_URL = "postgresql://mapper:password@localhost:5432/gisdb"
-engine = create_engine(DB_URL)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+USER = os.getenv("user")
+PASSWORD = os.getenv("password")
+HOST = os.getenv("host")
+PORT = os.getenv("port")
+DBNAME = os.getenv("dbname")
+
+# Construct the SQLAlchemy connection string
+DB_URL = f"postgresql+asyncpg://{USER}:{PASSWORD}@{HOST}:{PORT}/{DBNAME}"
+# DB_URL = "postgresql://mapper:password@localhost:5432/gisdb"
+
+engine = create_async_engine(
+    DB_URL,
+    pool_size = 10,
+    max_overflow = 5,
+    pool_timeout = 5,
+    pool_recycle = 1800,
+    echo = False
+)
+
+AsyncSessionLocal = async_sessionmaker(
+    bind=engine,
+    expire_on_commit=False,
+    class_=AsyncSession
+)
+
+# engine = create_engine(DB_URL)
+# SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 MAX_ZOOM = 15
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+async def get_db() -> AsyncSession:
+    async with AsyncSessionLocal() as session:
+        yield session
         
 QUERY = text("""
 SELECT ST_AsMVT(tile, 'airport_layers', 4096, 'geometry') as mvt
@@ -43,33 +71,33 @@ FROM (
   latitude,
   longitude,
   ST_AsMVTGeom(
-    ST_Transform(geometry, 3857),
+    geom3857,
     ST_TileEnvelope(:z, :x, :y),
     4096, 256, true
   ) AS geometry
-  FROM airport_layers
-  WHERE ST_Intersects(
-      geometry, 
-      ST_Transform(ST_TileEnvelope(:z, :x, :y), 4326)
-  )
+  FROM "GisDB".airport_layers
+  WHERE geom3857 && ST_TileEnvelope(:z, :x, :y)
 ) AS tile;
 """)
 
 @app.get("/tiles/{z}/{x}/{y}.mvt")
-async def get_tile(z: int, x: int, y: int, db: Session = Depends(get_db)):
-    try:
-        if z > MAX_ZOOM:
-            return Response(content=b'', media_type="application/vnd.mapbox-vector-tile")
-        
-        result = db.execute(QUERY, {"z": z, "x": x, "y": y})
+async def get_tile(z: int, x: int, y: int, db: AsyncSession = Depends(get_db)):
+    
+    if z > MAX_ZOOM:
+            # return Response(content=b'', media_type="application/vnd.mapbox-vector-tile")
+            return Response(status_code=204)
+
+    try:    
+        result = await db.execute(QUERY, {"z": z, "x": x, "y": y})
         tile_bytes = result.scalar()
-        
+            
         if tile_bytes:
             return Response(content=tile_bytes, media_type="application/vnd.mapbox-vector-tile")
         else:
             return Response(content=b'', media_type="application/vnd.mapbox-vector-tile")
-        
+            
     except Exception as e:
+        print(f"Tile error z={z}, x={x}, y={y}: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/airport/runway-funnel")

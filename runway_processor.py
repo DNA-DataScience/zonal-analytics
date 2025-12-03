@@ -3,22 +3,33 @@ from shapely import wkb
 import numpy as np
 from math import degrees, atan2
 from sqlalchemy import create_engine, text
+from dotenv import load_dotenv
+import os
 
 SELECT_QUERY = text("""
                     SELECT geometry, zone, type, radio, elevation, latitude, longitude
-                    FROM airport_layers
+                    FROM "GisDB".airport_layers
                     WHERE name = :airport_name
                     """)
 
 UPDATE_QUERY = text("""
-                    UPDATE airport_layers
-                    SET geometry = ST_GeomFromWKB(:geom, 4326)
-                    WHERE name = :name and zone = :zone
+                    UPDATE "GisDB".airport_layers
+                    SET 
+                        geometry = ST_GeomFromWKB(:geom, 4326),
+                        geom3857 = ST_Transform(ST_GeomFromWKB(:geom, 4326), 3857)
+                    WHERE name = :name AND zone = :zone
+
                     """)
 
 INSERT_QUERY = text("""
-                    INSERT INTO airport_layers (geometry, zone, name, type, radio, elevation, latitude, longitude)
-                    VALUES (ST_GeomFromWKB(:geom, 4326), :zone, :name, :type, :radio, :elevation, :lat, :lon)
+                    INSERT INTO "GisDB".airport_layers 
+                    (geometry, geom3857, zone, name, type, radio, elevation, latitude, longitude)
+                    VALUES (
+                        ST_GeomFromWKB(:geom, 4326),
+                        ST_Transform(ST_GeomFromWKB(:geom, 4326), 3857),
+                        :zone, :name, :type, :radio, :elevation, :lat, :lon
+                    )
+
                     """)
             
 
@@ -78,8 +89,19 @@ def process_runway_geometry(runway, airport):
     
     funnel_geometry = process_funnel(runway)
     
-        # Create database connection
-    DB_URL = "postgresql://mapper:password@localhost:5432/gisdb"
+    # Load environment variables from .env
+    load_dotenv("db.env")
+    # Create database connection
+    USER = os.getenv("user")
+    PASSWORD = os.getenv("password")
+    HOST = os.getenv("host")
+    PORT = os.getenv("port")
+    DBNAME = os.getenv("dbname")
+
+    # Construct the SQLAlchemy connection string
+    DB_URL = f"postgresql+psycopg2://{USER}:{PASSWORD}@{HOST}:{PORT}/{DBNAME}?sslmode=require"
+
+    # DB_URL = "postgresql://mapper:password@localhost:5432/gisdb"
     engine = create_engine(DB_URL)
     
     try:
@@ -90,6 +112,7 @@ def process_runway_geometry(runway, airport):
             for row in results:
                 geom, zone, t_ype, radio, elevation, lat, lon = row
                 shapely_geom = wkb.loads(geom, hex=True)
+                updated_geom = shapely_geom
                 
                 if (zone == 'funnel'):
                     updated_geom = shapely_geom.union(funnel_geometry)
