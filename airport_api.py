@@ -2,7 +2,7 @@ from fastapi import FastAPI, Depends, HTTPException
 from fastapi.responses import Response
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import text
-from typing import Dict, Any
+from typing import Dict, Any, AsyncGenerator
 from runway_processor import process_runway_geometry
 from dotenv import load_dotenv
 import os
@@ -12,7 +12,7 @@ import asyncio
 # Load environment variables from .env
 load_dotenv("db.env")
 
-# TILE_SEMAPHORE = asyncio.Semaphore(5)
+TILE_SEMAPHORE = asyncio.Semaphore(5)
 
 app = FastAPI()
 
@@ -55,7 +55,7 @@ AsyncSessionLocal = async_sessionmaker(
 
 MAX_ZOOM = 15
 
-async def get_db() -> AsyncSession:
+async def get_db() -> AsyncGenerator[AsyncSession, None]:
     async with AsyncSessionLocal() as session:
         yield session
         
@@ -86,19 +86,33 @@ async def get_tile(z: int, x: int, y: int, db: AsyncSession = Depends(get_db)):
     if z > MAX_ZOOM:
             # return Response(content=b'', media_type="application/vnd.mapbox-vector-tile")
             return Response(status_code=204)
+        
+    async with TILE_SEMAPHORE:
+        try:    
+            result = await db.execute(QUERY, {"z": z, "x": x, "y": y})
+            tile_bytes = result.scalar()
+            
+            if tile_bytes:
+                return Response(content=tile_bytes, media_type="application/vnd.mapbox-vector-tile")
+            else:
+                return Response(content=b'', media_type="application/vnd.mapbox-vector-tile")
+            
+        except Exception as e:
+            print(f"Tile error z={z}, x={x}, y={y}: {e}")
+            raise HTTPException(status_code=500, detail=str(e))
 
-    try:    
-        result = await db.execute(QUERY, {"z": z, "x": x, "y": y})
-        tile_bytes = result.scalar()
+    # try:    
+    #     result = await db.execute(QUERY, {"z": z, "x": x, "y": y})
+    #     tile_bytes = result.scalar()
             
-        if tile_bytes:
-            return Response(content=tile_bytes, media_type="application/vnd.mapbox-vector-tile")
-        else:
-            return Response(content=b'', media_type="application/vnd.mapbox-vector-tile")
+    #     if tile_bytes:
+    #         return Response(content=tile_bytes, media_type="application/vnd.mapbox-vector-tile")
+    #     else:
+    #         return Response(content=b'', media_type="application/vnd.mapbox-vector-tile")
             
-    except Exception as e:
-        print(f"Tile error z={z}, x={x}, y={y}: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
+    # except Exception as e:
+    #     print(f"Tile error z={z}, x={x}, y={y}: {e}")
+    #     raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/airport/runway-funnel")
 async def update_runway_funnel(runway_data: Dict[Any, Any]):
