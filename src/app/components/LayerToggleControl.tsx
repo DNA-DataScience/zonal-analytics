@@ -34,7 +34,7 @@ export class LayerToggleControl implements maplibregl.IControl {
     this.button = document.createElement("button");
     this.button.type = "button";
     this.button.ariaLabel = `Toggle ${this.label} visibility`;
-    this.button.textContent = `Hide ${this.label}`;
+    this.button.textContent = `🎞️📃`;
     this.button.onclick = () => this.toggle();
 
     this.container.appendChild(this.button);
@@ -118,13 +118,13 @@ export class LayerToggleControl implements maplibregl.IControl {
         this.safeSetOpacity(this.originalOpacity);
       }
       this.isHidden = false;
-      this.button.textContent = `Hide ${this.label}`;
+      this.button.textContent = `📃`;
     } else {
       // Hide (but keep queryable)
       this.captureOriginals();
       this.safeSetOpacity(this.hiddenOpacity);
       this.isHidden = true;
-      this.button.textContent = `Show ${this.label}`;
+      this.button.textContent = `📜`;
     }
 
     // Force a repaint so it takes effect without user interaction

@@ -8,10 +8,8 @@ import { CoordinateSearchControl } from "@/app/components/CoordinateSearchContro
 import { StyleToggleControl } from "@/app/components/StyleToggleControl";
 import { addLayers } from "@/app/lib/Layerer";
 import { LayerToggleControl } from "@/app/components/LayerToggleControl";
-import { MaplibreTerradrawControl } from "@watergis/maplibre-gl-terradraw";
 import "maplibre-gl/dist/maplibre-gl.css";
 import "@watergis/maplibre-gl-terradraw/dist/maplibre-gl-terradraw.css";
-import { CalibrationControl } from "@/app/components/CalibrationControl";
 import { CalibrationMenuControl } from "@/app/components/CalibrationMenuControl";
 
 const INDIA_BOUNDS: LngLatBoundsLike = [
@@ -22,8 +20,6 @@ const INDIA_BOUNDS: LngLatBoundsLike = [
 const Map: React.FC = () => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<MapType | null>(null);
-  const drawRef = useRef<MaplibreTerradrawControl | null>(null);
-  const calibrationRef = useRef<CalibrationControl | null>(null);
   const isInitializingRef = useRef<boolean>(false);
 
   useEffect(() => {
@@ -151,7 +147,7 @@ const Map: React.FC = () => {
       map.addControl(new CoordsControl(), "bottom-left");
       map.addControl(new StyleToggleControl("bright"), "bottom-right");
       map.addControl(new CalibrationMenuControl(), "top-right");
-      map.setMaxZoom(18);
+      map.setMaxZoom(15);
 
       const toggle = new LayerToggleControl({
         layerId: "airport-zones",
@@ -184,9 +180,6 @@ const Map: React.FC = () => {
         mapRef.current.remove();
         mapRef.current = null;
       }
-
-      drawRef.current = null;
-      calibrationRef.current = null;
     };
   }, []);
 

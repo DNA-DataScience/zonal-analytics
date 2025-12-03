@@ -391,6 +391,8 @@ export class CalibrationMenuControl implements maplibregl.IControl {
         "success",
       );
 
+      this.map.triggerRepaint();
+
       // Optionally close the menu after successful submission
       this.closeMenu();
     } catch (error) {

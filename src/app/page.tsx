@@ -1,5 +1,5 @@
 import Map from "./components/Map";
-import { SourcesButton } from "@/app/components/SourcesButton";
+import { SourcesButton } from "@/app/lib/SourcesButton";
 
 const HomePage: React.FC = () => {
   return (

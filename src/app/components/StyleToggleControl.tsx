@@ -38,7 +38,7 @@ export class StyleToggleControl implements IControl {
     button.type = "button";
     button.title = "Switch base map";
     button.setAttribute("aria-label", "Switch base map");
-    button.textContent = "Layers";
+    button.textContent = "🗺️";
     button.addEventListener("click", () => this.toggle());
 
     container.appendChild(button);
