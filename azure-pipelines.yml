@@ -1,0 +1,101 @@
+trigger:
+  - main
+  - master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  pythonVersion: '3.13'
+  appName: 'map-analytics-api'
+  registryName: '$(appName)acr'
+
+stages:
+  - stage: Build
+    displayName: 'Build and Test'
+    jobs:
+      - job: BuildJob
+        displayName: 'Build Application'
+        steps:
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: '$(pythonVersion)'
+            displayName: 'Use Python $(pythonVersion)'
+
+          - script: |
+              python -m pip install --upgrade pip
+              pip install uv
+            displayName: 'Install uv'
+
+          - script: |
+              uv pip install -e .
+              uv pip install gunicorn
+            displayName: 'Install dependencies with uv'
+
+          - script: |
+              uv pip install pytest pytest-cov
+              pytest --junitxml=junit/test-results.xml --cov=. --cov-report=xml --cov-report=html
+            displayName: 'Run Tests'
+            continueOnError: true
+
+          - task: PublishTestResults@2
+            condition: succeededOrFailed()
+            inputs:
+              testResultsFiles: '**/test-*.xml'
+              testRunTitle: 'Python Tests'
+
+          - task: PublishCodeCoverageResults@1
+            inputs:
+              codeCoverageTool: Cobertura
+              summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/coverage.xml'
+
+  - stage: Deploy
+    displayName: 'Deploy to Azure App Service'
+    dependsOn: Build
+    condition: succeeded()
+    jobs:
+      - deployment: DeployJob
+        displayName: 'Deploy Application'
+        environment: 'production'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - task: UsePythonVersion@0
+                  inputs:
+                    versionSpec: '$(pythonVersion)'
+                  displayName: 'Use Python $(pythonVersion)'
+
+                - task: DownloadPipelineArtifact@2
+                  inputs:
+                    buildType: 'current'
+                    targetPath: '$(Pipeline.Workspace)'
+
+                - script: |
+                    python -m pip install --upgrade pip
+                    pip install uv
+                  displayName: 'Install uv'
+
+                - script: |
+                    uv pip install -e .
+                    uv pip install gunicorn
+                  displayName: 'Install dependencies with uv'
+
+                - task: ArchiveFiles@2
+                  inputs:
+                    rootFolderOrFile: '$(Build.SourcesDirectory)'
+                    includeRootFolder: false
+                    archiveFile: '$(Build.ArtifactStagingDirectory)/app.zip'
+                    archiveType: 'zip'
+                    replaceExistingArchive: true
+                  displayName: 'Archive application'
+
+                - task: AzureWebApp@1
+                  inputs:
+                    azureSubscription: 'AzureServiceConnection'
+                    appType: 'webAppLinux'
+                    appName: '$(appName)'
+                    runtimeStack: 'PYTHON|3.13'
+                    startupCommand: 'gunicorn --config gunicorn_config.py --workers 4 --worker-class uvicorn.workers.UvicornWorker app:app'
+                    package: '$(Build.ArtifactStagingDirectory)/app.zip'
+                  displayName: 'Deploy to Azure App Service'

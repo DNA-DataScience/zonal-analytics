@@ -10,7 +10,9 @@ from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, Asyn
 import asyncio
 
 # Load environment variables from .env
-load_dotenv("db.env")
+if os.getenv("ENV") != "production":
+    load_dotenv("db.env")
+
 
 TILE_SEMAPHORE = asyncio.Semaphore(5)
 

@@ -90,7 +90,9 @@ def process_runway_geometry(runway, airport):
     funnel_geometry = process_funnel(runway)
     
     # Load environment variables from .env
-    load_dotenv("db.env")
+    if os.getenv("ENV") != "production":
+        load_dotenv("db.env")
+
     # Create database connection
     USER = os.getenv("user")
     PASSWORD = os.getenv("password")
