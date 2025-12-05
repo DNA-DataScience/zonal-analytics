@@ -8,7 +8,7 @@ pool:
   vmImage: "ubuntu-latest"
 
 variables:
-  azureServiceConnection: "zonal-backend-sc"
+  azureServiceConnection: "ServConn-Zonal"
   azureWebAppName: "zonal-backend"
   pythonVersion: "3.13"
 

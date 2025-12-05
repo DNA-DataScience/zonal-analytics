@@ -10,7 +10,7 @@ from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, Asyn
 import asyncio
 
 # Load environment variables from .env
-if os.getenv("ENV") != "production":
+if os.getenv("ENV") != "dev":
     load_dotenv("db.env")
 
 
