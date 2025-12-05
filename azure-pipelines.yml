@@ -6,7 +6,6 @@ trigger:
 
 pool:
   name: LocalPool
-  demands: Agent.Version -gt 2.0
 
 variables:
   azureServiceConnection: "ServConn-Zonal"
