@@ -13,17 +13,17 @@ variables:
   pythonVersion: "3.13"
 
 steps:
-  # 1. Install Python
-  - task: UsePythonVersion@0
-    inputs:
-      versionSpec: "$(pythonVersion)"
-      architecture: "x64"
+  # # 1. Install Python
+  # - task: UsePythonVersion@0
+  #   inputs:
+  #     versionSpec: "$(pythonVersion)"
+  #     architecture: "x64"
 
-  # 2. Install uv
-  - script: |
-      curl -LsSf https://astral.sh/uv/install.sh | sh
-      echo "$HOME/.local/bin" >> $GITHUB_PATH
-    displayName: "Install uv"
+  # # 2. Install uv
+  # - script: |
+  #     curl -LsSf https://astral.sh/uv/install.sh | sh
+  #     echo "$HOME/.local/bin" >> $GITHUB_PATH
+  #   displayName: "Install uv"
 
   # 3. Sync dependencies (creates .venv)
   - script: |
