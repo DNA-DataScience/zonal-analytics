@@ -1,18 +1,20 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+// Remove Google Fonts import temporarily
+// import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import 'maplibre-gl/dist/maplibre-gl.css';
-import '@maplibre/maplibre-gl-geocoder/dist/maplibre-gl-geocoder.css';
+import "maplibre-gl/dist/maplibre-gl.css";
+import "@maplibre/maplibre-gl-geocoder/dist/maplibre-gl-geocoder.css";
 
-const geistSans = Geist({
+// Use system fonts instead
+const geistSans = {
   variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+  className: "font-sans",
+};
 
-const geistMono = Geist_Mono({
+const geistMono = {
   variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+  className: "font-mono",
+};
 
 export const metadata: Metadata = {
   title: "Create Next App",
