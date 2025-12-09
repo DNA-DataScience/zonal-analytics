@@ -5,7 +5,9 @@ import os
 if __name__ == "__main__":
     
     if os.getenv("ENV") != "dev":
-        uvicorn.run("airport_api:app", host="0.0.0.0", port=8000, reload=True)
+        print("THE DEV PART OF CODE IS RUNNING")
+        uvicorn.run("airport_api:app", host="0.0.0.0", port=8000)
+        # uvicorn.run("airport_api:app", host="0.0.0.0", port=8000, reload=True)
 
  
     
