@@ -72,7 +72,7 @@ export function addLayers(map: maplibregl.Map) {
     console.log("Adding airport tiles");
     map.addSource("airport-tiles", {
       type: "vector",
-      tiles: ["http://127.0.0.1:8000/tiles/{z}/{x}/{y}.mvt"],
+      tiles: ["https://zonal-backend.azurewebsites.net/tiles/{z}/{x}/{y}.mvt"],
       minzoom: 0,
       maxzoom: 15,
     });

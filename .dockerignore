@@ -1,0 +1,7 @@
+**/.dockerignore
+**/docker-compose*
+**/compose*
+**/Dockerfile*
+node_modules
+LICENSE
+README.md
