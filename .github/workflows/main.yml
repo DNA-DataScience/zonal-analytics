@@ -5,7 +5,7 @@ name: Build and Deploy Frontend Container
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   build-and-deploy:
