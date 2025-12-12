@@ -39,8 +39,8 @@ DB_URL = f"postgresql+asyncpg://{USER}:{PASSWORD}@{HOST}:{PORT}/{DBNAME}"
 
 engine = create_async_engine(
     DB_URL,
-    pool_size = 10,
-    max_overflow = 5,
+    pool_size = 5,
+    max_overflow = 0,
     pool_timeout = 5,
     pool_recycle = 1800,
     echo = False
@@ -117,11 +117,11 @@ async def get_tile(z: int, x: int, y: int, db: AsyncSession = Depends(get_db)):
     #     raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/airport/runway-funnel")
-async def update_runway_funnel(runway_data: Dict[Any, Any]):
+async def update_runway_funnel(runway_data: Dict[Any, Any], db: AsyncSession = Depends(get_db)):
     try:
         runway = runway_data['features'][0]
         airport = runway_data['airportName']
-        success = process_runway_geometry(runway, airport)
+        success = await process_runway_geometry(runway, airport, db)
         if success:
             return {"status": "success", "message": "Runway funnel data processed and saved"}
         else:
