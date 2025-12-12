@@ -3,6 +3,7 @@ from shapely import wkb
 import numpy as np
 from math import degrees, atan2
 from sqlalchemy import create_engine, text
+from sqlalchemy.ext.asyncio import AsyncSession
 from dotenv import load_dotenv
 import os
 
@@ -85,82 +86,83 @@ def process_funnel(runway):
     return funnel_geometry
 
 
-def process_runway_geometry(runway, airport):
+async def process_runway_geometry(runway, airport, db:AsyncSession):
     
     funnel_geometry = process_funnel(runway)
     
-    # Load environment variables from .env
-    if os.getenv("ENV") != "dev":
-        load_dotenv("db.env")
+    # # Load environment variables from .env
+    # if os.getenv("ENV") != "dev":
+    #     load_dotenv("db.env")
 
-    # Create database connection
-    USER = os.getenv("user")
-    PASSWORD = os.getenv("password")
-    HOST = os.getenv("host")
-    PORT = os.getenv("port")
-    DBNAME = os.getenv("dbname")
+    # # Create database connection
+    # USER = os.getenv("user")
+    # PASSWORD = os.getenv("password")
+    # HOST = os.getenv("host")
+    # PORT = os.getenv("port")
+    # DBNAME = os.getenv("dbname")
 
-    # Construct the SQLAlchemy connection string
-    DB_URL = f"postgresql+psycopg2://{USER}:{PASSWORD}@{HOST}:{PORT}/{DBNAME}?sslmode=require"
+    # # Construct the SQLAlchemy connection string
+    # DB_URL = f"postgresql+psycopg2://{USER}:{PASSWORD}@{HOST}:{PORT}/{DBNAME}?sslmode=require"
 
-    # DB_URL = "postgresql://mapper:password@localhost:5432/gisdb"
-    engine = create_engine(DB_URL)
+    # # DB_URL = "postgresql://mapper:password@localhost:5432/gisdb"
+    # engine = create_engine(DB_URL)
     
     try:
-        with engine.connect() as connection:
-            results = connection.execute(SELECT_QUERY, {"airport_name": airport}).fetchall()
-            updated_geoms = []
-            funnel_exists = False
-            for row in results:
-                geom, zone, t_ype, radio, elevation, lat, lon = row
-                shapely_geom = wkb.loads(geom, hex=True)
-                updated_geom = shapely_geom
-                
-                if (zone == 'funnel'):
-                    updated_geom = shapely_geom.union(funnel_geometry)
-                    funnel_exists = True
+        result = await db.execute(SELECT_QUERY, {"airport_name": airport})
+        results = result.fetchall()
+        updated_geoms = []
+        funnel_exists = False
+        for row in results:
+            geom, zone, t_ype, radio, elevation, lat, lon = row
+            shapely_geom = wkb.loads(geom, hex=True)
+            updated_geom = shapely_geom
+            
+            if (zone == 'funnel'):
+                updated_geom = shapely_geom.union(funnel_geometry)
+                funnel_exists = True
+            else:
+                if (zone == 'inner'):
+                    funnel_geometry = funnel_geometry.difference(shapely_geom)
                 else:
-                    if (zone == 'inner'):
-                        funnel_geometry = funnel_geometry.difference(shapely_geom)
-                    else:
-                        updated_geom = shapely_geom.difference(funnel_geometry)  
-                    
-                print(updated_geom)
+                    updated_geom = shapely_geom.difference(funnel_geometry)  
                 
-                updated_geoms.append({
-                    'geometry': updated_geom,
-                    'zone': zone
-                })
-                
+            print(updated_geom)
             
-            for geom in updated_geoms:
-                connection.execute(UPDATE_QUERY, {
-                    "geom": geom['geometry'].wkb,
-                    "name": airport,
-                    "zone": geom["zone"]
-                })
-                
-            message = "Geometries updated successfully with unionized funnel zone"
+            updated_geoms.append({
+                'geometry': updated_geom,
+                'zone': zone
+            })
             
-            if (funnel_exists == False):    
-                connection.execute(INSERT_QUERY, {
-                    "geom": funnel_geometry.wkb,
-                    "zone": 'funnel',
-                    "name": airport,
-                    "type": t_ype,
-                    "radio": radio,
-                    "elevation": elevation,
-                    "lat": lat,
-                    "lon": lon
-                })
-                message = "Geometries updated successfully with inserted funnel zone"
+        
+        for geom in updated_geoms:
+            await db.execute(UPDATE_QUERY, {
+                "geom": geom['geometry'].wkb,
+                "name": airport,
+                "zone": geom["zone"]
+            })
             
-            connection.commit()
-            print(message)
+        message = "Geometries updated successfully with unionized funnel zone"
+        
+        if not funnel_exists:    
+            await db.execute(INSERT_QUERY, {
+                "geom": funnel_geometry.wkb,
+                "zone": 'funnel',
+                "name": airport,
+                "type": t_ype,
+                "radio": radio,
+                "elevation": elevation,
+                "lat": lat,
+                "lon": lon
+            })
+            message = "Geometries updated successfully with inserted funnel zone"
+        
+        await db.commit()
+        print(message)
         
         return True
     except Exception as e:
         print(f"Error processing runway funnel data: {str(e)}")
+        await db.rollback()
         return False
 
 if __name__ == "__main__":
