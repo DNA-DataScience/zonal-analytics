@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 import maplibregl, { LngLatBoundsLike, Map as MapType } from "maplibre-gl";
-import { CoordsControl } from "@/app/components/CoordsControl";
+//import { CoordsControl } from "@/app/components/CoordsControl";
 import { ContextMenuControl } from "@/app/components/ContextMenuControl";
 import { ReportPanelControl } from "@/app/components/ReportPanelControl";
 import { CoordinateSearchControl } from "@/app/components/CoordinateSearchControl";
@@ -144,7 +144,7 @@ const Map: React.FC = () => {
       map.addControl(contextMenuCtrl);
       map.addControl(new CoordinateSearchControl(contextMenuCtrl), "top-left");
       map.addControl(reportPanel, "top-left");
-      map.addControl(new CoordsControl(), "bottom-left");
+      //map.addControl(new CoordsControl(), "bottom-left");
       map.addControl(new StyleToggleControl("bright"), "bottom-right");
       map.addControl(new CalibrationMenuControl(), "top-right");
       map.setMaxZoom(15);
