@@ -46,5 +46,33 @@ async def generate_report(lat: float, lng: float, elev: float = 0, db: AsyncSess
         radio = r[3]
         air_elev = r[4]
         distance_m = float(r[5])
+        feasibility = ""
+        note = ""
+        min_height = "N/A"
+        
+        if air_type in ("funnel", "inner"):
+            feasibility = "Not Feasible"
+            note = f"No WTGs allowed in {air_type} zone."
+            min_height = "Restricted"
+        elif air_type == "middle":
+            feasibility = "Limited Feasibility"
+            note = f"Feasibility limited in middle zone. Based on distance and minimum height"
+            min_height = f"Some m"
+        elif air_type == "outer":
+            feasibility = "Feasible"
+            note = f"Feasibile in outer zone but still require NOC for most cases"
+            min_height = "Not Required"
+            
+        report.append({
+            "zone": zone,
+            "name": name,
+            "type": air_type,
+            "radio": radio,
+            "airport_elevation": air_elev,
+            "min_height": min_height,
+            "note": note,
+            "feasibility": feasibility
+        })
+            
     
-    return JSONResponse(content={"lat": lat, "lng": lng})
+    return JSONResponse(content=report)
