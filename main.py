@@ -1,7 +1,5 @@
 import uvicorn
-from airport_api import app
 import os
-import gunicorn
 
 if __name__ == "__main__":
     
