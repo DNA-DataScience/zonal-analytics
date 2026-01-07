@@ -6,22 +6,22 @@ export interface PanelLike {
 }
 
 export class ReportGenerator {
-  generate(
+  async generate(
     panel: PanelLike,
     map: maplibregl.Map,
     lat: number,
     lng: number,
     elevation?: number | null,
-  ): void {
-    panel.setBodyHTML(this.buildHTML(map, lat, lng, elevation));
+  ): Promise<void> {
+    panel.setBodyHTML(await this.buildHTML(map, lat, lng, elevation));
   }
 
-  private buildHTML(
+  private async buildHTML(
     map: maplibregl.Map,
     lat: number,
     lng: number,
     elevation?: number | null,
-  ): string {
+  ): Promise<string> {
     const latStr = lat.toFixed(5);
     const lngStr = lng.toFixed(5);
     const elevStr =
@@ -34,6 +34,16 @@ export class ReportGenerator {
       zoneProperty: "zone",
       pointTolerancePx: 2,
     });
+
+    const res = await fetch(
+      `http://127.0.0.1:8000/report-generator?lat=${lat}&lng=${lng}&elev=${elevation ?? 0}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
 
     return `
       <div class="report">
