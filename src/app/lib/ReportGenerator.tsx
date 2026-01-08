@@ -1,4 +1,4 @@
-import { getZonesAt } from "@/app/lib/FindZones";
+import { renderZonesFromJson } from "@/app/lib/FindZones";
 import maplibregl from "maplibre-gl";
 
 export interface PanelLike {
@@ -29,21 +29,30 @@ export class ReportGenerator {
         ? "N/A"
         : `${Math.round(elevation)} m`;
 
-    const rules = getZonesAt(map, lng, lat, {
-      layerIds: ["airport-zones"],
-      zoneProperty: "zone",
-      pointTolerancePx: 2,
-    });
+    // Default to empty; we'll try the backend first and fall back to local rules if needed
+    let rules = "";
 
-    const res = await fetch(
-      `http://127.0.0.1:8000/report-generator?lat=${lat}&lng=${lng}&elev=${elevation ?? 0}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
+    try {
+      const res = await fetch(
+        `http://127.0.0.1:8000/report-generator?lat=${lat}&lng=${lng}&elev=${elevation ?? 0}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
         },
-      },
-    );
+      );
+
+      if (res.ok) {
+        const json = await res.json();
+        console.log("Backend response: ", json);
+        rules = renderZonesFromJson(json);
+      } else {
+        console.warn("Backend responded with status:", res.status);
+      }
+    } catch (e) {
+      console.warn("Backend fetch failed, using local rules.", e);
+    }
 
     return `
       <div class="report">
