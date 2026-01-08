@@ -2,6 +2,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import text
 from fastapi import Depends, HTTPException
 from fastapi.responses import JSONResponse
+import math
 
 REPORT_QUERY = text("""
                     WITH p AS (
@@ -15,7 +16,7 @@ REPORT_QUERY = text("""
                     SELECT z.zone, z.name, z.type, z.radio, z.elevation,
                            ST_Distance(
                                p.geom4326::geography,
-                               z.aiport_point::geography
+                               z.airport_point::geography
                             ) AS distance_m
                     FROM "GisDB".airport_layers z
                     JOIN p
@@ -46,19 +47,20 @@ async def generate_report(lat: float, lng: float, elev: float = 0, db: AsyncSess
         radio = r[3]
         air_elev = r[4]
         distance_m = float(r[5])
-        feasibility = ""
-        note = ""
+        feasibility = "N/A"
+        note = "N/A"
         min_height = "N/A"
         
-        if air_type in ("funnel", "inner"):
+        if zone in ("funnel", "inner"):
             feasibility = "Not Feasible"
-            note = f"No WTGs allowed in {air_type} zone."
+            note = f"No WTGs allowed in {zone} zone."
             min_height = "Restricted"
-        elif air_type == "middle":
+        elif zone == "middle":
             feasibility = "Limited Feasibility"
             note = f"Feasibility limited in middle zone. Based on distance and minimum height"
-            min_height = f"Some m"
-        elif air_type == "outer":
+            mh = calc_min_height(elev, air_elev, distance_m)
+            min_height = f"{mh:.1f}m"
+        elif zone == "outer":
             feasibility = "Feasible"
             note = f"Feasibile in outer zone but still require NOC for most cases"
             min_height = "Not Required"
@@ -74,5 +76,11 @@ async def generate_report(lat: float, lng: float, elev: float = 0, db: AsyncSess
             "feasibility": feasibility
         })
             
-    
     return JSONResponse(content=report)
+
+def calc_min_height(elev:float, air_elev:float, distance_m:float):
+    
+    air_elev = float(air_elev)
+
+    mh = min(air_elev + (45 + 0.05 * (distance_m - 4000)) - elev, 300)
+    return mh
