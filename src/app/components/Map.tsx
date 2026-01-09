@@ -146,7 +146,7 @@ const Map: React.FC = () => {
       map.addControl(reportPanel, "top-left");
       //map.addControl(new CoordsControl(), "bottom-left");
       map.addControl(new StyleToggleControl("bright"), "bottom-right");
-      map.addControl(new CalibrationMenuControl(), "top-right");
+      //map.addControl(new CalibrationMenuControl(), "top-right");
       map.setMaxZoom(15);
 
       const toggle = new LayerToggleControl({
