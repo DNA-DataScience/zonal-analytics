@@ -8,6 +8,7 @@ export type BackendZone = {
   radio: string; // e.g. "VFR"
   type: string; // e.g. "AAI / Joint Venture"
   zone: string; // e.g. "inner" | "middle" | "outer" | "funnel"
+  distance?: number | string; // meters, present only for `nearest`;
 };
 
 export function renderZonesFromJson(
@@ -21,7 +22,31 @@ export function renderZonesFromJson(
       ? (Object.values(items) as unknown as BackendZone[])
       : [];
 
-  if (!list.length) {
+  const isNearest = (z?: string) => z?.toLowerCase().includes("nearest");
+  const nearest = list.find((it) => isNearest(it.zone));
+
+  if (nearest) {
+    let nearestBlock = "";
+    const distRaw = (nearest as BackendZone).distance;
+    const distNum =
+      typeof distRaw === "string" ? parseFloat(distRaw) : Number(distRaw);
+    const distText = Number.isFinite(distNum)
+      ? `${Math.round(distNum)}m`
+      : `${distRaw ?? "N/A"}`;
+
+    nearestBlock = `
+        
+        <div><strong>Nearest Airport:</strong></div>
+        <div class="nearest-airport">
+          <dl class="airport-info">
+            <dt><strong>Airport:</strong></dt><dd>${nearest.name}</dd>
+            <dt><strong>Airport Elevation:</strong></dt><dd>${nearest.airport_elevation}${/m$/i.test(String(nearest.airport_elevation)) ? "" : "m"}</dd>
+            <dt><strong>Airport Type:</strong></dt><dd>${nearest.type}</dd>
+            <dt><strong>Radio Type:</strong></dt><dd>${nearest.radio}</dd>
+            <dt><strong>Distance:</strong></dt><dd>${distText}</dd>
+          </dl>
+        </div>`;
+
     return (
       rules +
       `<li>
@@ -29,9 +54,22 @@ export function renderZonesFromJson(
         </li>` +
       `</ul>` +
       `</div>` +
-      `<div style="font-weight: bold; font-size: 20px;"><strong>Feasibility: </strong><span style="color: lawngreen">Yes</span></div></div>`
+      nearestBlock +
+      `<div style="font-weight: bold; font-size: 20px;"><strong>Feasibility: </strong><span style="color: lawngreen">Yes</span></div>`
     );
   }
+
+  // if (!list.length) {
+  //   return (
+  //     rules +
+  //     `<li>
+  //         No Zones
+  //       </li>` +
+  //     `</ul>` +
+  //     `</div>` +
+  //     `<div style="font-weight: bold; font-size: 20px;"><strong>Feasibility: </strong><span style="color: lawngreen">Yes</span></div></div>`
+  //   );
+  // }
 
   // Aggregation flags based on backend-provided semantics
   let anyNotFeasible = false;
@@ -73,7 +111,7 @@ export function renderZonesFromJson(
     rules += `
       <li>
         <strong>Airport:</strong> ${it.name}
-        <dl class="airport-info"
+        <dl class="airport-info">
           <dt><strong>Airport Elevation:</strong></dt><dd>${it.airport_elevation}${/m$/i.test(String(it.airport_elevation)) ? "" : "m"}</dd>
           <dt><strong>Airport Type:</strong></dt><dd>${it.type}</dd>
           <dt><strong>Radio Type:</strong></dt><dd>${it.radio}</dd>
