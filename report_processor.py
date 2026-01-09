@@ -61,7 +61,7 @@ async def generate_report(lat: float, lng: float, elev: float = 0, db: AsyncSess
     
     if not rows:
         #TODO nearest airports
-        res = await nearest_airport(lat, lng, elev, db)
+        return await nearest_airport(lat, lng, elev, db)
     
     report = []
     
@@ -98,7 +98,8 @@ async def generate_report(lat: float, lng: float, elev: float = 0, db: AsyncSess
             "airport_elevation": air_elev,
             "min_height": min_height,
             "note": note,
-            "feasibility": feasibility
+            "feasibility": feasibility,
+            "distance": distance_m
         })
             
     return JSONResponse(content=report)
@@ -142,9 +143,10 @@ async def nearest_airport(lat: float, lng: float, elev: float = 0, db: AsyncSess
             "airport_elevation": air_elev,
             "min_height": min_height,
             "note": note,
-            "feasibility": feasibility
+            "feasibility": feasibility,
+            "distance": distance_m
         })
     
-    print(report)
+    #print(report)
         
     return JSONResponse(report)
