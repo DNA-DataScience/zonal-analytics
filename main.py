@@ -1,5 +1,4 @@
 import uvicorn
-from airport_api import app
 import os
 
 if __name__ == "__main__":

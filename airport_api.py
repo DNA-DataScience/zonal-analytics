@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 import os
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
 import asyncio
+from report_processor import generate_report
 
 # Load environment variables from .env
 if os.getenv("ENV") != "dev":
@@ -129,3 +130,7 @@ async def update_runway_funnel(runway_data: Dict[Any, Any], db: AsyncSession = D
         
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/report-generator")
+async def report_generator(lat: float, lng: float, elev: float = 0, db: AsyncSession = Depends(get_db)):
+    return await generate_report(lat, lng, elev, db)
