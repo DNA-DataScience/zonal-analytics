@@ -13,6 +13,7 @@ RUN uv sync
 
 # Copy application code
 COPY airport_api.py .
+COPY report_processor.py .
 COPY main.py .
 COPY runway_processor.py .
 
