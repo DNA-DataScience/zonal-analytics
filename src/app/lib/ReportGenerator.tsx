@@ -34,7 +34,7 @@ export class ReportGenerator {
 
     try {
       const res = await fetch(
-        `http://127.0.0.1:8000/report-generator?lat=${lat}&lng=${lng}&elev=${elevation ?? 0}`,
+        `https://zonal-backend.azurewebsites.net/report-generator?lat=${lat}&lng=${lng}&elev=${elevation ?? 0}`,
         {
           method: "GET",
           headers: {
