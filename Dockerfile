@@ -16,7 +16,8 @@ COPY airport_api.py .
 COPY report_processor.py .
 COPY main.py .
 COPY runway_processor.py .
+COPY connect_db.py .
 
 EXPOSE 8000
 
-CMD ["uv", "run", "uvicorn", "airport_api:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uv", "run", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
