@@ -2,10 +2,9 @@ from shapely.geometry import Polygon, MultiPolygon, shape
 from shapely import wkb
 import numpy as np
 from math import degrees, atan2
-from sqlalchemy import create_engine, text
+from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
-from dotenv import load_dotenv
-import os
+
 
 SELECT_QUERY = text("""
                     SELECT geometry, zone, type, radio, elevation, latitude, longitude
