@@ -53,11 +53,11 @@ async def generate_report(lat: float, lng: float, elev: float = 0, db: AsyncSess
             "lon": lng
         })
         
-        rows = result.fetchall()
+        rows = await result.fetchall()
         
     except Exception as e:
         print(f"Error retrieving zone data: {str(e)}")
-        return HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=str(e))
     
     if not rows:
         #TODO nearest airports
@@ -109,7 +109,7 @@ def calc_min_height(elev:float, air_elev:float, distance_m:float):
     air_elev = float(air_elev)
 
     mh = min(air_elev + (45 + 0.05 * (distance_m - 4000)) - elev, 300)
-    return mh
+    return max(0, mh)
 
 async def nearest_airport(lat: float, lng: float, elev: float = 0, db: AsyncSession = None):
     try:
@@ -118,10 +118,13 @@ async def nearest_airport(lat: float, lng: float, elev: float = 0, db: AsyncSess
             "lon": lng
         })
         
-        row = result.fetchall()
+        row = await result.fetchall()
+        
+        if not row:  # Add this check
+            return {"status": "no_results", "message": "No airports found"}
         
     except Exception as e:
-        return HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=str(e))
     
     report = []
     r = row[0]
@@ -149,4 +152,4 @@ async def nearest_airport(lat: float, lng: float, elev: float = 0, db: AsyncSess
     
     #print(report)
         
-    return JSONResponse(report)
+    return report

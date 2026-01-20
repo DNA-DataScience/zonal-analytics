@@ -14,6 +14,8 @@ from connect_db import get_db
 # Initialize FastAPI app
 app = FastAPI()
 
+TILE_SEMAPHORE = None
+
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
@@ -29,7 +31,11 @@ from airport_api import router as airport_router
 
 app.include_router(airport_router, prefix="/airport", tags=["airport"])
 
-TILE_SEMAPHORE = asyncio.Semaphore(5)
+def get_tile_semaphore():
+    global TILE_SEMAPHORE
+    if TILE_SEMAPHORE is None:
+        TILE_SEMAPHORE = asyncio.Semaphore(5)
+    return TILE_SEMAPHORE
 
 MAX_ZOOM = 15
         
@@ -61,10 +67,11 @@ async def get_tile(z: int, x: int, y: int, db: AsyncSession = Depends(get_db)):
             # return Response(content=b'', media_type="application/vnd.mapbox-vector-tile")
             return Response(status_code=204)
         
-    async with TILE_SEMAPHORE:
+    semaphore = get_tile_semaphore()    
+    async with semaphore:
         try:    
             result = await db.execute(QUERY, {"z": z, "x": x, "y": y})
-            tile_bytes = result.scalar()
+            tile_bytes = await result.scalar()
             
             if tile_bytes:
                 return Response(content=tile_bytes, media_type="application/vnd.mapbox-vector-tile")

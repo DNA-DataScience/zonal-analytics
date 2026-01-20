@@ -108,7 +108,7 @@ async def process_runway_geometry(runway, airport, db:AsyncSession):
     
     try:
         result = await db.execute(SELECT_QUERY, {"airport_name": airport})
-        results = result.fetchall()
+        results = await result.fetchall()
         updated_geoms = []
         funnel_exists = False
         for row in results:
@@ -163,6 +163,3 @@ async def process_runway_geometry(runway, airport, db:AsyncSession):
         print(f"Error processing runway funnel data: {str(e)}")
         await db.rollback()
         return False
-
-if __name__ == "__main__":
-    process_runway_geometry()
