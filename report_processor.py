@@ -53,7 +53,7 @@ async def generate_report(lat: float, lng: float, elev: float = 0, db: AsyncSess
             "lon": lng
         })
         
-        rows = await result.fetchall()
+        rows = result.fetchall()
         
     except Exception as e:
         print(f"Error retrieving zone data: {str(e)}")
@@ -118,7 +118,7 @@ async def nearest_airport(lat: float, lng: float, elev: float = 0, db: AsyncSess
             "lon": lng
         })
         
-        row = await result.fetchall()
+        row = result.fetchall()
         
         if not row:  # Add this check
             return {"status": "no_results", "message": "No airports found"}

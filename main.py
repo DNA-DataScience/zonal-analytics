@@ -71,10 +71,11 @@ async def get_tile(z: int, x: int, y: int, db: AsyncSession = Depends(get_db)):
     async with semaphore:
         try:    
             result = await db.execute(QUERY, {"z": z, "x": x, "y": y})
-            tile_bytes = await result.scalar()
+            row = result.fetchone()
             
-            if tile_bytes:
-                return Response(content=tile_bytes, media_type="application/vnd.mapbox-vector-tile")
+            if row:
+                mvt_data = row[0]
+                return Response(content=mvt_data, media_type="application/vnd.mapbox-vector-tile")
             else:
                 return Response(content=b'', media_type="application/vnd.mapbox-vector-tile")
             

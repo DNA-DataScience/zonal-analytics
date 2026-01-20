@@ -1,6 +1,6 @@
 import pytest
 import asyncio
-from unittest.mock import AsyncMock
+from unittest.mock import AsyncMock, MagicMock
 from fastapi.testclient import TestClient
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -39,23 +39,23 @@ def override_get_db(mock_db_session):
 @pytest.fixture
 def mock_tile_result():
     """Mock tile query result"""
-    mock_result = AsyncMock()
-    mock_result.scalar.return_value = b'\x1f\x8b\x08\x00test_tile_data'
+    mock_result = MagicMock()
+    mock_result.fetchone.return_value = (b'\x1f\x8b\x08\x00test_tile_data',) 
     return mock_result
 
 
 @pytest.fixture
 def mock_empty_tile_result():
     """Mock empty tile result"""
-    mock_result = AsyncMock()
-    mock_result.scalar.return_value = None
+    mock_result = MagicMock()
+    mock_result.fetchone.return_value = None
     return mock_result
 
 
 @pytest.fixture
 def mock_report_result():
     """Mock report query result"""
-    mock_result = AsyncMock()
+    mock_result = MagicMock()
     mock_result.fetchall.return_value = [
         ("funnel", "TestAirport", "civil", "120.5", 500, 5000.0),
         ("inner", "TestAirport", "civil", "120.5", 500, 3000.0),
@@ -66,7 +66,7 @@ def mock_report_result():
 @pytest.fixture
 def mock_no_results():
     """Mock empty query result"""
-    mock_result = AsyncMock()
+    mock_result = MagicMock()
     mock_result.fetchall.return_value = []
     mock_result.scalar.return_value = None
     return mock_result

@@ -8,7 +8,7 @@ class TestGetTileEndpoint:
     
     def test_get_tile_success(self, client, override_get_db, mock_db_session, mock_tile_result):
         """Test successful tile retrieval"""
-        mock_db_session.execute.return_value = mock_tile_result
+        mock_db_session.execute = AsyncMock(return_value=mock_tile_result)
         
         response = client.get("/tiles/10/512/256.mvt")
         
@@ -18,7 +18,7 @@ class TestGetTileEndpoint:
     
     def test_get_tile_empty_result(self, client, override_get_db, mock_db_session, mock_empty_tile_result):
         """Test tile request with empty result"""
-        mock_db_session.execute.return_value = mock_empty_tile_result
+        mock_db_session.execute = AsyncMock(return_value=mock_empty_tile_result)
         
         response = client.get("/tiles/10/512/256.mvt")
         
@@ -34,7 +34,7 @@ class TestGetTileEndpoint:
     
     def test_get_tile_at_max_zoom(self, client, override_get_db, mock_db_session, mock_tile_result):
         """Test tile request at MAX_ZOOM boundary"""
-        mock_db_session.execute.return_value = mock_tile_result
+        mock_db_session.execute = AsyncMock(return_value=mock_tile_result)
         
         response = client.get("/tiles/15/512/256.mvt")
         
@@ -42,7 +42,7 @@ class TestGetTileEndpoint:
     
     def test_get_tile_below_max_zoom(self, client, override_get_db, mock_db_session, mock_tile_result):
         """Test tile request below MAX_ZOOM"""
-        mock_db_session.execute.return_value = mock_tile_result
+        mock_db_session.execute = AsyncMock(return_value=mock_tile_result)
         
         response = client.get("/tiles/14/512/256.mvt")
         
@@ -139,7 +139,7 @@ class TestReportGeneratorEndpoint:
     
     def test_report_generator_success(self, client, override_get_db, mock_db_session, mock_report_result):
         """Test successful report generation"""
-        mock_db_session.execute.return_value = mock_report_result
+        mock_db_session.execute = AsyncMock(return_value=mock_report_result)
         
         response = client.get("/report-generator?lat=28.5&lng=77.1&elev=100")
         
@@ -159,7 +159,7 @@ class TestReportGeneratorEndpoint:
     
     def test_report_generator_with_default_elevation(self, client, override_get_db, mock_db_session, mock_report_result):
         """Test report generator uses default elevation"""
-        mock_db_session.execute.return_value = mock_report_result
+        mock_db_session.execute = AsyncMock(return_value=mock_report_result)
         
         response = client.get("/report-generator?lat=28.5&lng=77.1")
         
@@ -167,7 +167,7 @@ class TestReportGeneratorEndpoint:
     
     def test_report_generator_coordinates_at_boundaries(self, client, override_get_db, mock_db_session, mock_no_results):
         """Test report with edge case coordinates"""
-        mock_db_session.execute.return_value = mock_no_results
+        mock_db_session.execute = AsyncMock(return_value=mock_no_results)
         
         response = client.get("/report-generator?lat=85&lng=180&elev=0")
         assert response.status_code in [200, 500]
