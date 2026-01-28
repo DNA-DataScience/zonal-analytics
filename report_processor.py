@@ -13,7 +13,7 @@ REPORT_QUERY = text("""
                             3857
                         ) AS geom3857
                     )
-                    SELECT z.zone, z.name, z.type, z.radio, z.elevation,
+                    SELECT z.zone, z.name, z.type, z.radio, z.elevation, z."CCZM_Cities",
                            ST_Distance(
                                p.geom4326::geography,
                                z.airport_point::geography
@@ -33,7 +33,7 @@ NEAREST_QUERY = text("""
                             3857
                         ) AS geom3857
                     )
-                    SELECT z.zone, z.name, z.type, z.radio, z.elevation,
+                    SELECT z.zone, z.name, z.type, z.radio, z.elevation, z."CCZM_Cities",
                            ST_Distance(
                                p.geom4326::geography,
                                z.airport_point::geography
@@ -71,10 +71,12 @@ async def generate_report(lat: float, lng: float, elev: float = 0, db: AsyncSess
         air_type = r[2]
         radio = r[3]
         air_elev = r[4]
-        distance_m = float(r[5])
+        distance_m = float(r[6])
         feasibility = "N/A"
         note = "N/A"
         min_height = "N/A"
+        crz = "na" if r[5] is None else r[5]
+        autoSettle = "N/A"
         
         if zone in ("funnel", "inner"):
             feasibility = "Not Feasible"
@@ -99,7 +101,9 @@ async def generate_report(lat: float, lng: float, elev: float = 0, db: AsyncSess
             "min_height": min_height,
             "note": note,
             "feasibility": feasibility,
-            "distance": distance_m
+            "distance": distance_m,
+            "cczm": crz,
+            "autoSettle": autoSettle
         })
             
     return JSONResponse(content=report)
@@ -133,10 +137,18 @@ async def nearest_airport(lat: float, lng: float, elev: float = 0, db: AsyncSess
     air_type = r[2]
     radio = r[3]
     air_elev = r[4]
-    distance_m = float(r[5])
+    distance_m = float(r[6])
     feasibility = "Feasible"
-    note = "N/A"
+    note = "Auto Settle only viable if height of WTG is 150m or less"
     min_height = "Not Required"
+    crz = "na" if r[5] is None else r[5]
+    autoSettle = "No"
+    
+    if (radio == "VFR" and distance_m > 20000):
+        autoSettle = "Yes"
+    elif ("IFR" in radio and distance_m > 56000):
+        autoSettle = "Yes"
+    
     
     report.append({
             "zone": zone,
@@ -147,9 +159,9 @@ async def nearest_airport(lat: float, lng: float, elev: float = 0, db: AsyncSess
             "min_height": min_height,
             "note": note,
             "feasibility": feasibility,
-            "distance": distance_m
+            "distance": distance_m,
+            "cczm": crz,
+            "autoSettle": autoSettle
         })
-    
-    #print(report)
         
-    return report
+    return JSONResponse(content=report)
