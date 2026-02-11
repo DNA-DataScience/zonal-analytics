@@ -1,20 +1,14 @@
 import uvicorn
 import os
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi import FastAPI, Depends, HTTPException
-from fastapi.responses import Response
-from sqlalchemy import text
-import asyncio
+from fastapi import FastAPI, Depends
 from report_processor import generate_report
 from sqlalchemy.ext.asyncio import AsyncSession
-from fastapi import Depends
 from connect_db import get_db
 
 
 # Initialize FastAPI app
 app = FastAPI()
-
-TILE_SEMAPHORE = None
 
 # Add CORS middleware
 app.add_middleware(
@@ -28,60 +22,10 @@ app.add_middleware(
 
 # Import and include routers
 from airport_api import router as airport_router
+from tiles import router as tiles_router
 
 app.include_router(airport_router, prefix="/airport", tags=["airport"])
-
-def get_tile_semaphore():
-    global TILE_SEMAPHORE
-    if TILE_SEMAPHORE is None:
-        TILE_SEMAPHORE = asyncio.Semaphore(5)
-    return TILE_SEMAPHORE
-
-MAX_ZOOM = 15
-        
-QUERY = text("""
-SELECT ST_AsMVT(tile, 'airport_layers', 4096, 'geometry') as mvt
-FROM (
-  SELECT
-  zone,
-  name,
-  type,
-  radio,
-  elevation,
-  latitude,
-  longitude,
-  ST_AsMVTGeom(
-    geom3857,
-    ST_TileEnvelope(:z, :x, :y),
-    4096, 256, true
-  ) AS geometry
-  FROM "GisDB".airport_layers
-  WHERE geom3857 && ST_TileEnvelope(:z, :x, :y)
-) AS tile;
-""")
-
-@app.get("/tiles/{z}/{x}/{y}.mvt")
-async def get_tile(z: int, x: int, y: int, db: AsyncSession = Depends(get_db)):
-    
-    if z > MAX_ZOOM:
-            # return Response(content=b'', media_type="application/vnd.mapbox-vector-tile")
-            return Response(status_code=204)
-        
-    semaphore = get_tile_semaphore()    
-    async with semaphore:
-        try:    
-            result = await db.execute(QUERY, {"z": z, "x": x, "y": y})
-            row = result.fetchone()
-            
-            if row:
-                mvt_data = row[0]
-                return Response(content=mvt_data, media_type="application/vnd.mapbox-vector-tile")
-            else:
-                return Response(content=b'', media_type="application/vnd.mapbox-vector-tile")
-            
-        except Exception as e:
-            print(f"Tile error z={z}, x={x}, y={y}: {e}")
-            raise HTTPException(status_code=500, detail=str(e))
+app.include_router(tiles_router, prefix="/tiles", tags=["tiles"])
 
 
 @app.get("/report-generator")
