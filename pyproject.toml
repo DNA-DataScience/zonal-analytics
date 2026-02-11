@@ -19,6 +19,7 @@ dependencies = [
     "matplotlib>=3.10.7",
     "notebook>=7.4.7",
     "polars>=1.33.1",
+    "psycopg>=3.3.2",
     "psycopg2>=2.9.10",
     "pyogrio>=0.11.1",
     "pytest>=9.0.2",

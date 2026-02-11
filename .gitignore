@@ -8,3 +8,13 @@ __pycache__/
 .coverage.*
 htmlcov/
 coverage.xml
+ap_zones_debug.html
+descriptions.html
+final_regulatory_map.html
+gj_zones_debug.html
+mh_zones_debug.html
+ka_zones_debug.html
+mp_zones_debug.html
+rj_zones_debug.html
+tn_zones_debug.html
+zones_preview.html
