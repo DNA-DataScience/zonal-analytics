@@ -72,87 +72,126 @@ export function addLayers(map: maplibregl.Map) {
     console.log("Adding airport tiles");
     map.addSource("airport-tiles", {
       type: "vector",
-      tiles: ["http://127.0.0.1:8000/tiles/{z}/{x}/{y}.mvt"],
+      tiles: ["http://127.0.0.1:8000/tiles/airport/{z}/{x}/{y}.mvt"],
       minzoom: 0,
       maxzoom: 15,
     });
   }
 
+  // Airport zones (keep original opacity and colors)
   addBelowLabels(
     {
       id: "airport-zones",
       type: "fill",
       source: "airport-tiles",
       "source-layer": "airport_layers",
-      filter: [
-        "all",
-        [
-          "any",
-          ["!=", ["get", "type"], "closed"],
-          [
-            "all",
-            ["==", ["get", "type"], "closed"],
-            ["==", ["get", "zone"], "inner"],
-          ],
-        ],
-      ],
       layout: {
         "fill-sort-key": [
-          "case",
-          ["==", ["get", "type"], "closed"],
-          0,
-          [
-            "match",
-            ["get", "zone"],
-            "outer",
-            1,
-            "middle",
-            2,
-            "inner",
-            3,
-            "funnel",
-            4,
-            1,
-          ],
+          "match",
+          ["get", "zone"],
+          "outer",
+          1,
+          "middle",
+          2,
+          "inner",
+          3,
+          "funnel",
+          4,
+          1,
         ],
       },
       paint: {
         "fill-color": [
-          "case",
-          ["==", ["get", "type"], "closed"],
-          "#9ca3af",
-          [
-            "match",
-            ["get", "zone"],
-            "inner",
-            "#ef4444",
-            "middle",
-            "#f4da50",
-            "outer",
-            "#33ef04",
-            "funnel",
-            "#ef4444",
-            "#9ca3af",
-          ],
+          "match",
+          ["get", "zone"],
+          "inner",
+          "#ef4444", // Red
+          "middle",
+          "#f4da50", // Yellow
+          "outer",
+          "#33ef04", // Green
+          "funnel",
+          "#ef4444", // Red
+          "#9ca3af", // Default gray
         ],
         "fill-opacity": 0.4,
         "fill-outline-color": [
-          "case",
-          ["==", ["get", "type"], "closed"],
-          "#6b7280",
-          [
-            "match",
-            ["get", "zone"],
-            "inner",
-            "#7f1d1d",
-            "middle",
-            "#c1a92e",
-            "outer",
-            "#23ac02",
-            "funnel",
-            "#7f1d1d",
-            "#6b7280",
-          ],
+          "match",
+          ["get", "zone"],
+          "inner",
+          "#7f1d1d", // Dark red
+          "middle",
+          "#c1a92e", // Dark yellow
+          "outer",
+          "#23ac02", // Dark green
+          "funnel",
+          "#7f1d1d", // Dark red
+          "#6b7280", // Default dark gray
+        ],
+      },
+    },
+    labelLayerId,
+  );
+
+  if (!map.getSource("mod-tiles")) {
+    console.log("Adding mod tiles");
+    map.addSource("mod-tiles", {
+      type: "vector",
+      tiles: ["http://127.0.0.1:8000/tiles/mod/{z}/{x}/{y}.mvt"],
+      minzoom: 0,
+      maxzoom: 15,
+    });
+  }
+
+  // Mod zones with very different colors and low opacity
+  addBelowLabels(
+    {
+      id: "mod-zones",
+      type: "fill",
+      source: "mod-tiles",
+      "source-layer": "mod_layers",
+      layout: {
+        "fill-sort-key": [
+          "match",
+          ["get", "zone"],
+          ["SPECIAL_ALLOWED", "SPECIAL_LIMITED_HEIGHT"],
+          4,
+          "NO_WTG",
+          3,
+          "NOC",
+          2,
+          "NO_NOC",
+          1,
+          1,
+        ],
+      },
+      paint: {
+        "fill-color": [
+          "match",
+          ["get", "zone"],
+          ["SPECIAL_ALLOWED", "SPECIAL_LIMITED_HEIGHT"],
+          "#8f25ed", // Bright purple - very different from airport colors
+          "NO_WTG",
+          "#dc3535", // Bright orange - different from airport red
+          "NOC",
+          "#f8ba35", // Cyan - different from airport yellow
+          "NO_NOC",
+          "#2bef24", // Emerald - different from airport green
+          "#64748b", // Slate gray
+        ],
+        "fill-opacity": 0.2,
+        "fill-outline-color": [
+          "match",
+          ["get", "zone"],
+          ["SPECIAL_ALLOWED", "SPECIAL_LIMITED_HEIGHT"],
+          "#731cc1", // Dark purple
+          "NO_WTG",
+          "#c12c2c", // Dark orange
+          "NOC",
+          "#cd9929", // Dark cyan
+          "NO_NOC",
+          "#1bbc3a", // Dark emerald
+          "#475569", // Dark slate
         ],
       },
     },

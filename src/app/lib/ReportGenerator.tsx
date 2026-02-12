@@ -56,44 +56,14 @@ export class ReportGenerator {
 
     return `
       <div class="report">
-        <style>
-          /* Indent airports under "Rule Checks" */
-          .report .rule-checks > * { margin-left: 16px; }
-
-          /* Put Zone/Note on the same line and indent them further */
-          .report .rule-checks dl {
-            margin: 4px 0 8px 16px;
-            display: grid;
-            grid-template-columns: max-content 1fr;
-            column-gap: 8px;
-          }
-          .report .rule-checks dt,
-          .report .rule-checks dd {
-            margin: 0;
-          }
-          .report .nearest-airport > * { margin-left: 16px; }
-
-          /* Put Zone/Note on the same line and indent them further */
-          .report .nearest-airport dl {
-            margin: 4px 0 8px 16px;
-            display: grid;
-            grid-template-columns: max-content 1fr;
-            column-gap: 8px;
-          }
-          .report .nearest-airport dt,
-          .report .nearest-airport dd {
-            margin: 0;
-          }
-        </style>
-
         <div><strong>Latitude:</strong> ${latStr}</div>
         <div><strong>Longitude:</strong> ${lngStr}</div>
         <div><strong>Elevation:</strong> ${elevStr}</div>
 
-        <div><strong>Rule Checks:</strong></div>
         <div class="rule-checks">
           ${rules}
         </div>
+      </div>
     `;
   }
 }
