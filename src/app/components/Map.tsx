@@ -8,6 +8,7 @@ import { CoordinateSearchControl } from "@/app/components/CoordinateSearchContro
 import { StyleToggleControl } from "@/app/components/StyleToggleControl";
 import { addLayers } from "@/app/lib/Layerer";
 import { LayerToggleControl } from "@/app/components/LayerToggleControl";
+import { BatchProcessingControl } from "@/app/components/BatchProcessingControl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import "@watergis/maplibre-gl-terradraw/dist/maplibre-gl-terradraw.css";
 import { CalibrationMenuControl } from "@/app/components/CalibrationMenuControl";
@@ -155,6 +156,8 @@ const Map: React.FC = () => {
         label: "Airport Layers",
       });
       map.addControl(toggle, "bottom-right");
+
+      map.addControl(new BatchProcessingControl(), "top-right");
 
       addLayers(map);
 

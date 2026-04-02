@@ -179,7 +179,7 @@ export function addLayers(map: maplibregl.Map) {
           "#2bef24", // Emerald - different from airport green
           "#64748b", // Slate gray
         ],
-        "fill-opacity": 0.2,
+        "fill-opacity": 0.4,
         "fill-outline-color": [
           "match",
           ["get", "zone"],

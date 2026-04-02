@@ -43,3 +43,9 @@ body {
   background-color: #fff;
   min-width: 160px;
 }
+
+/* Override MapLibre button hover transparency - preserve button backgrounds on hover */
+.maplibregl-ctrl button:hover {
+  background-color: inherit !important;
+}
+
