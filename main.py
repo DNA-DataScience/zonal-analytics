@@ -1,14 +1,32 @@
 import uvicorn
 import os
+import asyncio
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, HTTPException
+from fastapi.responses import JSONResponse, StreamingResponse
+from pydantic import BaseModel
+from typing import List
 from report_processor import generate_report
 from sqlalchemy.ext.asyncio import AsyncSession
 from connect_db import get_db
+from batch_processor import generate_batch_report
+
+
+# Pydantic models for batch request
+class Coordinate(BaseModel):
+    id: int
+    lat: float
+    lon: float
+
+class BatchRequest(BaseModel):
+    coordinates: List[Coordinate]
 
 
 # Initialize FastAPI app
 app = FastAPI()
+
+# Rate limiting for batch processing
+BATCH_SEMAPHORE = asyncio.Semaphore(3)
 
 # Add CORS middleware
 app.add_middleware(
@@ -31,6 +49,30 @@ app.include_router(tiles_router, prefix="/tiles", tags=["tiles"])
 @app.get("/report-generator")
 async def report_generator(lat: float, lng: float, elev: float = 0, db: AsyncSession = Depends(get_db)):
     return await generate_report(lat, lng, elev, db)
+
+
+@app.post("/batch-generator")
+async def batch_generator(request: BatchRequest, db: AsyncSession = Depends(get_db)):
+    async with BATCH_SEMAPHORE:
+        try:
+            coordinates_dict = [coord.model_dump() for coord in request.coordinates]
+            result = await generate_batch_report(coordinates_dict, db)
+            
+            # Stream CSV as download response
+            csv_content = result["csv_content"]
+            timestamp = result["timestamp"]
+            filename = f"batch_{timestamp}.csv"
+            
+            return StreamingResponse(
+                iter([csv_content]),
+                media_type="text/csv",
+                headers={
+                    "Content-Disposition": f"attachment; filename={filename}"
+                }
+            )
+        except Exception as e:
+            print(f"Error: {str(e)}")
+            raise HTTPException(status_code=400, detail=str(e))
 
 if __name__ == "__main__":
     

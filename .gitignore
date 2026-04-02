@@ -19,3 +19,8 @@ rj_zones_debug.html
 tn_zones_debug.html
 zones_preview.html
 REPORT_API_DOCS.md
+batches/
+tests/
+htmlcov/
+BATCH_DOWNLOAD_API.md
+batch_processing.md
