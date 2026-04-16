@@ -107,9 +107,9 @@ export function addLayers(map: maplibregl.Map) {
           "inner",
           "#ef4444", // Red
           "middle",
-          "#f4da50", // Yellow
+          "#ddbe36", // Yellow
           "outer",
-          "#33ef04", // Green
+          "#c6ed3b", // Green
           "funnel",
           "#ef4444", // Red
           "#9ca3af", // Default gray
@@ -121,9 +121,9 @@ export function addLayers(map: maplibregl.Map) {
           "inner",
           "#7f1d1d", // Dark red
           "middle",
-          "#c1a92e", // Dark yellow
+          "#c1a122", // Dark yellow
           "outer",
-          "#23ac02", // Dark green
+          "#caf411", // Dark green
           "funnel",
           "#7f1d1d", // Dark red
           "#6b7280", // Default dark gray
