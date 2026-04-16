@@ -22,5 +22,10 @@ REPORT_API_DOCS.md
 batches/
 tests/
 htmlcov/
+test_notebooks/extracted_kmz/
+test_notebooks/ESZ_Windy_States.kmz
 BATCH_DOWNLOAD_API.md
 batch_processing.md
+test_notebooks/ESZ Windy States.kmz
+test_notebooks/esz_combined.gpkg
+test_notebooks/esz_combined2.gpkg
