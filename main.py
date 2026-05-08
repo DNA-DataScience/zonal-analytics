@@ -1,6 +1,7 @@
 import uvicorn
 import os
 import asyncio
+from contextlib import asynccontextmanager
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.responses import JSONResponse, StreamingResponse
@@ -22,8 +23,30 @@ class BatchRequest(BaseModel):
     coordinates: List[Coordinate]
 
 
-# Initialize FastAPI app
-app = FastAPI()
+# Import and include routers
+from airport_api import router as airport_router
+from tiles import router as tiles_router
+from analytics_router import router as analytics_router, create_tables
+
+# Lifespan context manager for startup/shutdown
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Initialize analytics tables on startup"""
+    db = None
+    try:
+        from connect_db import AsyncSessionLocal
+        db = AsyncSessionLocal()
+        await create_tables(db)
+    except Exception as e:
+        print(f"Failed to create analytics tables: {str(e)}")
+    finally:
+        if db:
+            await db.close()
+    yield
+    # Shutdown logic here if needed (runs on app shutdown)
+
+# Initialize FastAPI app with lifespan
+app = FastAPI(lifespan=lifespan)
 
 # Rate limiting for batch processing
 BATCH_SEMAPHORE = asyncio.Semaphore(3)
@@ -38,12 +61,9 @@ app.add_middleware(
     expose_headers=["*"],
 )
 
-# Import and include routers
-from airport_api import router as airport_router
-from tiles import router as tiles_router
-
 app.include_router(airport_router, prefix="/airport", tags=["airport"])
 app.include_router(tiles_router, prefix="/tiles", tags=["tiles"])
+app.include_router(analytics_router)
 
 
 @app.get("/report-generator")
