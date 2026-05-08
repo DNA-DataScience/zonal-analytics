@@ -1,4 +1,5 @@
 import { renderZonesFromJson } from "@/app/lib/FindZones";
+import { trackEvent } from "@/app/lib/analytics";
 import maplibregl from "maplibre-gl";
 
 export interface PanelLike {
@@ -22,6 +23,8 @@ export class ReportGenerator {
     lng: number,
     elevation?: number | null,
   ): Promise<string> {
+    const apiBaseUrl =
+      process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:8000";
     const latStr = lat.toFixed(5);
     const lngStr = lng.toFixed(5);
     const elevStr =
@@ -33,8 +36,13 @@ export class ReportGenerator {
     let rules = "";
 
     try {
+      trackEvent("api_call", "/report-generator", {
+        lat,
+        lng,
+      });
+
       const res = await fetch(
-        `http://127.0.0.1:8000/report-generator?lat=${lat}&lng=${lng}&elev=${elevation ?? 0}`,
+        `${apiBaseUrl}/report-generator?lat=${lat}&lng=${lng}&elev=${elevation ?? 0}`,
         {
           method: "GET",
           headers: {
@@ -47,6 +55,11 @@ export class ReportGenerator {
         const json = await res.json();
         console.log("Backend response: ", json);
         rules = renderZonesFromJson(json);
+        trackEvent("report_generated", "/report-generator", {
+          lat,
+          lng,
+          elevation: elevation ?? null,
+        });
       } else {
         console.warn("Backend responded with status:", res.status);
       }

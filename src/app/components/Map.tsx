@@ -9,9 +9,9 @@ import { StyleToggleControl } from "@/app/components/StyleToggleControl";
 import { addLayers } from "@/app/lib/Layerer";
 import { LayerToggleControl } from "@/app/components/LayerToggleControl";
 import { BatchProcessingControl } from "@/app/components/BatchProcessingControl";
+import { initAnalytics, trackEvent } from "@/app/lib/analytics";
 import "maplibre-gl/dist/maplibre-gl.css";
 import "@watergis/maplibre-gl-terradraw/dist/maplibre-gl-terradraw.css";
-import { CalibrationMenuControl } from "@/app/components/CalibrationMenuControl";
 
 const INDIA_BOUNDS: LngLatBoundsLike = [
   [68.17665, 6.747139], // SW [lng, lat]
@@ -24,6 +24,11 @@ const Map: React.FC = () => {
   const isInitializingRef = useRef<boolean>(false);
 
   useEffect(() => {
+    const analyticsBaseUrl =
+      process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:8000";
+    const isDev = process.env.NODE_ENV !== "production";
+    initAnalytics(analyticsBaseUrl, isDev);
+
     if (mapRef.current || !mapContainerRef.current) return; // initialize only once
 
     const map = new maplibregl.Map({
@@ -134,6 +139,10 @@ const Map: React.FC = () => {
 
     map.on("load", () => {
       if (!mapRef.current) return;
+
+      trackEvent("map_interaction", null, {
+        action: "map_loaded",
+      });
 
       console.log("Map loaded, adding basic controls");
 

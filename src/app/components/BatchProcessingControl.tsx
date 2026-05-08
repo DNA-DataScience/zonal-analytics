@@ -1,4 +1,5 @@
 import maplibregl from "maplibre-gl";
+import { trackEvent } from "@/app/lib/analytics";
 
 interface Coordinate {
   id: number;
@@ -707,7 +708,18 @@ export class BatchProcessingControl implements maplibregl.IControl {
 
   private async _sendToBackend(coords: { coordinates: Coordinate[] }) {
     try {
-      const response = await fetch("http://127.0.0.1:8000/batch-generator", {
+      const apiBaseUrl =
+        process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:8000";
+
+      trackEvent("batch_submitted", "/batch-generator", {
+        count: coords.coordinates.length,
+        mode: this._mode,
+      });
+      trackEvent("api_call", "/batch-generator", {
+        count: coords.coordinates.length,
+      });
+
+      const response = await fetch(`${apiBaseUrl}/batch-generator`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
