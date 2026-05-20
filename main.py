@@ -26,6 +26,7 @@ class BatchRequest(BaseModel):
 # Import and include routers
 from airport_api import router as airport_router
 from tiles import router as tiles_router
+from points import router as points_router
 from analytics_router import router as analytics_router, create_tables
 
 # Lifespan context manager for startup/shutdown
@@ -63,6 +64,7 @@ app.add_middleware(
 
 app.include_router(airport_router, prefix="/airport", tags=["airport"])
 app.include_router(tiles_router, prefix="/tiles", tags=["tiles"])
+app.include_router(points_router, prefix="/points", tags=["points"])
 app.include_router(analytics_router)
 
 
