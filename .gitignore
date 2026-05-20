@@ -29,3 +29,10 @@ batch_processing.md
 test_notebooks/ESZ Windy States.kmz
 test_notebooks/esz_combined.gpkg
 test_notebooks/esz_combined2.gpkg
+ANALYTICS_API_DOCS.md
+analytics.js
+test_notebooks/AP Forest Boundary.KMZ
+*.KMZ
+*.kml
+*.html
+*.xlsx
