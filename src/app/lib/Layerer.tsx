@@ -197,4 +197,144 @@ export function addLayers(map: maplibregl.Map) {
     },
     labelLayerId,
   );
+
+  // Add CMS tiles with clustering
+  if (!map.getSource("cms-tiles")) {
+    console.log("Adding CMS tiles");
+    map.addSource("cms-tiles", {
+      type: "geojson",
+      data: { type: "FeatureCollection", features: [] },
+      cluster: true,
+      clusterMaxZoom: 14,
+      clusterRadius: 50,
+    });
+
+    // Fetch and load CMS data from GeoJSON endpoint
+    fetch("http://127.0.0.1:8000/points/cms.geojson")
+      .then((res) => res.json())
+      .then((data) => {
+        if (map.getSource("cms-tiles")) {
+          (map.getSource("cms-tiles") as maplibregl.GeoJSONSource).setData(data);
+        }
+      })
+      .catch((err) => console.error("Failed to load CMS data:", err));
+  }
+
+  // CMS clustered points - map.addLayer without beforeId so they render on top of basemap fills
+  map.addLayer({
+    id: "cms-clusters",
+    type: "circle",
+    source: "cms-tiles",
+    filter: ["has", "point_count"],
+    paint: {
+      "circle-color": "#d946ef", // Bright magenta
+      "circle-radius": ["step", ["get", "point_count"], 10, 50, 16, 300, 22],
+      "circle-opacity": 0.85,
+      "circle-stroke-width": 2,
+      "circle-stroke-color": "#a61e8e", // Dark magenta
+      "circle-stroke-opacity": 1,
+    },
+  });
+
+  // CMS cluster count labels
+  map.addLayer({
+    id: "cms-cluster-count",
+    type: "symbol",
+    source: "cms-tiles",
+    filter: ["has", "point_count"],
+    layout: {
+      "text-field": "{point_count_abbreviated}",
+      "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+      "text-size": 12,
+    },
+    paint: {
+      "text-color": "#ffffff",
+    },
+  });
+
+  // CMS unclustered individual points
+  map.addLayer({
+    id: "cms-stations",
+    type: "circle",
+    source: "cms-tiles",
+    filter: ["!", ["has", "point_count"]],
+    paint: {
+      "circle-radius": 6,
+      "circle-color": "#d946ef", // Bright magenta
+      "circle-opacity": 0.85,
+      "circle-stroke-width": 1.5,
+      "circle-stroke-color": "#a61e8e", // Dark magenta
+      "circle-stroke-opacity": 1,
+    },
+  });
+
+  // Add WTG tiles with clustering
+  if (!map.getSource("wtg-tiles")) {
+    console.log("Adding WTG tiles");
+    map.addSource("wtg-tiles", {
+      type: "geojson",
+      data: { type: "FeatureCollection", features: [] },
+      cluster: true,
+      clusterMaxZoom: 14,
+      clusterRadius: 50,
+    });
+
+    // Fetch and load WTG data from GeoJSON endpoint
+    fetch("http://127.0.0.1:8000/points/wtg.geojson")
+      .then((res) => res.json())
+      .then((data) => {
+        if (map.getSource("wtg-tiles")) {
+          (map.getSource("wtg-tiles") as maplibregl.GeoJSONSource).setData(data);
+        }
+      })
+      .catch((err) => console.error("Failed to load WTG data:", err));
+  }
+
+  // WTG clustered points - map.addLayer without beforeId so they render on top of basemap fills
+  map.addLayer({
+    id: "wtg-clusters",
+    type: "circle",
+    source: "wtg-tiles",
+    filter: ["has", "point_count"],
+    paint: {
+      "circle-color": "#06b6d4", // Bright cyan
+      "circle-radius": ["step", ["get", "point_count"], 10, 50, 16, 300, 22],
+      "circle-opacity": 0.85,
+      "circle-stroke-width": 2,
+      "circle-stroke-color": "#0369a1", // Dark cyan
+      "circle-stroke-opacity": 1,
+    },
+  });
+
+  // WTG cluster count labels
+  map.addLayer({
+    id: "wtg-cluster-count",
+    type: "symbol",
+    source: "wtg-tiles",
+    filter: ["has", "point_count"],
+    layout: {
+      "text-field": "{point_count_abbreviated}",
+      "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+      "text-size": 12,
+    },
+    paint: {
+      "text-color": "#ffffff",
+    },
+  });
+
+  // WTG unclustered individual points
+  map.addLayer({
+    id: "wtg-sites",
+    type: "circle",
+    source: "wtg-tiles",
+    filter: ["!", ["has", "point_count"]],
+    paint: {
+      "circle-radius": 6,
+      "circle-color": "#06b6d4", // Bright cyan
+      "circle-opacity": 0.85,
+      "circle-stroke-width": 1.5,
+      "circle-stroke-color": "#0369a1", // Dark cyan
+      "circle-stroke-opacity": 1,
+    },
+  });
 }

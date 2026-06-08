@@ -5,9 +5,7 @@ import maplibregl, { LngLatBoundsLike, Map as MapType } from "maplibre-gl";
 import { ContextMenuControl } from "@/app/components/ContextMenuControl";
 import { ReportPanelControl } from "@/app/components/ReportPanelControl";
 import { CoordinateSearchControl } from "@/app/components/CoordinateSearchControl";
-import { StyleToggleControl } from "@/app/components/StyleToggleControl";
 import { addLayers } from "@/app/lib/Layerer";
-import { LayerToggleControl } from "@/app/components/LayerToggleControl";
 import { BatchProcessingControl } from "@/app/components/BatchProcessingControl";
 import { initAnalytics, trackEvent } from "@/app/lib/analytics";
 import "maplibre-gl/dist/maplibre-gl.css";
@@ -155,16 +153,9 @@ const Map: React.FC = () => {
       map.addControl(new CoordinateSearchControl(contextMenuCtrl), "top-left");
       map.addControl(reportPanel, "top-left");
       //map.addControl(new CoordsControl(), "bottom-left");
-      map.addControl(new StyleToggleControl("bright"), "bottom-right");
       //map.addControl(new CalibrationMenuControl(), "top-right");
       map.setMaxZoom(15);
 
-      const toggle = new LayerToggleControl({
-        layerId: "airport-zones",
-        hiddenOpacity: 0.0001,
-        label: "Airport Layers",
-      });
-      map.addControl(toggle, "bottom-right");
 
       map.addControl(new BatchProcessingControl(), "top-right");
 

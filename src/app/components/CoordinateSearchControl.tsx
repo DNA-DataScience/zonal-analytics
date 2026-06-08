@@ -39,7 +39,7 @@ export class CoordinateSearchControl implements maplibregl.IControl {
           cursor: pointer;
         }
         .maplibregl-ctrl.coordinate-search-ctrl button:hover {
-          background: #005ec2;
+          background: #005ec2 !important;
         }
       `;
       document.head.appendChild(style);

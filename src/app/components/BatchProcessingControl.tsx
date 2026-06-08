@@ -28,15 +28,15 @@ export class BatchProcessingControl implements maplibregl.IControl {
       style.id = "batch-processing-style";
       style.textContent = `
         .maplibregl-ctrl.batch-processing-tab {
-          position: absolute;
-          right: 10px;
-          top: 50%;
-          transform: translateY(-50%);
-          z-index: 100;
+          position: relative;
+          z-index: 3;
         }
 
         .batch-processing-tab-button {
           appearance: none;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
           background: #3b82f6;
           border: 1px solid #1e40af;
           border-radius: 8px;
@@ -50,10 +50,19 @@ export class BatchProcessingControl implements maplibregl.IControl {
         }
 
         .batch-processing-tab-button:hover {
-          background: #2563eb;
+          background-color: #2563eb !important;
           border-color: #1e40af;
           box-shadow: 0 4px 8px rgba(16, 24, 40, 0.08);
           color: #ffffff;
+        }
+
+        .batch-processing-tab-button:focus,
+        .batch-processing-tab-button:focus-visible,
+        .batch-processing-tab-button:active {
+          background-color: #1d4ed8 !important;
+          border-color: #1e3a8a;
+          color: #ffffff;
+          outline: none;
         }
 
         .batch-processing-panel {
@@ -108,7 +117,7 @@ export class BatchProcessingControl implements maplibregl.IControl {
         }
 
         .batch-processing-close:hover {
-          background: #f1f5f9;
+          background-color: #f1f5f9 !important;
           border-color: #cbd5e1;
         }
 
@@ -141,13 +150,13 @@ export class BatchProcessingControl implements maplibregl.IControl {
         }
 
         .batch-processing-mode-btn.active {
-          background: #0f172a;
+          background-color: #0f172a !important;
           color: #ffffff;
           border-color: #0f172a;
         }
 
         .batch-processing-mode-btn:hover:not(.active) {
-          background: #e2e8f0;
+          background-color: #e2e8f0 !important;
           border-color: #cbd5e1;
         }
 
@@ -219,12 +228,12 @@ export class BatchProcessingControl implements maplibregl.IControl {
         }
 
         .batch-processing-table-btn:hover {
-          background: #e2e8f0;
+          background-color: #e2e8f0 !important;
           border-color: #94a3b8;
         }
 
         .batch-processing-table-btn.remove:hover {
-          background: #fee;
+          background-color: #fee2e2 !important;
           border-color: #fca5a5;
           color: #dc2626;
         }
@@ -302,22 +311,22 @@ export class BatchProcessingControl implements maplibregl.IControl {
         }
 
         .batch-processing-btn-primary {
-          background: #0f172a;
+          background-color: #0f172a !important;
           color: #ffffff;
         }
 
         .batch-processing-btn-primary:hover {
-          background: #1e293b;
+          background-color: #1e293b !important;
         }
 
         .batch-processing-btn-secondary {
-          background: #f1f5f9;
+          background-color: #f1f5f9 !important;
           color: #0f172a;
           border: 1px solid #cbd5e1;
         }
 
         .batch-processing-btn-secondary:hover {
-          background: #e2e8f0;
+          background-color: #e2e8f0 !important;
           border-color: #94a3b8;
         }
 
