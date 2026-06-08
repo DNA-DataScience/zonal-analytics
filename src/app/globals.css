@@ -43,3 +43,21 @@ body {
   background-color: #fff;
   min-width: 160px;
 }
+
+/* Normalize MapLibre control-group button visuals in light mode */
+.maplibregl-ctrl-group > button {
+  background-color: #ffffff;
+  color: #0f172a;
+}
+
+.maplibregl-ctrl-group > button:hover {
+  background-color: #f1f5f9;
+}
+
+/* Cancel MapLibre's rgba(0,0,0,0.05) hover from leaking into custom (non-ctrl-group) controls.
+   Custom controls manage their own hover states with !important. */
+.maplibregl-ctrl:not(.maplibregl-ctrl-group) button:not(:disabled):hover,
+.maplibregl-ctrl:not(.maplibregl-ctrl-group) button:not(:disabled):active {
+  background-color: unset;
+}
+
