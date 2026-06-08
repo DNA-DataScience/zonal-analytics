@@ -74,7 +74,7 @@ export function addLayers(map: maplibregl.Map) {
     console.log("Adding airport tiles");
     map.addSource("airport-tiles", {
       type: "vector",
-      tiles: ["${apiBaseUrl}/tiles/airport/{z}/{x}/{y}.mvt"],
+      tiles: [`${apiBaseUrl}/tiles/airport/{z}/{x}/{y}.mvt`],
       minzoom: 0,
       maxzoom: 15,
     });
@@ -165,7 +165,7 @@ export function addLayers(map: maplibregl.Map) {
     console.log("Adding mod tiles");
     map.addSource("mod-tiles", {
       type: "vector",
-      tiles: ["${apiBaseUrl}/tiles/mod/{z}/{x}/{y}.mvt"],
+      tiles: [`${apiBaseUrl}/tiles/mod/{z}/{x}/{y}.mvt`],
       minzoom: 0,
       maxzoom: 15,
     });
@@ -238,7 +238,7 @@ export function addLayers(map: maplibregl.Map) {
     });
 
     // Fetch and load CMS data from GeoJSON endpoint
-    fetch("${apiBaseUrl}/points/cms.geojson")
+    fetch(`${apiBaseUrl}/points/cms.geojson`)
       .then((res) => res.json())
       .then((data) => {
         if (map.getSource("cms-tiles")) {
@@ -310,7 +310,7 @@ export function addLayers(map: maplibregl.Map) {
     });
 
     // Fetch and load WTG data from GeoJSON endpoint
-    fetch("${apiBaseUrl}/points/wtg.geojson")
+    fetch(`${apiBaseUrl}/points/wtg.geojson`)
       .then((res) => res.json())
       .then((data) => {
         if (map.getSource("wtg-tiles")) {
