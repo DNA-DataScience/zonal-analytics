@@ -13,10 +13,15 @@ RUN uv sync
 
 # Copy application code
 COPY airport_api.py .
+COPY analytics_router.py .
+COPY batch_processor.py .
+COPY connect_db.py .
+COPY feasibility_engine.py .
 COPY report_processor.py .
 COPY main.py .
 COPY runway_processor.py .
-COPY connect_db.py .
+COPY points.py .
+COPY tiles.py .
 
 EXPOSE 8000
 
