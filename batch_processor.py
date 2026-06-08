@@ -13,6 +13,7 @@ from fastapi import HTTPException
 from feasibility_engine import (
     find_most_restrictive_airport_zone,
     find_most_restrictive_mod_zone,
+    find_most_restrictive_forest_zone,
     determine_feasibility,
     format_zone_description
 )
@@ -121,6 +122,52 @@ async def get_batch_mod_zones(coordinates: List[Dict], db: AsyncSession) -> List
     return results
 
 
+async def get_batch_forest_zones(coordinates: List[Dict], db: AsyncSession) -> List[Dict[str, Any]]:
+        """
+        Query reserve_forests for all coordinates in a single optimized batch query.
+        """
+        points_json = json.dumps(coordinates)
+
+        query = text("""
+                WITH points AS (
+                    SELECT
+                        (p->>'id')::int AS pid,
+                        ST_Transform(
+                            ST_SetSRID(
+                                ST_MakePoint(
+                                    (p->>'lon')::float,
+                                    (p->>'lat')::float
+                                ),
+                                4326
+                            ),
+                            3857
+                        ) AS geom
+                    FROM jsonb_array_elements(CAST(:points AS jsonb)) AS p
+                )
+                SELECT
+                    p.pid,
+                    z."Name"
+                FROM points p
+                JOIN "GisDB".reserve_forests z
+                    ON z.geom3857 && p.geom
+                 AND ST_Intersects(z.geom3857, p.geom)
+        """)
+
+        result = await db.execute(query, {"points": points_json})
+        rows = result.fetchall()
+
+        results = []
+        for row in rows:
+                results.append({
+                        "pid": row[0],
+                        "zone": "inner",
+                        "name": row[1] or "Unknown Forest",
+                        "type": "forest"
+                })
+
+        return results
+
+
 def save_batch_to_csv(
     coordinates: List[Dict],
     feasibility_results: List[Dict]
@@ -161,7 +208,8 @@ def save_batch_to_csv(
         'Longitude',
         'Feasibility',
         'Most Restrictive Airport Zone',
-        'Most Restrictive MoD Zone'
+        'Most Restrictive MoD Zone',
+        'Most Restrictive Forest Zone'
     ]
     writer.writerow(header)
     
@@ -175,7 +223,8 @@ def save_batch_to_csv(
             coord.get("lon", ""),  # Longitude
             result.get("feasibility", ""),  # Feasibility (Yes/NOC/No)
             result.get("most_restrictive_airport", "No zones exist"),  # Airport Zone
-            result.get("most_restrictive_mod", "No zones exist")  # MoD Zone
+            result.get("most_restrictive_mod", "No zones exist"),  # MoD Zone
+            result.get("most_restrictive_forest", "No zones exist")  # Forest Zone
         ]
         writer.writerow(row)
     
@@ -215,6 +264,7 @@ async def generate_batch_report(coordinates: List[Dict], db: AsyncSession) -> Di
         # Execute both batch queries
         airport_zones = await get_batch_airport_zones(coordinates, db)
         mod_zones = await get_batch_mod_zones(coordinates, db)
+        forest_zones = await get_batch_forest_zones(coordinates, db)
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Database query failed: {str(e)}")
     
@@ -232,6 +282,13 @@ async def generate_batch_report(coordinates: List[Dict], db: AsyncSession) -> Di
         if pid not in mod_zones_by_pid:
             mod_zones_by_pid[pid] = []
         mod_zones_by_pid[pid].append(zone)
+
+    forest_zones_by_pid = {}
+    for zone in forest_zones:
+        pid = zone.get("pid")
+        if pid not in forest_zones_by_pid:
+            forest_zones_by_pid[pid] = []
+        forest_zones_by_pid[pid].append(zone)
     
     # Perform feasibility analysis for each coordinate
     feasibility_results = []
@@ -247,13 +304,17 @@ async def generate_batch_report(coordinates: List[Dict], db: AsyncSession) -> Di
         mod_zone_type, mod_zone_dict = find_most_restrictive_mod_zone(
             mod_zones_by_pid.get(pid, [])
         )
+        forest_zone_type, forest_zone_dict = find_most_restrictive_forest_zone(
+            forest_zones_by_pid.get(pid, [])
+        )
         
         # Determine feasibility based on zone combination
-        feasibility, color = determine_feasibility(airport_zone_type, mod_zone_type)
+        feasibility, color = determine_feasibility(airport_zone_type, mod_zone_type, forest_zone_type)
         
         # Format zone descriptions
         airport_desc = format_zone_description(airport_zone_type, airport_zone_dict, "airport")
         mod_desc = format_zone_description(mod_zone_type, mod_zone_dict, "mod")
+        forest_desc = format_zone_description(forest_zone_type, forest_zone_dict, "forest")
         
         # Store result
         result = {
@@ -261,7 +322,8 @@ async def generate_batch_report(coordinates: List[Dict], db: AsyncSession) -> Di
             "feasibility": feasibility,
             "color": color,
             "most_restrictive_airport": airport_desc,
-            "most_restrictive_mod": mod_desc
+            "most_restrictive_mod": mod_desc,
+            "most_restrictive_forest": forest_desc
         }
         feasibility_results.append(result)
         summary_counts[color] += 1

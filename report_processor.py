@@ -8,9 +8,11 @@ import math
 from feasibility_engine import (
     find_most_restrictive_airport_zone,
     find_most_restrictive_mod_zone,
+    find_most_restrictive_forest_zone,
     determine_feasibility,
     build_airport_zone_report,
     build_mod_zone_report,
+    build_forest_zone_report,
     build_combined_analysis,
     calculate_autosettle
 )
@@ -72,6 +74,21 @@ MOD_REPORT_QUERY = text("""
                         AND ST_Intersects(z.geom3857, p.geom3857);                  
                     """)
 
+FOREST_REPORT_QUERY = text("""
+                    WITH p AS (
+                        SELECT
+                        ST_Transform(
+                            ST_SetSRID(ST_MakePoint(:lon, :lat), 4326),
+                            3857
+                        ) AS geom3857
+                    )
+                    SELECT z."Name"
+                    FROM "GisDB".reserve_forests z
+                    JOIN p
+                        ON z.geom3857 && p.geom3857
+                        AND ST_Intersects(z.geom3857, p.geom3857);
+                    """)
+
 async def generate_report(lat: float, lng: float, elev: float = 0, db: AsyncSession = None):
     
     # Fetch airport zones
@@ -94,6 +111,17 @@ async def generate_report(lat: float, lng: float, elev: float = 0, db: AsyncSess
         mod_rows = result.fetchall()
     except Exception as e:
         print(f"Error retrieving MoD zone data: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+    # Fetch forest zones
+    try:
+        result = await db.execute(FOREST_REPORT_QUERY, {
+            "lat": lat,
+            "lon": lng
+        })
+        forest_rows = result.fetchall()
+    except Exception as e:
+        print(f"Error retrieving forest zone data: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
     
     report = []
@@ -118,6 +146,14 @@ async def generate_report(lat: float, lng: float, elev: float = 0, db: AsyncSess
             "name": r[1],
             "type": r[2]
         })
+
+    forest_zones = []
+    for r in forest_rows:
+        forest_zones.append({
+            "zone": "inner",
+            "name": r[0] or "Unknown Forest",
+            "type": "forest"
+        })
     
     # Build individual airport zone reports
     airport_reports = []
@@ -130,21 +166,28 @@ async def generate_report(lat: float, lng: float, elev: float = 0, db: AsyncSess
     for zone_dict in mod_zones:
         mod_report = build_mod_zone_report(zone_dict)
         mod_reports.append(mod_report)
+
+    # Build individual forest zone reports
+    forest_reports = []
+    for zone_dict in forest_zones:
+        forest_report = build_forest_zone_report(zone_dict)
+        forest_reports.append(forest_report)
     
     # If no airport zones found, get nearest airport for auto-settlement info
     nearest_airport_data = None
-    if not airport_zones:
+    if not airport_zones and not mod_zones and not forest_zones:
         nearest_airport_data = await get_nearest_airport_data(lat, lng, elev, db)
     
     # If we have neither airport zones nor mod zones nor nearest airport, return error
-    if not airport_reports and not mod_reports and not nearest_airport_data:
+    if not airport_reports and not mod_reports and not forest_reports and not nearest_airport_data:
         return JSONResponse(content={"status": "no_results", "message": "No zones or airports found"})
     
     # Create combined analysis if we have zone intersections
-    if airport_reports or mod_reports:
+    if airport_reports or mod_reports or forest_reports:
         # Find most restrictive zones
         airport_zone_type, airport_zone_dict = find_most_restrictive_airport_zone(airport_zones)
         mod_zone_type, mod_zone_dict = find_most_restrictive_mod_zone(mod_zones)
+        forest_zone_type, forest_zone_dict = find_most_restrictive_forest_zone(forest_zones)
         
         # Build combined analysis
         combined = build_combined_analysis(
@@ -152,7 +195,9 @@ async def generate_report(lat: float, lng: float, elev: float = 0, db: AsyncSess
             mod_reports,
             (airport_zone_type, airport_zone_dict) if airport_zone_type else None,
             (mod_zone_type, mod_zone_dict) if mod_zone_type else None,
-            elev
+            elev,
+            forest_reports,
+            (forest_zone_type, forest_zone_dict) if forest_zone_type else None
         )
         report.append(combined)
     
@@ -161,6 +206,9 @@ async def generate_report(lat: float, lng: float, elev: float = 0, db: AsyncSess
     
     # Add all individual MoD zones
     report.extend(mod_reports)
+
+    # Add all individual forest zones
+    report.extend(forest_reports)
     
     # Add nearest airport data if no airport zones were found
     if nearest_airport_data:

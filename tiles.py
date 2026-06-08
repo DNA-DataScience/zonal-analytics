@@ -49,6 +49,21 @@ FROM (
 ) AS tile;
 """)
 
+FOREST_QUERY = text("""
+SELECT ST_AsMVT(tile, 'reserve_forests', 4096, 'geometry') as mvt
+FROM (
+  SELECT
+  "Name",
+  ST_AsMVTGeom(
+    geom3857,
+    ST_TileEnvelope(:z, :x, :y),
+    4096, 256, true
+  ) AS geometry
+  FROM "GisDB".reserve_forests
+  WHERE geom3857 && ST_TileEnvelope(:z, :x, :y)
+) AS tile;
+""")
+
 
 @router.get("/airport/{z}/{x}/{y}.mvt")
 async def get_airport_tile(z: int, x: int, y: int, db: AsyncSession = Depends(get_db)):
@@ -87,4 +102,24 @@ async def get_mod_tile(z: int, x: int, y: int, db: AsyncSession = Depends(get_db
             
         except Exception as e:
             print(f"MoD tile error z={z}, x={x}, y={y}: {e}")
+            raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/forest/{z}/{x}/{y}.mvt")
+async def get_forest_tile(z: int, x: int, y: int, db: AsyncSession = Depends(get_db)):
+    if z > MAX_ZOOM:
+        return Response(status_code=204)
+    
+    async with TILE_SEMAPHORE:
+        try:    
+            result = await db.execute(FOREST_QUERY, {"z": z, "x": x, "y": y})
+            tile_bytes = result.scalar()
+            
+            if tile_bytes:
+                return Response(content=tile_bytes, media_type="application/vnd.mapbox-vector-tile")
+            else:
+                return Response(content=b'', media_type="application/vnd.mapbox-vector-tile")
+            
+        except Exception as e:
+            print(f"Forest tile error z={z}, x={x}, y={y}: {e}")
             raise HTTPException(status_code=500, detail=str(e))
