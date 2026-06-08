@@ -1,85 +1,65 @@
 from fastapi import APIRouter, Depends, HTTPException
-from fastapi.responses import Response
+from fastapi.responses import JSONResponse
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
-import asyncio
+import json
 from connect_db import get_db
 
 
 router = APIRouter()
 
-TILE_SEMAPHORE = asyncio.Semaphore(5)
-MAX_ZOOM = 15
-
 CMS_QUERY = text("""
-SELECT ST_AsMVT(tile, 'cms_stations', 4096, 'geometry') as mvt
-FROM (
-  SELECT
-  "State" as state,
-  "State/ Site Office" as site_office,
-  "Site" as site,
-  ST_AsMVTGeom(
-	geom3857,
-	ST_TileEnvelope(:z, :x, :y),
-	4096, 256, true
-  ) AS geometry
-  FROM "GisDB".cms_stations
-  WHERE geom3857 && ST_TileEnvelope(:z, :x, :y)
-) AS tile;
+SELECT
+  "State" AS state,
+  "State/ Site Office" AS site_office,
+  "Site" AS site,
+  ST_AsGeoJSON(geometry)::json AS geom
+FROM "GisDB".cms_stations
+WHERE geometry IS NOT NULL;
 """)
 
 WTG_QUERY = text("""
-SELECT ST_AsMVT(tile, 'wtg_sites', 4096, 'geometry') as mvt
-FROM (
-  SELECT
-  "CUSTOMER_NAME" as customer_name,
-  "MAIN_SITE" as main_site,
-  "STATE" as state,
-  "INST_CAPACITY" as inst_capacity,
-  ST_AsMVTGeom(
-	geom3857,
-	ST_TileEnvelope(:z, :x, :y),
-	4096, 256, true
-  ) AS geometry
-  FROM "GisDB".wtg_sites
-  WHERE geom3857 && ST_TileEnvelope(:z, :x, :y)
-) AS tile;
+SELECT
+  "CUSTOMER_NAME" AS customer_name,
+  "MAIN_SITE" AS main_site,
+  "STATE" AS state,
+  "INST_CAPACITY" AS inst_capacity,
+  "COMM_DATE"::text AS comm_date,
+  ST_AsGeoJSON(geometry)::json AS geom
+FROM "GisDB".wtg_sites
+WHERE geometry IS NOT NULL;
 """)
 
 
-@router.get("/cms/{z}/{x}/{y}.mvt")
-async def get_cms_tile(z: int, x: int, y: int, db: AsyncSession = Depends(get_db)):
-	if z > MAX_ZOOM:
-		return Response(status_code=204)
-
-	async with TILE_SEMAPHORE:
-		try:
-			result = await db.execute(CMS_QUERY, {"z": z, "x": x, "y": y})
-			tile_bytes = result.scalar()
-
-			if tile_bytes:
-				return Response(content=tile_bytes, media_type="application/vnd.mapbox-vector-tile")
-			return Response(content=b"", media_type="application/vnd.mapbox-vector-tile")
-
-		except Exception as e:
-			print(f"CMS tile error z={z}, x={x}, y={y}: {e}")
-			raise HTTPException(status_code=500, detail=str(e))
+def build_feature_collection(rows, geom_key: str = "geom") -> dict:
+    features = [
+        {
+            "type": "Feature",
+            "geometry": row._mapping[geom_key],
+            "properties": {k: v for k, v in row._mapping.items() if k != geom_key},
+        }
+        for row in rows
+    ]
+    return {"type": "FeatureCollection", "features": features}
 
 
-@router.get("/wtg/{z}/{x}/{y}.mvt")
-async def get_wtg_tile(z: int, x: int, y: int, db: AsyncSession = Depends(get_db)):
-	if z > MAX_ZOOM:
-		return Response(status_code=204)
+@router.get("/cms.geojson")
+async def get_cms_points(db: AsyncSession = Depends(get_db)):
+    try:
+        result = await db.execute(CMS_QUERY)
+        rows = result.fetchall()
+        return JSONResponse(content=build_feature_collection(rows))
+    except Exception as e:
+        print(f"CMS points error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
-	async with TILE_SEMAPHORE:
-		try:
-			result = await db.execute(WTG_QUERY, {"z": z, "x": x, "y": y})
-			tile_bytes = result.scalar()
 
-			if tile_bytes:
-				return Response(content=tile_bytes, media_type="application/vnd.mapbox-vector-tile")
-			return Response(content=b"", media_type="application/vnd.mapbox-vector-tile")
-
-		except Exception as e:
-			print(f"WTG tile error z={z}, x={x}, y={y}: {e}")
-			raise HTTPException(status_code=500, detail=str(e))
+@router.get("/wtg.geojson")
+async def get_wtg_points(db: AsyncSession = Depends(get_db)):
+    try:
+        result = await db.execute(WTG_QUERY)
+        rows = result.fetchall()
+        return JSONResponse(content=build_feature_collection(rows))
+    except Exception as e:
+        print(f"WTG points error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
