@@ -1,6 +1,8 @@
 import maplibregl from "maplibre-gl";
 
 export function addLayers(map: maplibregl.Map) {
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:8000";
+
   const layers = map.getStyle().layers;
   let labelLayerId = "";
   for (const layer of layers) {
@@ -133,6 +135,32 @@ export function addLayers(map: maplibregl.Map) {
     labelLayerId,
   );
 
+  if (!map.getSource("forest-tiles")) {
+    console.log("Adding forest tiles");
+    map.addSource("forest-tiles", {
+      type: "vector",
+      tiles: [`${apiBaseUrl}/tiles/forest/{z}/{x}/{y}.mvt`],
+      minzoom: 0,
+      maxzoom: 15,
+    });
+  }
+
+  // Forest polygons are a single category, so use one consistent fill style.
+  addBelowLabels(
+    {
+      id: "forest-zones",
+      type: "fill",
+      source: "forest-tiles",
+      "source-layer": "reserve_forests",
+      paint: {
+        "fill-color": "#f43f5e",
+        "fill-opacity": 0.35,
+        "fill-outline-color": "#be123c",
+      },
+    },
+    labelLayerId,
+  );
+
   if (!map.getSource("mod-tiles")) {
     console.log("Adding mod tiles");
     map.addSource("mod-tiles", {
@@ -214,7 +242,9 @@ export function addLayers(map: maplibregl.Map) {
       .then((res) => res.json())
       .then((data) => {
         if (map.getSource("cms-tiles")) {
-          (map.getSource("cms-tiles") as maplibregl.GeoJSONSource).setData(data);
+          (map.getSource("cms-tiles") as maplibregl.GeoJSONSource).setData(
+            data,
+          );
         }
       })
       .catch((err) => console.error("Failed to load CMS data:", err));
@@ -284,7 +314,9 @@ export function addLayers(map: maplibregl.Map) {
       .then((res) => res.json())
       .then((data) => {
         if (map.getSource("wtg-tiles")) {
-          (map.getSource("wtg-tiles") as maplibregl.GeoJSONSource).setData(data);
+          (map.getSource("wtg-tiles") as maplibregl.GeoJSONSource).setData(
+            data,
+          );
         }
       })
       .catch((err) => console.error("Failed to load WTG data:", err));
