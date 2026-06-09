@@ -38,9 +38,10 @@ jobs:
       # -----------------------
       - name: Build and push image
         run: |
-          docker build -t ${{ secrets.ACR_LOGIN_SERVER }}/map-frontend:${{ github.sha }} .
+          docker build \
+            --build-arg NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }} \
+            -t ${{ secrets.ACR_LOGIN_SERVER }}/map-frontend:${{ github.sha }} .
           docker push ${{ secrets.ACR_LOGIN_SERVER }}/map-frontend:${{ github.sha }}
-
       # -----------------------
       # 4. Deploy to Azure App Service
       # -----------------------
