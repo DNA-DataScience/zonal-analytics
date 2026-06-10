@@ -3,7 +3,7 @@ import uuid
 import asyncio
 import logging
 import time
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional
 from fastapi import APIRouter, Depends, Request
 from pydantic import BaseModel
@@ -167,7 +167,7 @@ async def session_start(
     """Start a new analytics session"""
     try:
         session_id = str(uuid.uuid4())
-        now = datetime.utcnow()
+        now = datetime.now(timezone.utc)
         is_dev = is_dev_request(request)
         
         # Insert new session
