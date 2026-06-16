@@ -69,10 +69,6 @@ export function FeedbackButton({ label = "Feedback" }: FeedbackButtonProps) {
           setIsOpen(true);
         }}
         style={{
-          position: "fixed",
-          bottom: 12,
-          left: 12,
-          zIndex: 1000,
           display: "inline-flex",
           alignItems: "center",
           gap: 6,
