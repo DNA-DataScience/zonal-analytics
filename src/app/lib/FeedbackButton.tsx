@@ -7,11 +7,55 @@ type FeedbackButtonProps = {
 
 export function FeedbackButton({ label = "Feedback" }: FeedbackButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setSubmitted(true);
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const name = formData.get("name")?.toString().trim() ?? "";
+    const message = formData.get("message")?.toString().trim() ?? "";
+
+    if (!name || !message) {
+      setSubmitStatus("error");
+      setErrorMessage("Please enter both name and message.");
+      return;
+    }
+
+    const apiBaseUrl = (process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:8000").replace(/\/$/, "");
+
+    setIsSubmitting(true);
+    setSubmitStatus("idle");
+    setErrorMessage(null);
+
+    try {
+      const response = await fetch(`${apiBaseUrl}/feedback/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, message }),
+      });
+
+      if (!response.ok) {
+        console.error(`Failed to submit feedback with status ${response.status}`);
+        setSubmitStatus("error");
+        setErrorMessage("Failed to submit feedback. Please try again.");
+        return;
+      }
+
+      form.reset();
+      setSubmitStatus("success");
+    } catch (error) {
+      console.error("Failed to submit feedback:", error);
+      setSubmitStatus("error");
+      setErrorMessage("Failed to submit feedback. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -20,7 +64,8 @@ export function FeedbackButton({ label = "Feedback" }: FeedbackButtonProps) {
         type="button"
         aria-label={label}
         onClick={() => {
-          setSubmitted(false);
+          setSubmitStatus("idle");
+          setErrorMessage(null);
           setIsOpen(true);
         }}
         style={{
@@ -95,14 +140,7 @@ export function FeedbackButton({ label = "Feedback" }: FeedbackButtonProps) {
                 type="text"
                 name="name"
                 required
-                style={{ border: "1px solid #cbd5e1", borderRadius: 6, padding: "8px 10px" }}
-              />
-            </label>
-            <label style={{ fontSize: 12, display: "grid", gap: 4 }}>
-              Email (optional)
-              <input
-                type="email"
-                name="email"
+                maxLength={120}
                 style={{ border: "1px solid #cbd5e1", borderRadius: 6, padding: "8px 10px" }}
               />
             </label>
@@ -112,13 +150,20 @@ export function FeedbackButton({ label = "Feedback" }: FeedbackButtonProps) {
                 name="message"
                 required
                 rows={5}
+                maxLength={2000}
                 style={{ border: "1px solid #cbd5e1", borderRadius: 6, padding: "8px 10px", resize: "vertical" }}
               />
             </label>
 
-            {submitted && (
+            {submitStatus === "success" && (
               <div style={{ fontSize: 12, color: "#15803d", background: "#f0fdf4", border: "1px solid #bbf7d0", borderRadius: 6, padding: "8px 10px" }}>
-                Feedback captured in UI. Backend submission will be wired later.
+                Feedback submitted successfully.
+              </div>
+            )}
+
+            {submitStatus === "error" && errorMessage && (
+              <div style={{ fontSize: 12, color: "#b91c1c", background: "#fef2f2", border: "1px solid #fecaca", borderRadius: 6, padding: "8px 10px" }}>
+                {errorMessage}
               </div>
             )}
 
@@ -126,29 +171,33 @@ export function FeedbackButton({ label = "Feedback" }: FeedbackButtonProps) {
               <button
                 type="button"
                 onClick={() => setIsOpen(false)}
+                disabled={isSubmitting}
                 style={{
                   border: "1px solid #cbd5e1",
                   background: "#f8fafc",
                   color: "#0f172a",
                   borderRadius: 6,
                   padding: "8px 12px",
-                  cursor: "pointer",
+                  cursor: isSubmitting ? "not-allowed" : "pointer",
+                  opacity: isSubmitting ? 0.7 : 1,
                 }}
               >
                 Close
               </button>
               <button
                 type="submit"
+                disabled={isSubmitting}
                 style={{
                   border: "1px solid #0f172a",
                   background: "#0f172a",
                   color: "#ffffff",
                   borderRadius: 6,
                   padding: "8px 12px",
-                  cursor: "pointer",
+                  cursor: isSubmitting ? "not-allowed" : "pointer",
+                  opacity: isSubmitting ? 0.7 : 1,
                 }}
               >
-                Submit
+                {isSubmitting ? "Submitting..." : "Submit"}
               </button>
             </div>
           </form>
