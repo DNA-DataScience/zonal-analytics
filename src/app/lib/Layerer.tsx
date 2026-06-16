@@ -233,8 +233,8 @@ export function addLayers(map: maplibregl.Map) {
       type: "geojson",
       data: { type: "FeatureCollection", features: [] },
       cluster: true,
-      clusterMaxZoom: 14,
-      clusterRadius: 50,
+      clusterMaxZoom: 9,
+      clusterRadius: 90,
     });
 
     // Fetch and load CMS data from GeoJSON endpoint
@@ -255,6 +255,7 @@ export function addLayers(map: maplibregl.Map) {
     id: "cms-clusters",
     type: "circle",
     source: "cms-tiles",
+    maxzoom: 10,
     filter: ["has", "point_count"],
     paint: {
       "circle-color": "#d946ef", // Bright magenta
@@ -271,6 +272,7 @@ export function addLayers(map: maplibregl.Map) {
     id: "cms-cluster-count",
     type: "symbol",
     source: "cms-tiles",
+    maxzoom: 10,
     filter: ["has", "point_count"],
     layout: {
       "text-field": "{point_count_abbreviated}",
@@ -289,7 +291,7 @@ export function addLayers(map: maplibregl.Map) {
     source: "cms-tiles",
     filter: ["!", ["has", "point_count"]],
     paint: {
-      "circle-radius": 6,
+      "circle-radius": ["interpolate", ["linear"], ["zoom"], 0, 2.5, 10, 6],
       "circle-color": "#d946ef", // Bright magenta
       "circle-opacity": 0.85,
       "circle-stroke-width": 1.5,
@@ -305,8 +307,8 @@ export function addLayers(map: maplibregl.Map) {
       type: "geojson",
       data: { type: "FeatureCollection", features: [] },
       cluster: true,
-      clusterMaxZoom: 14,
-      clusterRadius: 50,
+      clusterMaxZoom: 9,
+      clusterRadius: 90,
     });
 
     // Fetch and load WTG data from GeoJSON endpoint
@@ -327,6 +329,7 @@ export function addLayers(map: maplibregl.Map) {
     id: "wtg-clusters",
     type: "circle",
     source: "wtg-tiles",
+    maxzoom: 10,
     filter: ["has", "point_count"],
     paint: {
       "circle-color": "#06b6d4", // Bright cyan
@@ -343,6 +346,7 @@ export function addLayers(map: maplibregl.Map) {
     id: "wtg-cluster-count",
     type: "symbol",
     source: "wtg-tiles",
+    maxzoom: 10,
     filter: ["has", "point_count"],
     layout: {
       "text-field": "{point_count_abbreviated}",
@@ -361,7 +365,7 @@ export function addLayers(map: maplibregl.Map) {
     source: "wtg-tiles",
     filter: ["!", ["has", "point_count"]],
     paint: {
-      "circle-radius": 6,
+      "circle-radius": ["interpolate", ["linear"], ["zoom"], 0, 2.5, 10, 6],
       "circle-color": "#06b6d4", // Bright cyan
       "circle-opacity": 0.85,
       "circle-stroke-width": 1.5,
