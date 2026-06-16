@@ -28,18 +28,20 @@ from airport_api import router as airport_router
 from tiles import router as tiles_router
 from points import router as points_router
 from analytics_router import router as analytics_router, create_tables
+from feedback_api import router as feedback_router, create_feedback_table
 
 # Lifespan context manager for startup/shutdown
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Initialize analytics tables on startup"""
+    """Initialize app tables on startup"""
     db = None
     try:
         from connect_db import AsyncSessionLocal
         db = AsyncSessionLocal()
         await create_tables(db)
+        await create_feedback_table(db)
     except Exception as e:
-        print(f"Failed to create analytics tables: {str(e)}")
+        print(f"Failed to create startup tables: {str(e)}")
     finally:
         if db:
             await db.close()
@@ -66,6 +68,7 @@ app.include_router(airport_router, prefix="/airport", tags=["airport"])
 app.include_router(tiles_router, prefix="/tiles", tags=["tiles"])
 app.include_router(points_router, prefix="/points", tags=["points"])
 app.include_router(analytics_router)
+app.include_router(feedback_router, prefix="/feedback", tags=["feedback"])
 
 
 @app.get("/report-generator")
