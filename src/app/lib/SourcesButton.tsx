@@ -8,7 +8,7 @@ type SourcesButtonProps = {
 
 export function SourcesButton({
   href,
-  label = "Airports Source",
+  label = "Sources",
 }: SourcesButtonProps) {
   return (
     <a
@@ -17,11 +17,6 @@ export function SourcesButton({
       rel="noopener noreferrer"
       aria-label={label}
       style={{
-        position: "fixed",
-        bottom: 12,
-        left: "50%",
-        transform: "translateX(-50%)",
-        zIndex: 1000,
         display: "inline-flex",
         alignItems: "center",
         gap: 6,
@@ -36,6 +31,7 @@ export function SourcesButton({
         backdropFilter: "blur(4px)",
       }}
     >
+      {/* Document / sources icon */}
       <svg
         aria-hidden="true"
         width="14"
@@ -43,7 +39,7 @@ export function SourcesButton({
         viewBox="0 0 24 24"
         fill="currentColor"
       >
-        <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9L2 14v2l8-2.5V19l-2 1.5V22l3-1 3 1v-1.5L13 19v-5.5l8 2.5z" />
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6zm2-5h8v1.5H8V15zm0-3h8v1.5H8V12zm0-3h4v1.5H8V9z" />
       </svg>
       <span>{label}</span>
     </a>
