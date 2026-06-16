@@ -22,6 +22,7 @@ COPY main.py .
 COPY runway_processor.py .
 COPY points.py .
 COPY tiles.py .
+COPY feedback_api.py .
 
 EXPOSE 8000
 
