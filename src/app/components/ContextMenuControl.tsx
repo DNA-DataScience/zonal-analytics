@@ -36,23 +36,23 @@ export class ContextMenuControl implements maplibregl.IControl {
       style.id = "ctxmenu-popup-style";
       style.textContent = `
         .maplibregl-popup.ctxmenu-popup .ctxmenu-btn {
-          padding: 6px 10px;
-          border: 1px solid #b6c2cf;
-          border-radius: 6px;
-          background: #f1f5f9;
-          color: #0f172a;
-          font: 500 12px/1 system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans";
+          padding: 8px 16px;
+          border: 1px solid var(--ui-accent);
+          border-radius: 9px;
+          background: var(--ui-accent);
+          color: #ffffff;
+          font: 600 12.5px/1 system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans";
           cursor: pointer;
-          box-shadow: 0 1px 0 rgba(16, 24, 40, 0.04);
-          transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, transform 0.02s ease;
+          box-shadow: 0 2px 6px var(--ui-accent-ring);
+          transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, transform 0.05s ease;
         }
         .maplibregl-popup.ctxmenu-popup .ctxmenu-btn:hover {
-          background: #e2e8f0;
-          border-color: #94a3b8;
+          background: var(--ui-accent-hover);
+          border-color: var(--ui-accent-hover);
+          box-shadow: 0 4px 12px var(--ui-accent-ring);
         }
         .maplibregl-popup.ctxmenu-popup .ctxmenu-btn:active {
           transform: translateY(1px);
-          box-shadow: 0 0 0 rgba(0,0,0,0);
         }
         .maplibregl-popup.ctxmenu-popup .ctxmenu-btn:focus {
           outline: 2px solid #93c5fd;
