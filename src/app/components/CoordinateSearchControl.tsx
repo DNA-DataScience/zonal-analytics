@@ -16,42 +16,15 @@ export class CoordinateSearchControl implements maplibregl.IControl {
     this._container = document.createElement("div");
     this._container.className = "maplibregl-ctrl coordinate-search-ctrl";
 
-    if (!document.getElementById("coordinate-search-ctrl-style")) {
-      const style = document.createElement("style");
-      style.id = "coordinate-search-ctrl-style";
-      style.textContent = `
-        .maplibregl-ctrl.coordinate-search-ctrl {
-          background: white;
-          border-radius: 6px;
-          box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-          font-family: sans-serif;
-        }
-        .maplibregl-ctrl.coordinate-search-ctrl input {
-          border: 1px solid #ccc;
-          border-radius: 4px;
-          color: black;
-        }
-        .maplibregl-ctrl.coordinate-search-ctrl button {
-          background: #0078ff;
-          color: white;
-          border: none;
-          border-radius: 4px;
-          cursor: pointer;
-        }
-        .maplibregl-ctrl.coordinate-search-ctrl button:hover {
-          background: #005ec2 !important;
-        }
-      `;
-      document.head.appendChild(style);
-      this._styleEl = style;
-    }
+    // Visual styling for this control lives in src/app/ui-theme.css
+    // (.coordinate-search-ctrl), keeping the design centralized.
 
     this._container.innerHTML = `
-      <div style="display: flex; flex-direction: column; gap: 4px; padding: 6px;">
-        <input id="latInput" type="number" step="any" placeholder="Latitude (-90 to 90)" style="width: 140px; padding: 4px;" />
-        <input id="lngInput" type="number" step="any" placeholder="Longitude (-180 to 180)" style="width: 140px; padding: 4px;" />
-        <button id="flyBtn" style="padding: 4px;">Go</button>
-        <div id="errorMsg" style="color: red; font-size: 12px; min-height: 14px;"></div>
+      <div style="display: flex; flex-direction: column; gap: 6px; padding: 8px;">
+        <input id="latInput" type="number" step="any" placeholder="Latitude (-90 to 90)" style="width: 150px; padding: 6px 8px;" />
+        <input id="lngInput" type="number" step="any" placeholder="Longitude (-180 to 180)" style="width: 150px; padding: 6px 8px;" />
+        <button id="flyBtn" style="padding: 6px 8px;">Go</button>
+        <div id="errorMsg" style="color: #dc2626; font-size: 12px; min-height: 14px; font-weight: 500;"></div>
       </div>
     `;
 

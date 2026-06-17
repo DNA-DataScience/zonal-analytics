@@ -1,0 +1,412 @@
+/* ============================================================================
+   ui-theme.css — Central design system (light "frosted-glass" premium theme)
+   Single source of truth for the on-map UI. Imported once from globals.css.
+   Tuned for high legibility (older users) with a calm professional blue accent.
+   ========================================================================== */
+
+:root {
+  /* Accent */
+  --ui-accent: #2563eb;
+  --ui-accent-hover: #1d4ed8;
+  --ui-accent-active: #1e40af;
+  --ui-accent-soft: #eff6ff;
+  --ui-accent-softer: #dbeafe;
+  --ui-accent-ring: rgba(37, 99, 235, 0.28);
+
+  /* Frosted-glass surfaces */
+  --ui-glass-bg: rgba(255, 255, 255, 0.86);
+  --ui-glass-bg-strong: rgba(255, 255, 255, 0.94);
+  --ui-glass-blur: blur(16px) saturate(170%);
+  --ui-header-bg: rgba(248, 250, 252, 0.82);
+  --ui-glass-border: rgba(15, 23, 42, 0.08);
+  --ui-hairline: rgba(15, 23, 42, 0.08);
+
+  /* Text */
+  --ui-text: #0f172a;
+  --ui-text-soft: #475569;
+  --ui-text-muted: #64748b;
+
+  /* Shape & depth */
+  --ui-radius: 16px;
+  --ui-radius-sm: 10px;
+  --ui-shadow:
+    0 20px 50px rgba(2, 6, 23, 0.16), 0 4px 14px rgba(2, 6, 23, 0.08);
+  --ui-shadow-sm: 0 6px 18px rgba(2, 6, 23, 0.12);
+
+  /* Typography */
+  --ui-font:
+    system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    "Noto Sans", "Liberation Sans", sans-serif;
+}
+
+/* ----------------------------------------------------------------------------
+   Unified panel surface — targets BOTH existing panel roots at once so the
+   Batch panel and the Report panel are visually identical.
+   (Components keep only their layout: position / size / show-hide.)
+   -------------------------------------------------------------------------- */
+.batch-processing-panel,
+.report-panel__card {
+  background: var(--ui-glass-bg) !important;
+  -webkit-backdrop-filter: var(--ui-glass-blur);
+  backdrop-filter: var(--ui-glass-blur);
+  border: 1px solid var(--ui-glass-border) !important;
+  border-radius: var(--ui-radius) !important;
+  box-shadow: var(--ui-shadow) !important;
+  color: var(--ui-text);
+  font-family: var(--ui-font);
+}
+
+/* Unified headers */
+.batch-processing-header,
+.report-panel__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 16px !important;
+  font: 700 16px/1.2 var(--ui-font) !important;
+  color: var(--ui-text) !important;
+  background: var(--ui-header-bg) !important;
+  border-bottom: 1px solid var(--ui-hairline) !important;
+}
+
+.batch-processing-title,
+.report-panel__title {
+  flex: 1;
+  letter-spacing: -0.01em;
+}
+
+/* Unified close buttons */
+.batch-processing-close,
+.report-panel__close {
+  appearance: none;
+  border: 1px solid var(--ui-hairline) !important;
+  background: rgba(255, 255, 255, 0.7) !important;
+  color: var(--ui-text-soft) !important;
+  border-radius: 9px !important;
+  width: 30px !important;
+  height: 30px !important;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font: 600 18px/1 var(--ui-font) !important;
+  margin-left: auto;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.05s ease;
+}
+
+.batch-processing-close:hover,
+.report-panel__close:hover {
+  background: var(--ui-accent-soft) !important;
+  border-color: var(--ui-accent-softer) !important;
+  color: var(--ui-accent) !important;
+}
+
+.batch-processing-close:active,
+.report-panel__close:active {
+  transform: translateY(1px);
+}
+
+/* Unified scrollable bodies + smooth custom scrollbars */
+.batch-processing-body,
+.report-panel__body {
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(37, 99, 235, 0.35) transparent;
+}
+
+.batch-processing-body::-webkit-scrollbar,
+.report-panel__body::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.batch-processing-body::-webkit-scrollbar-track,
+.report-panel__body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.batch-processing-body::-webkit-scrollbar-thumb,
+.report-panel__body::-webkit-scrollbar-thumb {
+  background: rgba(37, 99, 235, 0.3);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.batch-processing-body::-webkit-scrollbar-thumb:hover,
+.report-panel__body::-webkit-scrollbar-thumb:hover {
+  background: rgba(37, 99, 235, 0.55);
+  background-clip: padding-box;
+}
+
+/* ----------------------------------------------------------------------------
+   Panel entrance animation (uniform for both panels)
+   -------------------------------------------------------------------------- */
+@keyframes ui-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.batch-processing-panel.open,
+.report-panel.open .report-panel__card {
+  animation: ui-panel-in 0.22s cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: transform, opacity;
+}
+
+/* ----------------------------------------------------------------------------
+   Small controls — light frosted look
+   -------------------------------------------------------------------------- */
+
+/* Coordinate search card */
+.maplibregl-ctrl.coordinate-search-ctrl {
+  background: var(--ui-glass-bg) !important;
+  -webkit-backdrop-filter: var(--ui-glass-blur);
+  backdrop-filter: var(--ui-glass-blur);
+  border: 1px solid var(--ui-glass-border);
+  border-radius: var(--ui-radius-sm);
+  box-shadow: var(--ui-shadow-sm);
+  font-family: var(--ui-font);
+  color: var(--ui-text);
+}
+
+.maplibregl-ctrl.coordinate-search-ctrl input {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: 1px solid var(--ui-hairline) !important;
+  border-radius: 8px !important;
+  color: var(--ui-text) !important;
+  font-size: 13px !important;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.maplibregl-ctrl.coordinate-search-ctrl input::placeholder {
+  color: var(--ui-text-muted);
+}
+
+.maplibregl-ctrl.coordinate-search-ctrl input:focus {
+  outline: none;
+  border-color: var(--ui-accent) !important;
+  box-shadow: 0 0 0 3px var(--ui-accent-ring) !important;
+}
+
+.maplibregl-ctrl.coordinate-search-ctrl button {
+  background: var(--ui-accent) !important;
+  color: #ffffff !important;
+  border: 1px solid var(--ui-accent) !important;
+  border-radius: 8px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    transform 0.05s ease,
+    box-shadow 0.15s ease;
+}
+
+.maplibregl-ctrl.coordinate-search-ctrl button:hover {
+  background: var(--ui-accent-hover) !important;
+  box-shadow: 0 4px 12px var(--ui-accent-ring);
+}
+
+.maplibregl-ctrl.coordinate-search-ctrl button:active {
+  transform: translateY(1px);
+}
+
+/* Batch trigger — slim vertical pull-tab anchored to the right screen edge */
+.batch-processing-tab-button {
+  appearance: none;
+  position: fixed;
+  right: 0;
+  top: calc(50% + 70px);
+  transform: translateY(-50%);
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  letter-spacing: 0.08em;
+  background: var(--ui-glass-bg-strong) !important;
+  -webkit-backdrop-filter: var(--ui-glass-blur);
+  backdrop-filter: var(--ui-glass-blur);
+  border: 1px solid var(--ui-glass-border) !important;
+  border-right: none !important;
+  border-radius: 12px 0 0 12px !important;
+  padding: 16px 9px !important;
+  cursor: pointer;
+  font: 700 13px/1.2 var(--ui-font) !important;
+  color: var(--ui-accent) !important;
+  box-shadow: -6px 0 18px rgba(15, 23, 42, 0.12) !important;
+  transition:
+    background 0.15s ease,
+    transform 0.12s ease,
+    box-shadow 0.15s ease,
+    border-color 0.15s ease,
+    padding 0.12s ease !important;
+  white-space: nowrap;
+}
+
+.batch-processing-tab-button:hover {
+  background: #ffffff !important;
+  border-color: var(--ui-accent-softer) !important;
+  box-shadow: -8px 0 26px var(--ui-accent-ring) !important;
+  transform: translateY(-50%) translateX(-3px);
+}
+
+.batch-processing-tab-button:focus,
+.batch-processing-tab-button:focus-visible,
+.batch-processing-tab-button:active {
+  outline: none;
+  border-color: var(--ui-accent) !important;
+  box-shadow:
+    -6px 0 18px rgba(15, 23, 42, 0.12),
+    0 0 0 3px var(--ui-accent-ring) !important;
+}
+
+/* Hide the trigger button while its panel is open (fixes the peek bug) */
+.maplibregl-ctrl.batch-processing-tab.open .batch-processing-tab-button {
+  display: none;
+}
+
+/* MapLibre native control group (zoom/nav) — clean white frosted */
+.maplibregl-ctrl.maplibregl-ctrl-group {
+  background: var(--ui-glass-bg-strong);
+  -webkit-backdrop-filter: var(--ui-glass-blur);
+  backdrop-filter: var(--ui-glass-blur);
+  border: 1px solid var(--ui-glass-border);
+  border-radius: var(--ui-radius-sm);
+  box-shadow: var(--ui-shadow-sm);
+  overflow: hidden;
+}
+
+.maplibregl-ctrl-group > button {
+  background-color: transparent;
+  color: var(--ui-text);
+}
+
+.maplibregl-ctrl-group > button:hover {
+  background-color: var(--ui-accent-soft);
+}
+
+/* Right-click context popup */
+.maplibregl-popup.ctxmenu-popup .maplibregl-popup-content {
+  font-family: var(--ui-font);
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--ui-text);
+  background: var(--ui-glass-bg-strong);
+  -webkit-backdrop-filter: var(--ui-glass-blur);
+  backdrop-filter: var(--ui-glass-blur);
+  min-width: 172px;
+  border-radius: 14px;
+  border: 1px solid var(--ui-glass-border);
+  box-shadow: var(--ui-shadow);
+  padding: 13px 15px;
+}
+
+/* ----------------------------------------------------------------------------
+   Toast notifications (replaces browser alert()) — light, top-right
+   -------------------------------------------------------------------------- */
+.ui-toast-stack {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.ui-toast {
+  pointer-events: auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 240px;
+  max-width: 340px;
+  padding: 13px 15px;
+  border-radius: 12px;
+  background: var(--ui-glass-bg-strong);
+  -webkit-backdrop-filter: var(--ui-glass-blur);
+  backdrop-filter: var(--ui-glass-blur);
+  border: 1px solid var(--ui-glass-border);
+  border-left: 4px solid var(--ui-accent);
+  box-shadow: var(--ui-shadow);
+  color: var(--ui-text);
+  font: 500 13.5px/1.45 var(--ui-font);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateX(16px);
+  transition:
+    opacity 0.26s ease,
+    transform 0.26s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ui-toast.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.ui-toast__icon {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+}
+
+.ui-toast--success {
+  border-left-color: #16a34a;
+}
+.ui-toast--success .ui-toast__icon {
+  color: #16a34a;
+}
+.ui-toast--error {
+  border-left-color: #dc2626;
+}
+.ui-toast--error .ui-toast__icon {
+  color: #dc2626;
+}
+.ui-toast--warning {
+  border-left-color: #d97706;
+}
+.ui-toast--warning .ui-toast__icon {
+  color: #d97706;
+}
+.ui-toast--info {
+  border-left-color: var(--ui-accent);
+}
+.ui-toast--info .ui-toast__icon {
+  color: var(--ui-accent);
+}
+
+/* ----------------------------------------------------------------------------
+   Motion accessibility
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .batch-processing-panel.open,
+  .report-panel.open .report-panel__card {
+    animation: none;
+  }
+  .ui-toast {
+    transition: opacity 0.2s ease;
+    transform: none;
+  }
+  .batch-processing-tab-button:hover {
+    transform: translateY(-50%);
+  }
+}

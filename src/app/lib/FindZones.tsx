@@ -8,6 +8,7 @@ export type CombinedZone = {
   contributing_restrictions: string[];
   total_airport_zones: number;
   total_mod_zones: number;
+  total_forest_zones?: number;
 };
 
 export type AirportZone = {
@@ -40,7 +41,13 @@ export type ModZone = {
   note: string;
 };
 
-export type ReportZone = CombinedZone | AirportZone | ModZone;
+export type ForestZone = {
+  layer: "forest";
+  zone?: string;
+  name: string;
+};
+
+export type ReportZone = CombinedZone | AirportZone | ModZone | ForestZone;
 
 // Legacy type for backwards compatibility
 export type BackendZone = {
@@ -97,11 +104,20 @@ function renderFeasibilityBadge(feasibility: string): string {
 }
 
 // Helper: Render zone count badges
-function renderZoneCountBadges(airportCount: number, modCount: number): string {
+function renderZoneCountBadges(
+  airportCount: number,
+  modCount: number,
+  forestCount?: number,
+): string {
+  const forestBadge =
+    forestCount !== undefined
+      ? `<span class="count-badge count-forest">${forestCount} Forest Zone${forestCount !== 1 ? "s" : ""}</span>`
+      : "";
   return `
     <div class="zone-counts">
       <span class="count-badge count-airport">${airportCount} Airport Zone${airportCount !== 1 ? "s" : ""}</span>
       <span class="count-badge count-mod">${modCount} MoD Zone${modCount !== 1 ? "s" : ""}</span>
+      ${forestBadge}
     </div>
   `;
 }
@@ -235,6 +251,16 @@ function renderModZoneCard(zone: ModZone): string {
   `;
 }
 
+function renderForestZoneCard(zone: ForestZone): string {
+  return `
+    <div class="zone-card forest-card">
+      <div class="zone-card-header">
+        <h4 class="zone-card-title">${zone.name}</h4>
+      </div>
+    </div>
+  `;
+}
+
 export function renderZonesFromJson(
   items: ReportZone[] | BackendZone[] | undefined | null,
 ): string {
@@ -280,6 +306,10 @@ export function renderZonesFromJson(
   const modZones: ModZone[] = zones.filter(
     (z) => z.layer === "mod",
   ) as ModZone[];
+  const forestZones: ForestZone[] = zones.filter(
+    (z) => z.layer === "forest",
+  ) as ForestZone[];
+  const forestCount = combined?.total_forest_zones ?? forestZones.length;
 
   let html = "";
 
@@ -303,7 +333,7 @@ export function renderZonesFromJson(
         `
             : ""
         }
-        ${renderZoneCountBadges(combined.total_airport_zones, combined.total_mod_zones)}
+        ${renderZoneCountBadges(combined.total_airport_zones, combined.total_mod_zones, forestCount)}
         <div class="zone-field">
           <span class="field-label">Maximum Allowed Height:</span>
           <span class="field-value">${combined.min_height}</span>
@@ -326,7 +356,7 @@ export function renderZonesFromJson(
           ${renderFeasibilityBadge(feasibility)}
         </div>
         <p class="combined-note">${note}</p>
-        ${renderZoneCountBadges(airportZones.length, modZones.length)}
+        ${renderZoneCountBadges(airportZones.length, modZones.length, forestZones.length)}
       </div>
     `;
   }
@@ -392,6 +422,38 @@ export function renderZonesFromJson(
           <span class="section-count">0</span>
         </div>
         <p class="empty-state">✓ No MoD zones found at this location</p>
+      </div>
+    `;
+  }
+
+  // Render Forest Zones Section
+  if (forestZones.length > 0) {
+    const isExpanded = forestZones.length <= 3;
+    const forestCards = forestZones
+      .map((zone) => renderForestZoneCard(zone))
+      .join("");
+
+    html += `
+      <div class="report-section zone-section">
+        <details class="zone-details" ${isExpanded ? "open" : ""}>
+          <summary class="section-header">
+            <span class="section-title">Forest Zones</span>
+            <span class="section-count">${forestZones.length}</span>
+          </summary>
+          <div class="zone-cards">
+            ${forestCards}
+          </div>
+        </details>
+      </div>
+    `;
+  } else if (combined && forestCount === 0) {
+    html += `
+      <div class="report-section zone-section">
+        <div class="section-header">
+          <span class="section-title">Forest Zones</span>
+          <span class="section-count">0</span>
+        </div>
+        <p class="empty-state">✓ No forest zones found at this location</p>
       </div>
     `;
   }

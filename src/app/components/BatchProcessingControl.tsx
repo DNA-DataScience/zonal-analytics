@@ -1,5 +1,6 @@
 import maplibregl from "maplibre-gl";
 import { trackEvent } from "@/app/lib/analytics";
+import { showToast } from "@/app/lib/toast";
 
 interface Coordinate {
   id: number;
@@ -32,93 +33,20 @@ export class BatchProcessingControl implements maplibregl.IControl {
           z-index: 3;
         }
 
-        .batch-processing-tab-button {
-          appearance: none;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          background: #3b82f6;
-          border: 1px solid #1e40af;
-          border-radius: 8px;
-          padding: 10px 12px;
-          cursor: pointer;
-          font: 600 14px/1.2 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans";
-          color: #ffffff;
-          box-shadow: 0 2px 4px rgba(16, 24, 40, 0.06);
-          transition: all 0.15s ease;
-          white-space: nowrap;
-        }
-
-        .batch-processing-tab-button:hover {
-          background-color: #2563eb !important;
-          border-color: #1e40af;
-          box-shadow: 0 4px 8px rgba(16, 24, 40, 0.08);
-          color: #ffffff;
-        }
-
-        .batch-processing-tab-button:focus,
-        .batch-processing-tab-button:focus-visible,
-        .batch-processing-tab-button:active {
-          background-color: #1d4ed8 !important;
-          border-color: #1e3a8a;
-          color: #ffffff;
-          outline: none;
-        }
-
         .batch-processing-panel {
-          position: absolute;
-          right: 0;
-          top: 0;
+          position: fixed;
+          right: 12px;
+          top: 12px;
           width: 380px;
-          background: #ffffff;
-          border-radius: 12px;
-          border: 1px solid rgba(15, 23, 42, 0.08);
-          box-shadow: 0 6px 24px rgba(16, 24, 40, 0.08), 0 2px 4px rgba(16, 24, 40, 0.06);
           display: none;
           flex-direction: column;
-          max-height: 80vh;
+          max-height: calc(100vh - 24px);
           overflow: hidden;
           z-index: 101;
         }
 
         .batch-processing-panel.open {
           display: flex;
-        }
-
-        .batch-processing-header {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          padding: 12px 14px;
-          font: 600 16px/1.2 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans";
-          color: #0f172a;
-          background: #f8fafc;
-          border-bottom: 1px solid #e2e8f0;
-        }
-
-        .batch-processing-title {
-          flex: 1;
-        }
-
-        .batch-processing-close {
-          appearance: none;
-          border: 1px solid #e2e8f0;
-          background: #ffffff;
-          color: #0f172a;
-          border-radius: 6px;
-          width: 24px;
-          height: 24px;
-          cursor: pointer;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          font: 600 16px/1;
-          transition: background 0.15s ease, border-color 0.15s ease;
-        }
-
-        .batch-processing-close:hover {
-          background-color: #f1f5f9 !important;
-          border-color: #cbd5e1;
         }
 
         .batch-processing-body {
@@ -150,9 +78,9 @@ export class BatchProcessingControl implements maplibregl.IControl {
         }
 
         .batch-processing-mode-btn.active {
-          background-color: #0f172a !important;
+          background-color: var(--ui-accent) !important;
           color: #ffffff;
-          border-color: #0f172a;
+          border-color: var(--ui-accent);
         }
 
         .batch-processing-mode-btn:hover:not(.active) {
@@ -196,8 +124,9 @@ export class BatchProcessingControl implements maplibregl.IControl {
 
         .batch-processing-table input:focus {
           outline: none;
-          border-color: #0f172a;
-          background: #f8fafc;
+          border-color: var(--ui-accent);
+          box-shadow: 0 0 0 3px var(--ui-accent-ring);
+          background: #ffffff;
         }
 
         .batch-processing-table input.error {
@@ -252,8 +181,9 @@ export class BatchProcessingControl implements maplibregl.IControl {
 
         .batch-processing-paste-area:focus {
           outline: none;
-          border-color: #0f172a;
-          background: #f8fafc;
+          border-color: var(--ui-accent);
+          box-shadow: 0 0 0 3px var(--ui-accent-ring);
+          background: #ffffff;
         }
 
         .batch-processing-paste-area.error {
@@ -311,12 +241,12 @@ export class BatchProcessingControl implements maplibregl.IControl {
         }
 
         .batch-processing-btn-primary {
-          background-color: #0f172a !important;
+          background-color: var(--ui-accent) !important;
           color: #ffffff;
         }
 
         .batch-processing-btn-primary:hover {
-          background-color: #1e293b !important;
+          background-color: var(--ui-accent-hover) !important;
         }
 
         .batch-processing-btn-secondary {
@@ -342,7 +272,7 @@ export class BatchProcessingControl implements maplibregl.IControl {
     // Create tab button
     const tabButton = document.createElement("button");
     tabButton.className = "batch-processing-tab-button";
-    tabButton.textContent = "📦 Batch";
+    tabButton.textContent = "Batch";
     tabButton.title = "Batch Processing";
     tabButton.addEventListener("click", () => this.toggle());
 
@@ -486,7 +416,7 @@ export class BatchProcessingControl implements maplibregl.IControl {
 
   private _addTableRow() {
     if (this._coordinates.length >= 100) {
-      alert("Maximum 100 coordinates allowed");
+      showToast("Maximum 100 coordinates allowed", "warning");
       return;
     }
 
@@ -664,7 +594,7 @@ export class BatchProcessingControl implements maplibregl.IControl {
     });
 
     if (hasErrors) {
-      alert("Please fix all coordinate errors before generating");
+      showToast("Please fix all coordinate errors before generating", "error");
       return null;
     }
 
@@ -705,7 +635,7 @@ export class BatchProcessingControl implements maplibregl.IControl {
     }
 
     if (!coords || coords.length === 0) {
-      alert("Please enter at least one coordinate");
+      showToast("Please enter at least one coordinate", "warning");
       return;
     }
 
@@ -770,10 +700,13 @@ export class BatchProcessingControl implements maplibregl.IControl {
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
 
-      alert("Batch report downloaded successfully");
+      showToast("Batch report downloaded successfully", "success");
     } catch (error) {
       console.error("Error sending batch processing request:", error);
-      alert("Failed to send batch processing request. Please try again.");
+      showToast(
+        "Failed to send batch processing request. Please try again.",
+        "error",
+      );
     }
   }
 
@@ -787,11 +720,13 @@ export class BatchProcessingControl implements maplibregl.IControl {
 
   open() {
     this._isOpen = true;
+    this._container.classList.add("open");
     this._panel.classList.add("open");
   }
 
   close() {
     this._isOpen = false;
+    this._container.classList.remove("open");
     this._panel.classList.remove("open");
   }
 

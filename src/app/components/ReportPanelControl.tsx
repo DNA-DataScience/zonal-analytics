@@ -23,54 +23,16 @@ export class ReportPanelControl implements maplibregl.IControl {
   .report-panel__card {
     display: flex;
     flex-direction: column;
-    background: #ffffff;
-    border-radius: 12px;
-    border: 1px solid rgba(15, 23, 42, 0.08);
-    box-shadow: 0 6px 24px rgba(16,24,40,0.08), 0 2px 4px rgba(16,24,40,0.06);
     overflow: hidden;
     max-height: 60vh;
-  }
-  .report-panel__header {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 14px;
-    font: 600 18px/1.2 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans";
-    color: #0f172a;
-    background: #f8fafc;
-    border-bottom: 1px solid #e2e8f0;
-  }
-  .report-panel__title {
-    flex: 1;
-  }
-  .report-panel__close {
-    appearance: none;
-    border: 1px solid #e2e8f0;
-    background: #ffffff;
-    color: #0f172a;
-    border-radius: 8px;
-    width: 28px;
-    height: 28px;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.15s ease, border-color 0.15s ease;
-    margin-left: auto;
-  }
-  .report-panel__close:hover {
-    background: #f1f5f9;
-    border-color: #cbd5e1;
   }
   .report-panel__body {
     flex: 1 1 auto;
     min-height: 0;
     overflow: auto;
-    overscroll-behavior: contain;
-    -webkit-overflow-scrolling: touch;
-    padding: 12px 14px;
+    padding: 14px 16px;
     color: #334155;
-    font: 400 13px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans";
+    font: 400 13px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans";
   }
 
   /* Feasibility Badges */
@@ -203,6 +165,11 @@ export class ReportPanelControl implements maplibregl.IControl {
     background: #fee2e2;
     color: #dc2626;
     border-color: #fca5a5;
+  }
+  .count-forest {
+    background: #dcfce7;
+    color: #15803d;
+    border-color: #86efac;
   }
 
   /* Section Headers with Collapsible */
@@ -342,6 +309,12 @@ export class ReportPanelControl implements maplibregl.IControl {
   .mod-card {
     border-left: 3px solid #dc2626;
   }
+  .forest-card {
+    border-left: 3px solid #15803d;
+  }
+  .forest-card .zone-card-header {
+    margin-bottom: 0;
+  }
 
   /* Empty State */
   .empty-state {
@@ -440,10 +413,12 @@ export class ReportPanelControl implements maplibregl.IControl {
 
   show() {
     this._container.style.display = "";
+    this._container.classList.add("open");
   }
 
   hide() {
     this._container.style.display = "none";
+    this._container.classList.remove("open");
     this._marker?.getPopup()?.remove();
     this._marker?.remove();
     this._marker = undefined;
