@@ -69,7 +69,7 @@ function renderCczmButton(cczm: string): string {
     return `<span style="color: #666; font-style: italic;">Not Available for this Airport</span>`;
   }
 
-  const pdfUrl = `https://nocas2.aai.aero/nocas/CCZMPDF_Links/CCZMMap_${cczm}.pdf`;
+  const pdfUrl = `https://nocas.aai.aero/nocas/CCZMPDF_Links/CCZMMap_${cczm}.pdf`;
   return `<a href="${pdfUrl}" target="_blank" rel="noopener noreferrer" style="
     display: inline-flex;
     align-items: center;
