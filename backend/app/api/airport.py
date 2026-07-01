@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException
 from typing import Dict, Any
-from runway_processor import process_runway_geometry
+from app.processors.reports.runway_processor import process_runway_geometry
 from dotenv import load_dotenv
 import os
 from sqlalchemy.ext.asyncio import AsyncSession
-from connect_db import get_db
+from app.db.connect_db import get_db
 
 
 # Load environment variables from .env
