@@ -5,7 +5,7 @@ from fastapi.responses import JSONResponse
 import math
 
 # Import feasibility analysis functions from centralized module
-from feasibility_engine import (
+from app.engine.feasibility_engine import (
     find_most_restrictive_airport_zone,
     find_most_restrictive_mod_zone,
     find_most_restrictive_forest_zone,

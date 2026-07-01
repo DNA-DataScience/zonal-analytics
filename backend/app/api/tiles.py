@@ -3,7 +3,7 @@ from fastapi.responses import Response
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
 import asyncio
-from connect_db import get_db
+from app.db.connect_db import get_db
 
 
 router = APIRouter()

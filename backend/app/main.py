@@ -7,10 +7,10 @@ from fastapi import FastAPI, Depends, HTTPException
 from fastapi.responses import JSONResponse, StreamingResponse
 from pydantic import BaseModel
 from typing import List
-from report_processor import generate_report
+from app.processors.reports.report_processor import generate_report
 from sqlalchemy.ext.asyncio import AsyncSession
-from connect_db import get_db
-from batch_processor import generate_batch_report
+from app.db.connect_db import get_db
+from app.processors.batches.batch_processor import generate_batch_report
 
 
 # Pydantic models for batch request
@@ -24,11 +24,11 @@ class BatchRequest(BaseModel):
 
 
 # Import and include routers
-from airport_api import router as airport_router
-from tiles import router as tiles_router
-from points import router as points_router
-from analytics_router import router as analytics_router, create_tables
-from feedback_api import router as feedback_router, create_feedback_table
+from app.api.airport import router as airport_router
+from app.api.tiles import router as tiles_router
+from app.api.points import router as points_router
+from app.api.analytics import router as analytics_router, create_tables
+from app.api.feedback import router as feedback_router, create_feedback_table
 
 # Lifespan context manager for startup/shutdown
 @asynccontextmanager
@@ -36,7 +36,7 @@ async def lifespan(app: FastAPI):
     """Initialize app tables on startup"""
     db = None
     try:
-        from connect_db import AsyncSessionLocal
+        from app.db.connect_db import AsyncSessionLocal
         db = AsyncSessionLocal()
         await create_tables(db)
         await create_feedback_table(db)
@@ -102,7 +102,7 @@ async def batch_generator(request: BatchRequest, db: AsyncSession = Depends(get_
 if __name__ == "__main__":
     
     if os.getenv("ENV") != "dev":
-        uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+        uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)
 
  
     
