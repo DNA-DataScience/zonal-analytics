@@ -6,7 +6,7 @@ from pydantic import BaseModel, Field
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from connect_db import get_db
+from app.db.connect_db import get_db
 
 
 router = APIRouter(tags=["feedback"])
