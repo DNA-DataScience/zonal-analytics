@@ -1,0 +1,38 @@
+import type { Metadata } from "next";
+// Remove Google Fonts import temporarily
+// import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+import "maplibre-gl/dist/maplibre-gl.css";
+import "@maplibre/maplibre-gl-geocoder/dist/maplibre-gl-geocoder.css";
+
+// Use system fonts instead
+const geistSans = {
+  variable: "--font-geist-sans",
+  className: "font-sans",
+};
+
+const geistMono = {
+  variable: "--font-geist-mono",
+  className: "font-mono",
+};
+
+export const metadata: Metadata = {
+  title: "Zonal Analytics",
+  description: "Zonal Analytics",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        {children}
+      </body>
+    </html>
+  );
+}
