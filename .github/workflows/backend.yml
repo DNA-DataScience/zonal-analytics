@@ -5,8 +5,10 @@ name: Build and Deploy Backend Container
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
+    paths:
+      - 'backend/**'
+      - '.github/workflows/backend.yml'
 
 jobs:
   build-and-deploy:
@@ -39,7 +41,7 @@ jobs:
       # -----------------------
       - name: Build and push image
         run: |
-          docker build -t ${{ secrets.ACR_LOGIN_SERVER }}/map-backend:${{ github.sha }} .
+          docker build -t ${{ secrets.ACR_LOGIN_SERVER }}/map-backend:${{ github.sha }} ./backend
           docker push ${{ secrets.ACR_LOGIN_SERVER }}/map-backend:${{ github.sha }}
 
       # -----------------------

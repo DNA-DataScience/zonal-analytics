@@ -4,8 +4,10 @@ name: Build and Deploy Frontend Container
 
 on:
   push:
-    branches:
-      - master
+    branches: [ main ]
+    paths:
+      - 'frontend/**'
+      - '.github/workflows/frontend.yml'
 
 jobs:
   build-and-deploy:
@@ -40,7 +42,7 @@ jobs:
         run: |
           docker build \
             --build-arg NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }} \
-            -t ${{ secrets.ACR_LOGIN_SERVER }}/map-frontend:${{ github.sha }} .
+            -t ${{ secrets.ACR_LOGIN_SERVER }}/map-frontend:${{ github.sha }} ./frontend
           docker push ${{ secrets.ACR_LOGIN_SERVER }}/map-frontend:${{ github.sha }}
       # -----------------------
       # 4. Deploy to Azure App Service
