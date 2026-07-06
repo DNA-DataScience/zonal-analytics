@@ -36,7 +36,7 @@ async def lifespan(app: FastAPI):
     """Initialize app tables on startup"""
     db = None
     try:
-        from connect_db import AsyncSessionLocal
+        from app.db.connect_db import AsyncSessionLocal
         db = AsyncSessionLocal()
         await create_tables(db)
         await create_feedback_table(db)
