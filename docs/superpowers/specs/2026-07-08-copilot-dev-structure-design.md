@@ -39,8 +39,11 @@ ahead of a new team member joining (who may not use Copilot).
 
 ```
 zonal-analytics/
+├── AGENTS.md                        # canonical repo brief + workflow gate
+│                                    # (cross-tool standard: Copilot CLI, Codex,
+│                                    #  Cursor, etc. — teammate-tool agnostic)
 ├── .github/
-│   ├── copilot-instructions.md      # repo brief + workflow gate (every session)
+│   ├── copilot-instructions.md      # thin pointer to AGENTS.md (for IDE Copilot)
 │   ├── agents/
 │   │   ├── frontend-dev.md          # MapLibre/Next.js implementer
 │   │   └── qa-engineer.md           # test writer (pytest + coverage)
@@ -57,9 +60,11 @@ zonal-analytics/
 │       └── walkthroughs.md          # accumulated learning log
 ```
 
-`copilot-instructions.md` stays under ~60 lines: stack summary, key commands,
-hard workflow rules, and pointers to `docs/codebase/` and the skills. Deep
-knowledge lives in skills (loaded on demand) so the always-on context is small.
+`AGENTS.md` stays under ~60 lines: stack summary, key commands, hard workflow
+rules, commit message style, and pointers to `docs/codebase/` and the skills.
+Deep knowledge lives in skills (loaded on demand) so the always-on context is
+small. `.github/copilot-instructions.md` contains only a reference to AGENTS.md
+so IDE Copilot surfaces pick it up too.
 
 ## 2) Enforced Workflow
 
@@ -140,7 +145,11 @@ main ──────────── protected, deploy-only (current realit
 - All work on `feat/*` / `fix/*` off `dev`; merge into `dev` via PR
 - Promote `dev → main` via PR only when deploy-ready (notebooks and experiments
   may stay on dev — the promotion PR selects what main receives)
-- Commit style: conventional-ish prefixes (`feat:`, `fix:`, `chore:`)
+- Commit style (enforced via AGENTS.md):
+  - Single line only: `<type>: <Capitalized imperative subject>` — e.g.
+    `feat: Add SCADA readings ingestion endpoint`
+  - Types: `feat`, `fix`, `chore`, `docs`, `test`, `refactor`
+  - Subject ≤ 72 chars, no issue numbers/IDs/counts, no body, no trailers
 - CI (created in the queued tests+CI plan) runs pytest, lint, and build on PRs
   so the teammate's pushes get the same gates without Copilot
 - `docs/codebase/` doubles as teammate onboarding material
