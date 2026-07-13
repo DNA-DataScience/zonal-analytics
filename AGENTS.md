@@ -43,6 +43,13 @@ no jargon dumps, explain the *why* of each decision.
   types `feat|fix|chore|docs|test|refactor`, ≤72 chars, no issue numbers,
   no body, no trailers.
 
+## Resuming work
+
+When the user says **"next task"** (or asks where we left off): read
+`.superpowers/sdd/progress.md` (execution ledger) and the newest plan in
+`docs/superpowers/plans/`, then resume at the first item not marked complete.
+Never redo tasks the ledger marks complete.
+
 ## Repo skills (`.github/skills/`)
 
 - `geospatial-backend` — GisDB schema, MVT tiles, add-a-layer recipe
