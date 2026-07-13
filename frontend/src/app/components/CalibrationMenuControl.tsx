@@ -364,16 +364,19 @@ export class CalibrationMenuControl implements maplibregl.IControl {
       this.calibrateButton.textContent = "Sending...";
       this.calibrateButton.disabled = true;
 
-      const res = await fetch("http://127.0.0.1:8000/airport/runway-funnel", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const res = await fetch(
+        "https://zonal-backend.azurewebsites.net/airport/runway-funnel",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            features: drawings.features,
+            airportName: airportName,
+          }),
         },
-        body: JSON.stringify({
-          features: drawings.features,
-          airportName: airportName,
-        }),
-      });
+      );
 
       // Reset button state
       this.calibrateButton.textContent = originalText;
