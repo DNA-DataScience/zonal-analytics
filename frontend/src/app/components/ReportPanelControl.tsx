@@ -144,6 +144,7 @@ export class ReportPanelControl implements maplibregl.IControl {
   /* Zone Count Badges */
   .zone-counts {
     display: flex;
+    flex-wrap: wrap;
     gap: 8px;
     margin: 10px 0 8px 0;
   }
@@ -170,6 +171,11 @@ export class ReportPanelControl implements maplibregl.IControl {
     background: #dcfce7;
     color: #15803d;
     border-color: #86efac;
+  }
+  .count-inner-zones {
+    background: #ffe4e6;
+    color: #be123c;
+    border-color: #fda4af;
   }
 
   /* Section Headers with Collapsible */
@@ -311,6 +317,9 @@ export class ReportPanelControl implements maplibregl.IControl {
   }
   .forest-card {
     border-left: 3px solid #15803d;
+  }
+  .inner-zones-card {
+    border-left: 3px solid #be123c;
   }
   .forest-card .zone-card-header {
     margin-bottom: 0;
