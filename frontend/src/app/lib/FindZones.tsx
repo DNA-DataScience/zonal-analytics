@@ -9,6 +9,7 @@ export type CombinedZone = {
   total_airport_zones: number;
   total_mod_zones: number;
   total_forest_zones?: number;
+  total_inner_zone_zones?: number;
 };
 
 export type AirportZone = {
@@ -47,7 +48,22 @@ export type ForestZone = {
   name: string;
 };
 
-export type ReportZone = CombinedZone | AirportZone | ModZone | ForestZone;
+export type InnerZone = {
+  layer: "inner_zones";
+  zone: string;
+  name: string;
+  type: "inner_zone";
+  feasibility: "No";
+  min_height: "Restricted";
+  note: string;
+};
+
+export type ReportZone =
+  | CombinedZone
+  | AirportZone
+  | ModZone
+  | ForestZone
+  | InnerZone;
 
 // Legacy type for backwards compatibility
 export type BackendZone = {
@@ -108,16 +124,22 @@ function renderZoneCountBadges(
   airportCount: number,
   modCount: number,
   forestCount?: number,
+  innerZoneCount?: number,
 ): string {
   const forestBadge =
     forestCount !== undefined
       ? `<span class="count-badge count-forest">${forestCount} Forest Zone${forestCount !== 1 ? "s" : ""}</span>`
+      : "";
+  const innerZoneBadge =
+    innerZoneCount !== undefined
+      ? `<span class="count-badge count-inner-zones">${innerZoneCount} Inner Zone${innerZoneCount !== 1 ? "s" : ""}</span>`
       : "";
   return `
     <div class="zone-counts">
       <span class="count-badge count-airport">${airportCount} Airport Zone${airportCount !== 1 ? "s" : ""}</span>
       <span class="count-badge count-mod">${modCount} MoD Zone${modCount !== 1 ? "s" : ""}</span>
       ${forestBadge}
+      ${innerZoneBadge}
     </div>
   `;
 }
@@ -132,7 +154,14 @@ function renderContributingRestrictions(restrictions: string[]): string {
     .map((r) => {
       const isAirport = r.toLowerCase().includes("airport:");
       const isMod = r.toLowerCase().includes("mod:");
-      const dotColor = isAirport ? "#ef4444" : isMod ? "#f59e0b" : "#94a3b8";
+      const isInnerZone = r.toLowerCase().includes("inner zones:");
+      const dotColor = isAirport
+        ? "#ef4444"
+        : isMod
+          ? "#f59e0b"
+          : isInnerZone
+            ? "#be123c"
+            : "#94a3b8";
       return `<li><span class="restriction-dot" style="color: ${dotColor};">●</span> ${r}</li>`;
     })
     .join("");
@@ -261,6 +290,31 @@ function renderForestZoneCard(zone: ForestZone): string {
   `;
 }
 
+function renderInnerZoneCard(zone: InnerZone): string {
+  return `
+    <div class="zone-card inner-zones-card">
+      <div class="zone-card-header">
+        <h4 class="zone-card-title">${zone.name}</h4>
+        ${renderFeasibilityBadge(zone.feasibility)}
+      </div>
+      <div class="zone-card-body">
+        <div class="zone-field">
+          <span class="field-label">Category:</span>
+          <span class="field-value">${zone.zone}</span>
+        </div>
+        <div class="zone-field">
+          <span class="field-label">Min Height:</span>
+          <span class="field-value">${zone.min_height}</span>
+        </div>
+        <div class="zone-field zone-note">
+          <span class="field-label">Note:</span>
+          <span class="field-value">${zone.note}</span>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
 export function renderZonesFromJson(
   items: ReportZone[] | BackendZone[] | undefined | null,
 ): string {
@@ -309,7 +363,12 @@ export function renderZonesFromJson(
   const forestZones: ForestZone[] = zones.filter(
     (z) => z.layer === "forest",
   ) as ForestZone[];
+  const innerZones: InnerZone[] = zones.filter(
+    (z) => z.layer === "inner_zones",
+  ) as InnerZone[];
   const forestCount = combined?.total_forest_zones ?? forestZones.length;
+  const innerZoneCount =
+    combined?.total_inner_zone_zones ?? innerZones.length;
 
   let html = "";
 
@@ -333,7 +392,7 @@ export function renderZonesFromJson(
         `
             : ""
         }
-        ${renderZoneCountBadges(combined.total_airport_zones, combined.total_mod_zones, forestCount)}
+        ${renderZoneCountBadges(combined.total_airport_zones, combined.total_mod_zones, forestCount, innerZoneCount)}
         <div class="zone-field">
           <span class="field-label">Maximum Allowed Height:</span>
           <span class="field-value">${combined.min_height}</span>
@@ -356,7 +415,7 @@ export function renderZonesFromJson(
           ${renderFeasibilityBadge(feasibility)}
         </div>
         <p class="combined-note">${note}</p>
-        ${renderZoneCountBadges(airportZones.length, modZones.length, forestZones.length)}
+        ${renderZoneCountBadges(airportZones.length, modZones.length, forestZones.length, innerZones.length)}
       </div>
     `;
   }
@@ -454,6 +513,38 @@ export function renderZonesFromJson(
           <span class="section-count">0</span>
         </div>
         <p class="empty-state">✓ No forest zones found at this location</p>
+      </div>
+    `;
+  }
+
+  // Render Inner Zones Section
+  if (innerZones.length > 0) {
+    const isExpanded = innerZones.length <= 3;
+    const innerZoneCards = innerZones
+      .map((zone) => renderInnerZoneCard(zone))
+      .join("");
+
+    html += `
+      <div class="report-section zone-section">
+        <details class="zone-details" ${isExpanded ? "open" : ""}>
+          <summary class="section-header">
+            <span class="section-title">Inner Zones</span>
+            <span class="section-count">${innerZones.length}</span>
+          </summary>
+          <div class="zone-cards">
+            ${innerZoneCards}
+          </div>
+        </details>
+      </div>
+    `;
+  } else if (combined && innerZoneCount === 0) {
+    html += `
+      <div class="report-section zone-section">
+        <div class="section-header">
+          <span class="section-title">Inner Zones</span>
+          <span class="section-count">0</span>
+        </div>
+        <p class="empty-state">✓ No Inner Zones found at this location</p>
       </div>
     `;
   }
