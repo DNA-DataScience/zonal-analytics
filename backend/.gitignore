@@ -20,7 +20,6 @@ tn_zones_debug.html
 zones_preview.html
 REPORT_API_DOCS.md
 batches/
-tests/
 htmlcov/
 test_notebooks/extracted_kmz/
 test_notebooks/ESZ_Windy_States.kmz
