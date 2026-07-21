@@ -36,6 +36,20 @@ LAYER_CONFIG = {
         "db_table": "reserve_forests",
         "query_fields": ["name"],
         "special_handlers": None,
+    },
+    "inner_zones": {
+        "name": "Inner Zones",
+        "priority_order": [
+            "Animal/Bird Migratory Path",
+            "Coastal Regulatory Zone",
+            "Heritage",
+            "Reservoir",
+            "Sanctuary",
+            "Defence Protected Area",
+        ],
+        "db_table": "inner_zones",
+        "query_fields": ["name", "category", "state_code", "state_name"],
+        "special_handlers": None,
     }
 }
 
@@ -110,18 +124,24 @@ def find_most_restrictive_zone(
     config = LAYER_CONFIG.get(layer_key)
     if not config:
         return None, None
-    
+
+    def get_zone_value(zone: Dict) -> Optional[str]:
+        for field in ("zone", "category"):
+            if field in config.get("query_fields", []) and zone.get(field) is not None:
+                return zone.get(field)
+        return zone.get("zone") or zone.get("category")
+
     # Check for special handlers first (for MoD zones)
     if config.get("special_handlers"):
         for special_type in config["special_handlers"]:
             for zone in zones:
-                if zone.get("zone") == special_type:
+                if get_zone_value(zone) == special_type:
                     return special_type, zone
-    
+
     # Find by priority order
     for priority_zone in config["priority_order"]:
         for zone in zones:
-            if zone.get("zone") == priority_zone:
+            if get_zone_value(zone) == priority_zone:
                 return priority_zone, zone
     
     # No zones found matching priority
@@ -143,10 +163,16 @@ def find_most_restrictive_forest_zone(zones: List[Dict]) -> Tuple[Optional[str],
     return find_most_restrictive_zone(zones, "forest")
 
 
+def find_most_restrictive_inner_zone(zones: List[Dict]) -> Tuple[Optional[str], Optional[Dict]]:
+    """Wrapper for finding most restrictive Inner Zones category."""
+    return find_most_restrictive_zone(zones, "inner_zones")
+
+
 def determine_feasibility(
     airport_zone_type: Optional[str],
     mod_zone_type: Optional[str],
-    forest_zone_type: Optional[str] = None
+    forest_zone_type: Optional[str] = None,
+    inner_zone_type: Optional[str] = None
 ) -> Tuple[str, str]:
     """
     Determine overall feasibility and color based on most restrictive zones.
@@ -157,12 +183,16 @@ def determine_feasibility(
         airport_zone_type: Most restrictive airport zone type (e.g., "funnel") or None
         mod_zone_type: Most restrictive MoD zone type (e.g., "NO_WTG") or None
         forest_zone_type: Most restrictive forest zone type (always "inner") or None
+        inner_zone_type: Most restrictive Inner Zones category or None
         
     Returns:
         Tuple of (feasibility, color)
         - feasibility: "Yes", "NOC", or "No"
         - color: "green", "yellow", or "red"
     """
+    if inner_zone_type:
+        return ("No", "red")
+
     if forest_zone_type:
         return ("No", "red")
 
@@ -284,7 +314,8 @@ def generate_combined_note(
     feasibility: str,
     most_restrictive_airport: Optional[Tuple[str, Dict]],
     most_restrictive_mod: Optional[Tuple[str, Dict]],
-    most_restrictive_forest: Optional[Tuple[str, Dict]] = None
+    most_restrictive_forest: Optional[Tuple[str, Dict]] = None,
+    most_restrictive_inner_zone: Optional[Tuple[str, Dict]] = None
 ) -> str:
     """
     Generate comprehensive note for combined feasibility analysis.
@@ -294,6 +325,7 @@ def generate_combined_note(
         most_restrictive_airport: Tuple of (zone_type, zone_dict) or None
         most_restrictive_mod: Tuple of (zone_type, zone_dict) or None
         most_restrictive_forest: Tuple of (zone_type, zone_dict) or None
+        most_restrictive_inner_zone: Tuple of (category, zone_dict) or None
         
     Returns:
         Detailed note explaining the combined determination
@@ -302,6 +334,11 @@ def generate_combined_note(
     
     if feasibility == "No":
         reasons = []
+        if most_restrictive_inner_zone and most_restrictive_inner_zone[0]:
+            inner_zone, inner_zone_dict = most_restrictive_inner_zone
+            reasons.append(
+                f"Inner Zones {inner_zone} at {inner_zone_dict.get('name', 'Unknown Inner Zone')}"
+            )
         if most_restrictive_airport and most_restrictive_airport[0]:
             airport_zone, airport_dict = most_restrictive_airport
             reasons.append(f"Airport {airport_zone} zone at {airport_dict.get('name', 'Unknown')}")
@@ -471,6 +508,19 @@ def build_forest_zone_report(zone_dict: Dict) -> Dict:
     }
 
 
+def build_inner_zone_report(zone_dict: Dict) -> Dict:
+    """Build complete Inner Zones report."""
+    return {
+        "layer": "inner_zones",
+        "zone": zone_dict["category"],
+        "name": zone_dict.get("name") or "Unknown Inner Zone",
+        "type": "inner_zone",
+        "min_height": "Restricted",
+        "note": "No WTGs allowed in Inner Zones restricted area.",
+        "feasibility": "No",
+    }
+
+
 def build_combined_analysis(
     airport_reports: List[Dict],
     mod_reports: List[Dict],
@@ -478,7 +528,9 @@ def build_combined_analysis(
     most_restrictive_mod: Optional[Tuple[str, Dict]],
     elev: float,
     forest_reports: Optional[List[Dict]] = None,
-    most_restrictive_forest: Optional[Tuple[str, Dict]] = None
+    most_restrictive_forest: Optional[Tuple[str, Dict]] = None,
+    inner_zone_reports: Optional[List[Dict]] = None,
+    most_restrictive_inner_zone: Optional[Tuple[str, Dict]] = None
 ) -> Dict:
     """
     Build combined feasibility analysis report.
@@ -490,6 +542,8 @@ def build_combined_analysis(
         most_restrictive_mod: Tuple of (zone_type, zone_dict) or None
         forest_reports: List of individual forest zone reports
         most_restrictive_forest: Tuple of (zone_type, zone_dict) or None
+        inner_zone_reports: List of individual Inner Zones reports
+        most_restrictive_inner_zone: Tuple of (category, zone_dict) or None
         elev: Ground elevation at the point (meters)
         
     Returns:
@@ -499,12 +553,23 @@ def build_combined_analysis(
     airport_zone_type = most_restrictive_airport[0] if most_restrictive_airport else None
     mod_zone_type = most_restrictive_mod[0] if most_restrictive_mod else None
     forest_zone_type = most_restrictive_forest[0] if most_restrictive_forest else None
+    inner_zone_type = most_restrictive_inner_zone[0] if most_restrictive_inner_zone else None
     
     # Determine combined feasibility
-    feasibility, color = determine_feasibility(airport_zone_type, mod_zone_type, forest_zone_type)
+    feasibility, color = determine_feasibility(
+        airport_zone_type,
+        mod_zone_type,
+        forest_zone_type,
+        inner_zone_type,
+    )
     
     # Build contributing restrictions list
     contributing_restrictions = []
+    if most_restrictive_inner_zone and most_restrictive_inner_zone[0]:
+        inner_zone, inner_zone_dict = most_restrictive_inner_zone
+        contributing_restrictions.append(
+            f"Inner Zones: {inner_zone} - {inner_zone_dict.get('name', 'Unknown Inner Zone')}"
+        )
     if most_restrictive_airport and most_restrictive_airport[0]:
         airport_zone, airport_dict = most_restrictive_airport
         contributing_restrictions.append(
@@ -526,11 +591,17 @@ def build_combined_analysis(
         feasibility,
         most_restrictive_airport,
         most_restrictive_mod,
-        most_restrictive_forest
+        most_restrictive_forest,
+        most_restrictive_inner_zone
     )
     
     # Aggregate min_height from all zones
-    all_reports = airport_reports + mod_reports + (forest_reports or [])
+    all_reports = (
+        airport_reports
+        + mod_reports
+        + (forest_reports or [])
+        + (inner_zone_reports or [])
+    )
     min_heights = [
         r["min_height"] for r in all_reports 
         if r["min_height"] not in ["N/A", "Not Required", "Not Applicable", "Restricted"]
@@ -555,7 +626,7 @@ def build_combined_analysis(
     else:
         final_min_height = "Not Required"
     
-    return {
+    combined = {
         "layer": "combined",
         "zone": "Combined Analysis",
         "feasibility": feasibility,
@@ -566,3 +637,8 @@ def build_combined_analysis(
         "total_mod_zones": len(mod_reports),
         "total_forest_zones": len(forest_reports or [])
     }
+
+    if inner_zone_reports is not None or most_restrictive_inner_zone is not None:
+        combined["total_inner_zone_zones"] = len(inner_zone_reports or [])
+
+    return combined
