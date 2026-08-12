@@ -3,10 +3,12 @@ from fastapi.responses import Response
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
 import asyncio
+import logging
 from app.db.connect_db import get_db
 
 
 router = APIRouter()
+logger = logging.getLogger(__name__)
 
 TILE_SEMAPHORE = asyncio.Semaphore(5)
 MAX_ZOOM = 15
@@ -60,6 +62,24 @@ FROM (
     4096, 256, true
   ) AS geometry
   FROM "GisDB".reserve_forests
+  WHERE geom3857 && ST_TileEnvelope(:z, :x, :y)
+) AS tile;
+""")
+
+INNER_ZONES_QUERY = text("""
+SELECT ST_AsMVT(tile, 'inner_zones', 4096, 'geometry') as mvt
+FROM (
+  SELECT
+  "Name",
+  category,
+  state_code,
+  state_name,
+  ST_AsMVTGeom(
+    geom3857,
+    ST_TileEnvelope(:z, :x, :y),
+    4096, 256, true
+  ) AS geometry
+  FROM "GisDB".inner_zones
   WHERE geom3857 && ST_TileEnvelope(:z, :x, :y)
 ) AS tile;
 """)
@@ -123,3 +143,23 @@ async def get_forest_tile(z: int, x: int, y: int, db: AsyncSession = Depends(get
         except Exception as e:
             print(f"Forest tile error z={z}, x={x}, y={y}: {e}")
             raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/inner-zones/{z}/{x}/{y}.mvt")
+async def get_inner_zones_tile(z: int, x: int, y: int, db: AsyncSession = Depends(get_db)):
+    if z > MAX_ZOOM:
+        return Response(status_code=204)
+
+    async with TILE_SEMAPHORE:
+        try:
+            result = await db.execute(INNER_ZONES_QUERY, {"z": z, "x": x, "y": y})
+            tile_bytes = result.scalar()
+
+            if tile_bytes:
+                return Response(content=tile_bytes, media_type="application/vnd.mapbox-vector-tile")
+            else:
+                return Response(content=b"", media_type="application/vnd.mapbox-vector-tile")
+
+        except Exception as exc:
+            logger.exception("Inner Zones tile error z=%s, x=%s, y=%s", z, x, y)
+            raise HTTPException(status_code=500, detail=str(exc))

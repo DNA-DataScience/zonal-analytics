@@ -1,0 +1,10 @@
+Task 1: complete (commits cc49740..2d06c3c, review clean; minor: on agenting by design until Task 8)
+Task 2: complete (commits 2d06c3c..7705b50, review clean)
+Task 3: complete (commits 7705b50..ec0b901, review clean)
+Task 4: complete (commits ec0b901..f9eb362, review clean)
+Task 5: complete (commits f9eb362..92775ef, review clean)
+Task 6: complete (commits 92775ef..e239aed, review clean)
+Task 7: complete (commits e239aed..12f7ba6, review clean)
+Task 8: mostly complete (merge c29ab40, renamed agenting->dev, pushed origin/dev; NOT done: delete origin/agenting (user keeping), branch protection on main, default-branch setting, stale suzman6-* cleanup)
+Task 9: complete (structural check 9/9 True, dry run confirmed via live session loads, walkthrough done + logged ce33fad, whole-branch review clean)
+PLAN COMPLETE. Remaining manual (user, browser): branch protection on main, default-branch setting, stale suzman6-* cleanup.

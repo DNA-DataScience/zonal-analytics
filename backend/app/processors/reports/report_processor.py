@@ -9,10 +9,12 @@ from app.engine.feasibility_engine import (
     find_most_restrictive_airport_zone,
     find_most_restrictive_mod_zone,
     find_most_restrictive_forest_zone,
+    find_most_restrictive_inner_zone,
     determine_feasibility,
     build_airport_zone_report,
     build_mod_zone_report,
     build_forest_zone_report,
+    build_inner_zone_report,
     build_combined_analysis,
     calculate_autosettle
 )
@@ -89,6 +91,21 @@ FOREST_REPORT_QUERY = text("""
                         AND ST_Intersects(z.geom3857, p.geom3857);
                     """)
 
+INNER_ZONES_REPORT_QUERY = text("""
+                    WITH p AS (
+                       SELECT
+                       ST_Transform(
+                           ST_SetSRID(ST_MakePoint(:lon, :lat), 4326),
+                           3857
+                       ) AS geom3857
+                    )
+                    SELECT z.category, z."Name", z.state_code, z.state_name
+                    FROM "GisDB".inner_zones z
+                    JOIN p
+                       ON z.geom3857 && p.geom3857
+                       AND ST_Intersects(z.geom3857, p.geom3857);
+                    """)
+
 async def generate_report(lat: float, lng: float, elev: float = 0, db: AsyncSession = None):
     
     # Fetch airport zones
@@ -123,6 +140,17 @@ async def generate_report(lat: float, lng: float, elev: float = 0, db: AsyncSess
     except Exception as e:
         print(f"Error retrieving forest zone data: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+
+    # Fetch Inner Zones
+    try:
+        result = await db.execute(INNER_ZONES_REPORT_QUERY, {
+            "lat": lat,
+            "lon": lng
+        })
+        inner_zone_rows = result.fetchall()
+    except Exception as e:
+        print(f"Error retrieving Inner Zones data: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
     
     report = []
     
@@ -154,6 +182,16 @@ async def generate_report(lat: float, lng: float, elev: float = 0, db: AsyncSess
             "name": r[0] or "Unknown Forest",
             "type": "forest"
         })
+
+    inner_zones = []
+    for r in inner_zone_rows:
+        inner_zones.append({
+            "zone": r[0],
+            "category": r[0],
+            "name": r[1] or "Unknown Inner Zone",
+            "state_code": r[2],
+            "state_name": r[3],
+        })
     
     # Build individual airport zone reports
     airport_reports = []
@@ -172,22 +210,35 @@ async def generate_report(lat: float, lng: float, elev: float = 0, db: AsyncSess
     for zone_dict in forest_zones:
         forest_report = build_forest_zone_report(zone_dict)
         forest_reports.append(forest_report)
+
+    # Build individual Inner Zones reports
+    inner_zone_reports = []
+    for zone_dict in inner_zones:
+        inner_zone_report = build_inner_zone_report(zone_dict)
+        inner_zone_reports.append(inner_zone_report)
     
     # If no airport zones found, get nearest airport for auto-settlement info
     nearest_airport_data = None
-    if not airport_zones and not mod_zones and not forest_zones:
+    if not airport_zones and not mod_zones and not forest_zones and not inner_zones:
         nearest_airport_data = await get_nearest_airport_data(lat, lng, elev, db)
     
     # If we have neither airport zones nor mod zones nor nearest airport, return error
-    if not airport_reports and not mod_reports and not forest_reports and not nearest_airport_data:
+    if (
+        not airport_reports
+        and not mod_reports
+        and not forest_reports
+        and not inner_zone_reports
+        and not nearest_airport_data
+    ):
         return JSONResponse(content={"status": "no_results", "message": "No zones or airports found"})
     
     # Create combined analysis if we have zone intersections
-    if airport_reports or mod_reports or forest_reports:
+    if airport_reports or mod_reports or forest_reports or inner_zone_reports:
         # Find most restrictive zones
         airport_zone_type, airport_zone_dict = find_most_restrictive_airport_zone(airport_zones)
         mod_zone_type, mod_zone_dict = find_most_restrictive_mod_zone(mod_zones)
         forest_zone_type, forest_zone_dict = find_most_restrictive_forest_zone(forest_zones)
+        inner_zone_type, inner_zone_dict = find_most_restrictive_inner_zone(inner_zones)
         
         # Build combined analysis
         combined = build_combined_analysis(
@@ -197,7 +248,9 @@ async def generate_report(lat: float, lng: float, elev: float = 0, db: AsyncSess
             (mod_zone_type, mod_zone_dict) if mod_zone_type else None,
             elev,
             forest_reports,
-            (forest_zone_type, forest_zone_dict) if forest_zone_type else None
+            (forest_zone_type, forest_zone_dict) if forest_zone_type else None,
+            inner_zone_reports,
+            (inner_zone_type, inner_zone_dict) if inner_zone_type else None
         )
         report.append(combined)
     
@@ -209,6 +262,9 @@ async def generate_report(lat: float, lng: float, elev: float = 0, db: AsyncSess
 
     # Add all individual forest zones
     report.extend(forest_reports)
+
+    # Add all individual Inner Zones
+    report.extend(inner_zone_reports)
     
     # Add nearest airport data if no airport zones were found
     if nearest_airport_data:
