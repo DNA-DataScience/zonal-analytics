@@ -89,6 +89,7 @@ def is_dev_request(request: Request) -> bool:
 # Database initialization
 async def create_tables(db: AsyncSession):
     """Create analytics tables and view if they don't exist"""
+    logger.info("Ensuring analytics_sessions, analytics_events tables and analytics_visitor_summary view exist")
     try:
         # Create analytics_sessions table
         await db.execute(text("""
@@ -151,10 +152,10 @@ async def create_tables(db: AsyncSession):
         """))
 
         await db.commit()
-        print("Analytics tables created successfully")
-    except Exception as e:
+        logger.info("Analytics tables and view created successfully")
+    except Exception:
         await db.rollback()
-        print(f"Error creating analytics tables: {str(e)}")
+        logger.exception("Error creating analytics tables")
         raise
 
 
@@ -165,14 +166,18 @@ async def session_start(
     db: AsyncSession = Depends(get_db)
 ):
     """Start a new analytics session"""
+    session_id = str(uuid.uuid4())
     try:
-        session_id = str(uuid.uuid4())
         now = datetime.now(timezone.utc)
         is_dev = is_dev_request(request)
-        
+        logger.info(
+            "Starting analytics session session_id=%s anonymous_id=%s is_dev=%s client_env=%s referrer=%s",
+            session_id, request_body.anonymous_id, is_dev, request_body.client_env, request_body.referrer,
+        )
+
         # Insert new session
         await db.execute(text("""
-            INSERT INTO analytics_sessions 
+            INSERT INTO analytics_sessions
             (id, anonymous_id, started_at, last_heartbeat_at, is_dev, client_env, user_agent, referrer)
             VALUES (:id, :anonymous_id, :started_at, :last_heartbeat_at, :is_dev, :client_env, :user_agent, :referrer)
         """), {
@@ -185,11 +190,13 @@ async def session_start(
             "user_agent": request_body.user_agent,
             "referrer": request_body.referrer,
         })
-        
+
         await db.commit()
+        logger.debug("Analytics session inserted session_id=%s", session_id)
         return SessionStartResponse(session_id=session_id)
-    except Exception as e:
+    except Exception:
         await db.rollback()
+        logger.exception("Failed to start analytics session anonymous_id=%s", request_body.anonymous_id)
         raise
 
 
@@ -203,6 +210,7 @@ async def heartbeat(
     started = time.monotonic()
     attempts = 0
     now = datetime.utcnow()
+    logger.debug("Heartbeat received session_id=%s anonymous_id=%s", request_body.session_id, request_body.anonymous_id)
 
     while True:
         attempts += 1
@@ -218,6 +226,9 @@ async def heartbeat(
             })
 
             await db.commit()
+            logger.debug(
+                "Heartbeat persisted session_id=%s attempts=%d", request_body.session_id, attempts
+            )
             return {
                 "status": "ok",
                 "persisted": True,
@@ -227,10 +238,18 @@ async def heartbeat(
             await db.rollback()
 
             if not _is_transient_db_error(exc):
+                logger.exception(
+                    "Non-transient heartbeat error session_id=%s attempts=%d",
+                    request_body.session_id, attempts,
+                )
                 raise
 
             elapsed = time.monotonic() - started
             next_delay = HEARTBEAT_RETRY_DELAYS_SECONDS[min(attempts - 1, len(HEARTBEAT_RETRY_DELAYS_SECONDS) - 1)]
+            logger.warning(
+                "Transient heartbeat DB error session_id=%s attempt=%d elapsed=%.3fs: %s",
+                request_body.session_id, attempts, elapsed, exc,
+            )
             if elapsed + next_delay > HEARTBEAT_RETRY_BUDGET_SECONDS:
                 pool_reset_triggered = await reset_db_pool_if_needed()
                 logger.warning(
@@ -260,9 +279,10 @@ async def session_end(
     db: AsyncSession = Depends(get_db)
 ):
     """End an analytics session"""
+    logger.info("Ending analytics session session_id=%s anonymous_id=%s", request_body.session_id, request_body.anonymous_id)
     try:
         now = datetime.utcnow()
-        
+
         # Get session to calculate duration
         result = await db.execute(text("""
             SELECT started_at, last_heartbeat_at FROM analytics_sessions
@@ -271,23 +291,24 @@ async def session_end(
             "session_id": request_body.session_id,
             "anonymous_id": request_body.anonymous_id,
         })
-        
+
         session_row = result.fetchone()
         if not session_row:
+            logger.warning("Session end requested for unknown session_id=%s", request_body.session_id)
             return {"status": "session not found"}
-        
+
         started_at = session_row[0]
         last_heartbeat_at = session_row[1]
-        
+
         # Calculate duration: use actual duration if last heartbeat is later, else estimate from now
         if last_heartbeat_at > started_at:
             duration_seconds = int((last_heartbeat_at - started_at).total_seconds())
         else:
             duration_seconds = int((now - started_at).total_seconds())
-        
+
         # Update session with end time and duration
         await db.execute(text("""
-            UPDATE analytics_sessions 
+            UPDATE analytics_sessions
             SET ended_at = :now, duration_seconds = :duration_seconds
             WHERE id = :session_id AND anonymous_id = :anonymous_id
         """), {
@@ -296,11 +317,16 @@ async def session_end(
             "session_id": request_body.session_id,
             "anonymous_id": request_body.anonymous_id,
         })
-        
+
         await db.commit()
+        logger.info(
+            "Analytics session ended session_id=%s duration_seconds=%d",
+            request_body.session_id, duration_seconds,
+        )
         return {"status": "ok", "duration_seconds": duration_seconds}
-    except Exception as e:
+    except Exception:
         await db.rollback()
+        logger.exception("Failed to end analytics session session_id=%s", request_body.session_id)
         raise
 
 
@@ -311,16 +337,20 @@ async def event(
     db: AsyncSession = Depends(get_db)
 ):
     """Log an analytics event"""
+    logger.debug(
+        "Analytics event session_id=%s event_type=%s endpoint=%s",
+        request_body.session_id, request_body.event_type, request_body.endpoint,
+    )
     try:
         now = datetime.utcnow()
         import json
-        
+
         # Convert metadata to JSON string
         metadata_json = json.dumps(request_body.metadata) if request_body.metadata else "{}"
-        
+
         # Insert event
         await db.execute(text("""
-            INSERT INTO analytics_events 
+            INSERT INTO analytics_events
             (session_id, event_type, endpoint, occurred_at, metadata)
             VALUES (:session_id, :event_type, :endpoint, :occurred_at, :metadata)
         """), {
@@ -330,9 +360,13 @@ async def event(
             "occurred_at": now,
             "metadata": metadata_json,
         })
-        
+
         await db.commit()
         return {"status": "ok"}
-    except Exception as e:
+    except Exception:
         await db.rollback()
+        logger.exception(
+            "Failed to log analytics event session_id=%s event_type=%s",
+            request_body.session_id, request_body.event_type,
+        )
         raise

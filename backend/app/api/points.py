@@ -3,10 +3,12 @@ from fastapi.responses import JSONResponse
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
 import json
+import logging
 from app.db.connect_db import get_db
 
 
 router = APIRouter()
+logger = logging.getLogger(__name__)
 
 CMS_QUERY = text("""
 SELECT
@@ -45,21 +47,25 @@ def build_feature_collection(rows, geom_key: str = "geom") -> dict:
 
 @router.get("/cms.geojson")
 async def get_cms_points(db: AsyncSession = Depends(get_db)):
+    logger.info("GET /points/cms.geojson")
     try:
         result = await db.execute(CMS_QUERY)
         rows = result.fetchall()
+        logger.info("CMS points query returned %d rows", len(rows))
         return JSONResponse(content=build_feature_collection(rows))
     except Exception as e:
-        print(f"CMS points error: {e}")
+        logger.exception("CMS points query failed")
         raise HTTPException(status_code=500, detail=str(e))
 
 
 @router.get("/wtg.geojson")
 async def get_wtg_points(db: AsyncSession = Depends(get_db)):
+    logger.info("GET /points/wtg.geojson")
     try:
         result = await db.execute(WTG_QUERY)
         rows = result.fetchall()
+        logger.info("WTG points query returned %d rows", len(rows))
         return JSONResponse(content=build_feature_collection(rows))
     except Exception as e:
-        print(f"WTG points error: {e}")
+        logger.exception("WTG points query failed")
         raise HTTPException(status_code=500, detail=str(e))

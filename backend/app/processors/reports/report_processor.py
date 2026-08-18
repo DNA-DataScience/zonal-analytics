@@ -3,6 +3,9 @@ from sqlalchemy import text
 from fastapi import Depends, HTTPException
 from fastapi.responses import JSONResponse
 import math
+import logging
+
+logger = logging.getLogger(__name__)
 
 # Import feasibility analysis functions from centralized module
 from app.engine.feasibility_engine import (
@@ -107,7 +110,8 @@ INNER_ZONES_REPORT_QUERY = text("""
                     """)
 
 async def generate_report(lat: float, lng: float, elev: float = 0, db: AsyncSession = None):
-    
+    logger.info("Generating feasibility report for lat=%s lng=%s elev=%s", lat, lng, elev)
+
     # Fetch airport zones
     try:
         result = await db.execute(REPORT_QUERY, {
@@ -115,10 +119,11 @@ async def generate_report(lat: float, lng: float, elev: float = 0, db: AsyncSess
             "lon": lng
         })
         airport_rows = result.fetchall()
+        logger.debug("Airport zone query returned %d rows", len(airport_rows))
     except Exception as e:
-        print(f"Error retrieving airport zone data: {str(e)}")
+        logger.exception("Error retrieving airport zone data for lat=%s lng=%s", lat, lng)
         raise HTTPException(status_code=500, detail=str(e))
-    
+
     # Fetch MoD zones
     try:
         result = await db.execute(MOD_REPORT_QUERY, {
@@ -126,8 +131,9 @@ async def generate_report(lat: float, lng: float, elev: float = 0, db: AsyncSess
             "lon": lng
         })
         mod_rows = result.fetchall()
+        logger.debug("MoD zone query returned %d rows", len(mod_rows))
     except Exception as e:
-        print(f"Error retrieving MoD zone data: {str(e)}")
+        logger.exception("Error retrieving MoD zone data for lat=%s lng=%s", lat, lng)
         raise HTTPException(status_code=500, detail=str(e))
 
     # Fetch forest zones
@@ -137,8 +143,9 @@ async def generate_report(lat: float, lng: float, elev: float = 0, db: AsyncSess
             "lon": lng
         })
         forest_rows = result.fetchall()
+        logger.debug("Forest zone query returned %d rows", len(forest_rows))
     except Exception as e:
-        print(f"Error retrieving forest zone data: {str(e)}")
+        logger.exception("Error retrieving forest zone data for lat=%s lng=%s", lat, lng)
         raise HTTPException(status_code=500, detail=str(e))
 
     # Fetch Inner Zones
@@ -148,10 +155,11 @@ async def generate_report(lat: float, lng: float, elev: float = 0, db: AsyncSess
             "lon": lng
         })
         inner_zone_rows = result.fetchall()
+        logger.debug("Inner Zones query returned %d rows", len(inner_zone_rows))
     except Exception as e:
-        print(f"Error retrieving Inner Zones data: {str(e)}")
+        logger.exception("Error retrieving Inner Zones data for lat=%s lng=%s", lat, lng)
         raise HTTPException(status_code=500, detail=str(e))
-    
+
     report = []
     
     # Convert database rows to zone dictionaries
@@ -220,8 +228,9 @@ async def generate_report(lat: float, lng: float, elev: float = 0, db: AsyncSess
     # If no airport zones found, get nearest airport for auto-settlement info
     nearest_airport_data = None
     if not airport_zones and not mod_zones and not forest_zones and not inner_zones:
+        logger.debug("No zone intersections found for lat=%s lng=%s; falling back to nearest airport lookup", lat, lng)
         nearest_airport_data = await get_nearest_airport_data(lat, lng, elev, db)
-    
+
     # If we have neither airport zones nor mod zones nor nearest airport, return error
     if (
         not airport_reports
@@ -230,8 +239,9 @@ async def generate_report(lat: float, lng: float, elev: float = 0, db: AsyncSess
         and not inner_zone_reports
         and not nearest_airport_data
     ):
+        logger.warning("No zones or airports found for lat=%s lng=%s", lat, lng)
         return JSONResponse(content={"status": "no_results", "message": "No zones or airports found"})
-    
+
     # Create combined analysis if we have zone intersections
     if airport_reports or mod_reports or forest_reports or inner_zone_reports:
         # Find most restrictive zones
@@ -239,7 +249,11 @@ async def generate_report(lat: float, lng: float, elev: float = 0, db: AsyncSess
         mod_zone_type, mod_zone_dict = find_most_restrictive_mod_zone(mod_zones)
         forest_zone_type, forest_zone_dict = find_most_restrictive_forest_zone(forest_zones)
         inner_zone_type, inner_zone_dict = find_most_restrictive_inner_zone(inner_zones)
-        
+        logger.debug(
+            "Most restrictive zones for lat=%s lng=%s: airport=%s mod=%s forest=%s inner_zones=%s",
+            lat, lng, airport_zone_type, mod_zone_type, forest_zone_type, inner_zone_type,
+        )
+
         # Build combined analysis
         combined = build_combined_analysis(
             airport_reports,
@@ -251,6 +265,10 @@ async def generate_report(lat: float, lng: float, elev: float = 0, db: AsyncSess
             (forest_zone_type, forest_zone_dict) if forest_zone_type else None,
             inner_zone_reports,
             (inner_zone_type, inner_zone_dict) if inner_zone_type else None
+        )
+        logger.info(
+            "Combined feasibility for lat=%s lng=%s: %s (min_height=%s)",
+            lat, lng, combined.get("feasibility"), combined.get("min_height"),
         )
         report.append(combined)
     
@@ -269,7 +287,8 @@ async def generate_report(lat: float, lng: float, elev: float = 0, db: AsyncSess
     # Add nearest airport data if no airport zones were found
     if nearest_airport_data:
         report.append(nearest_airport_data)
-    
+
+    logger.info("Report generation complete for lat=%s lng=%s: %d section(s)", lat, lng, len(report))
     return JSONResponse(content=report)
 
 
@@ -280,16 +299,17 @@ async def get_nearest_airport_data(lat: float, lng: float, elev: float = 0, db: 
             "lat": lat,
             "lon": lng
         })
-        
+
         row = result.fetchall()
-        
+
         if not row:
+            logger.warning("Nearest airport query returned no rows for lat=%s lng=%s", lat, lng)
             return None
-        
-    except Exception as e:
-        print(f"Error retrieving nearest airport: {str(e)}")
+
+    except Exception:
+        logger.exception("Error retrieving nearest airport for lat=%s lng=%s", lat, lng)
         return None
-    
+
     r = row[0]
     zone = "nearest"
     name = r[1]
@@ -304,7 +324,11 @@ async def get_nearest_airport_data(lat: float, lng: float, elev: float = 0, db: 
     
     # Use centralized autoSettle calculation
     autoSettle = calculate_autosettle(radio, distance_m)
-    
+    logger.info(
+        "Nearest airport for lat=%s lng=%s: name=%s distance_m=%.1f autoSettle=%s",
+        lat, lng, name, distance_m, autoSettle,
+    )
+
     return {
         "layer": "airport",
         "zone": zone,

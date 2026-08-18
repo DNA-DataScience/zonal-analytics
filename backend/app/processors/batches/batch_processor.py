@@ -3,11 +3,15 @@ import csv
 from datetime import datetime
 import os
 import io
+import logging
+import time
 from pathlib import Path
 from typing import List, Dict, Any, Tuple
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import text
 from fastapi import HTTPException
+
+logger = logging.getLogger(__name__)
 
 # Import feasibility analysis functions from centralized module
 from app.engine.feasibility_engine import (
@@ -55,10 +59,11 @@ async def get_batch_airport_zones(coordinates: List[Dict], db: AsyncSession) -> 
          AND ST_Intersects(z.geom3857, p.geom)
     """)
     
+    logger.debug("Batch airport zone query for %d coordinates", len(coordinates))
     result = await db.execute(query, {"points": points_json})
     rows = result.fetchall()
-    print(rows)
-    
+    logger.debug("Batch airport zone query returned %d matching rows", len(rows))
+
     results = []
     for row in rows:
         results.append({
@@ -69,7 +74,7 @@ async def get_batch_airport_zones(coordinates: List[Dict], db: AsyncSession) -> 
             "radio": row[4],
             "elevation": row[5]
         })
-    
+
     return results
 
 
@@ -106,11 +111,11 @@ async def get_batch_mod_zones(coordinates: List[Dict], db: AsyncSession) -> List
         AND ST_Intersects(z.geom3857, p.geom)
     """)
     
+    logger.debug("Batch MoD zone query for %d coordinates", len(coordinates))
     result = await db.execute(query, {"points": points_json})
     rows = result.fetchall()
-    
-    print(rows)
-    
+    logger.debug("Batch MoD zone query returned %d matching rows", len(rows))
+
     results = []
     for row in rows:
         results.append({
@@ -119,7 +124,7 @@ async def get_batch_mod_zones(coordinates: List[Dict], db: AsyncSession) -> List
             "name": row[2],
             "type": row[3]
         })
-    
+
     return results
 
 
@@ -154,8 +159,10 @@ async def get_batch_forest_zones(coordinates: List[Dict], db: AsyncSession) -> L
                  AND ST_Intersects(z.geom3857, p.geom)
         """)
 
+        logger.debug("Batch forest zone query for %d coordinates", len(coordinates))
         result = await db.execute(query, {"points": points_json})
         rows = result.fetchall()
+        logger.debug("Batch forest zone query returned %d matching rows", len(rows))
 
         results = []
         for row in rows:
@@ -203,8 +210,10 @@ async def get_batch_inner_zones(coordinates: List[Dict], db: AsyncSession) -> Li
          AND ST_Intersects(z.geom3857, p.geom)
     """)
 
+    logger.debug("Batch inner zones query for %d coordinates", len(coordinates))
     result = await db.execute(query, {"points": points_json})
     rows = result.fetchall()
+    logger.debug("Batch inner zones query returned %d matching rows", len(rows))
 
     results = []
     for row in rows:
@@ -284,7 +293,8 @@ def save_batch_to_csv(
     
     csv_content = output.getvalue()
     output.close()
-    
+    logger.debug("CSV built: %d rows, timestamp=%s", len(feasibility_results), timestamp)
+
     return csv_content, timestamp
 
 
@@ -308,19 +318,29 @@ async def generate_batch_report(coordinates: List[Dict], db: AsyncSession) -> Di
     Raises:
         HTTPException: If batch size exceeds limits or database errors occur
     """
+    started = time.monotonic()
+    logger.info("Starting batch report generation for %d coordinates", len(coordinates))
+
     # Validate batch size
     if len(coordinates) > 100:
+        logger.warning("Batch request rejected: %d coordinates exceeds limit of 100", len(coordinates))
         raise HTTPException(status_code=400, detail="Maximum 100 coordinates per batch request")
     if len(coordinates) == 0:
+        logger.warning("Batch request rejected: no coordinates supplied")
         raise HTTPException(status_code=400, detail="At least 1 coordinate required")
-    
+
     try:
         # Execute both batch queries
         airport_zones = await get_batch_airport_zones(coordinates, db)
         mod_zones = await get_batch_mod_zones(coordinates, db)
         forest_zones = await get_batch_forest_zones(coordinates, db)
         inner_zones = await get_batch_inner_zones(coordinates, db)
+        logger.debug(
+            "Batch zone lookups complete: airport=%d mod=%d forest=%d inner_zones=%d matches",
+            len(airport_zones), len(mod_zones), len(forest_zones), len(inner_zones),
+        )
     except Exception as e:
+        logger.exception("Batch zone database query failed for %d coordinates", len(coordinates))
         raise HTTPException(status_code=500, detail=f"Database query failed: {str(e)}")
     
     # Group zones by coordinate ID
@@ -402,12 +422,23 @@ async def generate_batch_report(coordinates: List[Dict], db: AsyncSession) -> Di
         feasibility_results.append(result)
         summary_counts[color] += 1
     
+    logger.info(
+        "Batch feasibility summary for %d coordinates: green=%d yellow=%d red=%d",
+        len(coordinates), summary_counts["green"], summary_counts["yellow"], summary_counts["red"],
+    )
+
     # Generate CSV in memory
     try:
         csv_content, timestamp = save_batch_to_csv(coordinates, feasibility_results)
     except ValueError as e:
+        logger.exception("CSV generation failed for %d coordinates", len(coordinates))
         raise HTTPException(status_code=500, detail=f"CSV generation failed: {str(e)}")
-    
+
+    logger.info(
+        "Batch report generation complete for %d coordinates in %.3fs",
+        len(coordinates), time.monotonic() - started,
+    )
+
     # Return CSV content for streaming
     return {
         "csv_content": csv_content,

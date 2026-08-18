@@ -8,7 +8,10 @@ Can be imported by batch_processor.py, report_processor.py, or any other modules
 zone analysis capabilities.
 """
 
+import logging
 from typing import List, Dict, Optional, Tuple
+
+logger = logging.getLogger(__name__)
 
 # ============================================================================
 # LAYER CONFIGURATION - Modular structure for zone layers
@@ -120,9 +123,10 @@ def find_most_restrictive_zone(
     """
     if not zones:
         return None, None
-    
+
     config = LAYER_CONFIG.get(layer_key)
     if not config:
+        logger.warning("Unknown layer_key=%s passed to find_most_restrictive_zone", layer_key)
         return None, None
 
     def get_zone_value(zone: Dict) -> Optional[str]:
@@ -136,15 +140,24 @@ def find_most_restrictive_zone(
         for special_type in config["special_handlers"]:
             for zone in zones:
                 if get_zone_value(zone) == special_type:
+                    logger.debug(
+                        "Layer=%s: special handler %s matched (%d candidate zones)",
+                        layer_key, special_type, len(zones),
+                    )
                     return special_type, zone
 
     # Find by priority order
     for priority_zone in config["priority_order"]:
         for zone in zones:
             if get_zone_value(zone) == priority_zone:
+                logger.debug(
+                    "Layer=%s: most restrictive zone=%s (%d candidate zones)",
+                    layer_key, priority_zone, len(zones),
+                )
                 return priority_zone, zone
-    
+
     # No zones found matching priority
+    logger.debug("Layer=%s: %d candidate zones present but none matched priority order", layer_key, len(zones))
     return None, None
 
 
@@ -191,15 +204,21 @@ def determine_feasibility(
         - color: "green", "yellow", or "red"
     """
     if inner_zone_type:
+        logger.debug("Feasibility=No (red): inner_zone_type=%s present", inner_zone_type)
         return ("No", "red")
 
     if forest_zone_type:
+        logger.debug("Feasibility=No (red): forest_zone_type=%s present", forest_zone_type)
         return ("No", "red")
 
     key = (airport_zone_type, mod_zone_type)
-    
+
     # Use rule lookup, default to permissive if rule not found
     result = FEASIBILITY_RULES.get(key, ("Yes", "green"))
+    if key not in FEASIBILITY_RULES:
+        logger.debug("No explicit feasibility rule for %s; defaulting to %s", key, result)
+    else:
+        logger.debug("Feasibility rule matched for %s -> %s", key, result)
     return result
 
 
@@ -621,7 +640,8 @@ def build_combined_analysis(
                 final_min_height = f"{max(numeric_heights):.1f}m"
             else:
                 final_min_height = min_heights[0]
-        except:
+        except Exception:
+            logger.warning("Failed to parse numeric min_height values from %s; defaulting to Not Applicable", min_heights, exc_info=True)
             final_min_height = "Not Applicable"
     else:
         final_min_height = "Not Required"

@@ -1,0 +1,56 @@
+[
+  {
+    "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestFeasibilityEngineResponseTime::test_determine_feasibility_average_call_latency",
+    "label": "determine_feasibility",
+    "value": 0.1784,
+    "unit": "us/call"
+  },
+  {
+    "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestFeasibilityEngineResponseTime::test_find_most_restrictive_zone_average_call_latency",
+    "label": "find_most_restrictive_airport_zone",
+    "value": 1.5894,
+    "unit": "us/call"
+  },
+  {
+    "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestFeasibilityEngineResponseTime::test_build_combined_analysis_with_large_zone_lists",
+    "label": "build_combined_analysis[1000 reports]",
+    "value": 0.3451,
+    "unit": "ms"
+  },
+  {
+    "nodeid": "exhaustive_tests/test_report_processor_exhaustive.py::TestGenerateReportResponseTime::test_response_time_with_no_intersecting_zones",
+    "label": "generate_report[no zones, nearest fallback]",
+    "value": 0.0674,
+    "unit": "ms"
+  },
+  {
+    "nodeid": "exhaustive_tests/test_report_processor_exhaustive.py::TestGenerateReportResponseTime::test_response_time_with_single_zone_per_layer",
+    "label": "generate_report[1 zone per layer]",
+    "value": 0.1012,
+    "unit": "ms"
+  },
+  {
+    "nodeid": "exhaustive_tests/test_report_processor_exhaustive.py::TestGenerateReportResponseTime::test_response_time_with_many_overlapping_zones",
+    "label": "generate_report[200 zones x 4 layers]",
+    "value": 3.1807,
+    "unit": "ms"
+  },
+  {
+    "nodeid": "exhaustive_tests/test_runway_processor_exhaustive.py::TestRunwayProcessorResponseTime::test_create_arc_wedge_latency",
+    "label": "create_arc_wedge",
+    "value": 0.4148,
+    "unit": "ms/call"
+  },
+  {
+    "nodeid": "exhaustive_tests/test_runway_processor_exhaustive.py::TestRunwayProcessorResponseTime::test_process_funnel_latency",
+    "label": "process_funnel",
+    "value": 1.1961,
+    "unit": "ms/call"
+  },
+  {
+    "nodeid": "exhaustive_tests/test_runway_processor_exhaustive.py::TestRunwayProcessorResponseTime::test_process_runway_geometry_latency_with_many_zones",
+    "label": "process_runway_geometry[30 rows]",
+    "value": 11.7842,
+    "unit": "ms"
+  }
+]

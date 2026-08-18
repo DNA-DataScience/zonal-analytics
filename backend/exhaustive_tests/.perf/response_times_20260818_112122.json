@@ -1,0 +1,959 @@
+{
+  "total_tests": 180,
+  "total_duration_ms": 1621.891,
+  "average_duration_ms": 9.011,
+  "slowest": [
+    {
+      "nodeid": "exhaustive_tests/test_runway_processor_exhaustive.py::TestRunwayProcessorResponseTime::test_create_arc_wedge_latency",
+      "duration_ms": 830.096,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_runway_processor_exhaustive.py::TestRunwayProcessorResponseTime::test_process_funnel_latency",
+      "duration_ms": 598.863,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestFeasibilityEngineResponseTime::test_find_most_restrictive_zone_average_call_latency",
+      "duration_ms": 32.22,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_runway_processor_exhaustive.py::TestRunwayProcessorResponseTime::test_process_runway_geometry_latency_with_many_zones",
+      "duration_ms": 16.135,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_runway_processor_exhaustive.py::TestProcessFunnel::test_returns_a_polygon_geometry",
+      "duration_ms": 7.401,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_runway_processor_exhaustive.py::TestProcessRunwayGeometryBusinessLogic::test_inserts_new_funnel_zone_when_none_exists",
+      "duration_ms": 6.809,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_runway_processor_exhaustive.py::TestProcessRunwayGeometryBusinessLogic::test_updates_existing_funnel_zone_instead_of_inserting",
+      "duration_ms": 6.12,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_runway_processor_exhaustive.py::TestProcessRunwayGeometryBusinessLogic::test_row_processing_order_affects_funnel_geometry_used_for_difference",
+      "duration_ms": 5.846,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_runway_processor_exhaustive.py::TestProcessRunwayGeometryBusinessLogic::test_malformed_geometry_bytes_triggers_rollback_and_returns_false",
+      "duration_ms": 5.64,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_report_processor_exhaustive.py::TestGenerateReportResponseTime::test_response_time_with_many_overlapping_zones",
+      "duration_ms": 5.411,
+      "outcome": "passed"
+    }
+  ],
+  "all_timings": [
+    {
+      "nodeid": "exhaustive_tests/test_runway_processor_exhaustive.py::TestRunwayProcessorResponseTime::test_create_arc_wedge_latency",
+      "duration_ms": 830.096,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_runway_processor_exhaustive.py::TestRunwayProcessorResponseTime::test_process_funnel_latency",
+      "duration_ms": 598.863,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestFeasibilityEngineResponseTime::test_find_most_restrictive_zone_average_call_latency",
+      "duration_ms": 32.22,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_runway_processor_exhaustive.py::TestRunwayProcessorResponseTime::test_process_runway_geometry_latency_with_many_zones",
+      "duration_ms": 16.135,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_runway_processor_exhaustive.py::TestProcessFunnel::test_returns_a_polygon_geometry",
+      "duration_ms": 7.401,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_runway_processor_exhaustive.py::TestProcessRunwayGeometryBusinessLogic::test_inserts_new_funnel_zone_when_none_exists",
+      "duration_ms": 6.809,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_runway_processor_exhaustive.py::TestProcessRunwayGeometryBusinessLogic::test_updates_existing_funnel_zone_instead_of_inserting",
+      "duration_ms": 6.12,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_runway_processor_exhaustive.py::TestProcessRunwayGeometryBusinessLogic::test_row_processing_order_affects_funnel_geometry_used_for_difference",
+      "duration_ms": 5.846,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_runway_processor_exhaustive.py::TestProcessRunwayGeometryBusinessLogic::test_malformed_geometry_bytes_triggers_rollback_and_returns_false",
+      "duration_ms": 5.64,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_report_processor_exhaustive.py::TestGenerateReportResponseTime::test_response_time_with_many_overlapping_zones",
+      "duration_ms": 5.411,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_runway_processor_exhaustive.py::TestProcessFunnel::test_different_runway_orientations_produce_different_funnel_bounds",
+      "duration_ms": 5.367,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestFeasibilityEngineResponseTime::test_determine_feasibility_average_call_latency",
+      "duration_ms": 4.19,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_runway_processor_exhaustive.py::TestProcessFunnel::test_funnel_is_centered_near_runway_centroid",
+      "duration_ms": 3.623,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_runway_processor_exhaustive.py::TestProcessRunwayGeometryRealisticSqlalchemyBehavior::test_realistic_sync_fetchall_causes_silent_failure",
+      "duration_ms": 3.567,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_runway_processor_exhaustive.py::TestProcessFunnel::test_funnel_has_nonzero_area",
+      "duration_ms": 3.252,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_runway_processor_exhaustive.py::TestProcessRunwayGeometryBusinessLogic::test_returns_true_and_commits_on_success",
+      "duration_ms": 2.687,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestFindMostRestrictiveZone::test_inner_zones_layer_reads_category_field_not_zone_field",
+      "duration_ms": 2.484,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_runway_processor_exhaustive.py::TestProcessRunwayGeometryBusinessLogic::test_db_execute_exception_triggers_rollback_and_returns_false",
+      "duration_ms": 2.364,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_runway_processor_exhaustive.py::TestProcessFunnel::test_funnel_extends_roughly_30km_from_center_in_each_direction",
+      "duration_ms": 2.32,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_runway_processor_exhaustive.py::TestProcessRunwayGeometryBusinessLogic::test_non_funnel_non_inner_zone_gets_funnel_geometry_subtracted",
+      "duration_ms": 2.285,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_runway_processor_exhaustive.py::TestCreateArcWedge::test_returns_a_polygon",
+      "duration_ms": 2.276,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_report_processor_exhaustive.py::TestGenerateReportErrorHandling::test_inner_zones_query_failure_raises_500",
+      "duration_ms": 1.693,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_report_processor_exhaustive.py::TestGenerateReportOrderingAndContent::test_query_params_include_lat_and_lon_for_every_call",
+      "duration_ms": 1.634,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_report_processor_exhaustive.py::TestGenerateReportNoResultsAndFallback::test_all_empty_and_no_nearest_airport_returns_no_results_status",
+      "duration_ms": 1.567,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_report_processor_exhaustive.py::TestGetNearestAirportData::test_ifr_autosettle_yes_beyond_56km",
+      "duration_ms": 1.323,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_runway_processor_exhaustive.py::TestCreateArcWedge::test_default_steps_parameter_is_100",
+      "duration_ms": 1.273,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_report_processor_exhaustive.py::TestGenerateReportOrderingAndContent::test_combined_is_first_followed_by_airport_mod_forest_inner",
+      "duration_ms": 1.27,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_report_processor_exhaustive.py::TestGetNearestAirportData::test_vfr_autosettle_yes_beyond_20km",
+      "duration_ms": 1.269,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_report_processor_exhaustive.py::TestGetNearestAirportData::test_returns_none_on_database_exception_instead_of_raising",
+      "duration_ms": 1.254,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_report_processor_exhaustive.py::TestGenerateReportNoResultsAndFallback::test_all_empty_falls_back_to_nearest_airport",
+      "duration_ms": 1.155,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestFindMostRestrictiveZone::test_airport_priority_order_picks_most_restrictive[present_order1-funnel]",
+      "duration_ms": 1.082,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestDetermineFeasibility::test_every_declared_rule_matches_lookup_table[key26-expected26]",
+      "duration_ms": 1.02,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_report_processor_exhaustive.py::TestGenerateReportErrorHandling::test_mod_query_failure_raises_500",
+      "duration_ms": 1.008,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_runway_processor_exhaustive.py::TestCreateArcWedge::test_point_count_matches_steps_plus_two",
+      "duration_ms": 1.0,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_report_processor_exhaustive.py::TestGenerateReportErrorHandling::test_airport_query_failure_raises_500",
+      "duration_ms": 0.969,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestDetermineFeasibility::test_every_declared_rule_matches_lookup_table[key7-expected7]",
+      "duration_ms": 0.946,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestFeasibilityEngineResponseTime::test_build_combined_analysis_with_large_zone_lists",
+      "duration_ms": 0.941,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestFindMostRestrictiveZone::test_unknown_layer_key_returns_none_none",
+      "duration_ms": 0.927,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_report_processor_exhaustive.py::TestGenerateReportOrderingAndContent::test_forest_row_without_name_defaults_to_unknown_forest",
+      "duration_ms": 0.892,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_runway_processor_exhaustive.py::TestCreateArcWedge::test_polygon_ring_starts_and_ends_at_center_point",
+      "duration_ms": 0.846,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_report_processor_exhaustive.py::TestGenerateReportErrorHandling::test_forest_query_failure_raises_500",
+      "duration_ms": 0.839,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_report_processor_exhaustive.py::TestGenerateReportOrderingAndContent::test_inner_zone_forces_not_feasible_combined_result",
+      "duration_ms": 0.732,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_runway_processor_exhaustive.py::TestCreateArcWedge::test_zero_radius_collapses_wedge_to_center_point",
+      "duration_ms": 0.715,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_report_processor_exhaustive.py::TestGetNearestAirportData::test_crz_value_is_passed_through",
+      "duration_ms": 0.703,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_report_processor_exhaustive.py::TestGenerateReportOrderingAndContent::test_elevation_parameter_flows_into_middle_zone_min_height",
+      "duration_ms": 0.684,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_report_processor_exhaustive.py::TestGetNearestAirportData::test_vfr_autosettle_no_within_20km",
+      "duration_ms": 0.682,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestLayerConfig::test_every_layer_has_required_keys[airport]",
+      "duration_ms": 0.681,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestBuildAirportZoneReport::test_outer_zone_is_feasible_no_height_required",
+      "duration_ms": 0.678,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestFindMostRestrictiveZone::test_airport_priority_order_picks_most_restrictive[present_order3-funnel]",
+      "duration_ms": 0.675,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestBuildAirportZoneReport::test_inner_zone_is_not_feasible_restricted",
+      "duration_ms": 0.675,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_report_processor_exhaustive.py::TestGenerateReportResponseTime::test_response_time_with_no_intersecting_zones",
+      "duration_ms": 0.671,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestFindMostRestrictiveZone::test_inner_zones_priority_order_among_categories",
+      "duration_ms": 0.66,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_runway_processor_exhaustive.py::TestCreateArcWedge::test_full_360_arc_width_produces_nonzero_area",
+      "duration_ms": 0.648,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_report_processor_exhaustive.py::TestGenerateReportOrderingAndContent::test_multiple_airport_rows_use_most_restrictive_for_combined",
+      "duration_ms": 0.622,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_report_processor_exhaustive.py::TestGenerateReportOrderingAndContent::test_only_airport_zone_produces_correct_combined_feasibility",
+      "duration_ms": 0.591,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestGenerateNotes::test_generate_mod_note_known_types[SPECIAL_ALLOWED-specially allowed]",
+      "duration_ms": 0.586,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestFindMostRestrictiveZone::test_no_matching_priority_returns_none_none",
+      "duration_ms": 0.584,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_report_processor_exhaustive.py::TestGenerateReportOrderingAndContent::test_elevation_defaults_to_zero_when_omitted",
+      "duration_ms": 0.582,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestDetermineFeasibility::test_every_declared_rule_matches_lookup_table[key1-expected1]",
+      "duration_ms": 0.571,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_report_processor_exhaustive.py::TestGetNearestAirportData::test_crz_none_defaults_to_na_string",
+      "duration_ms": 0.569,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestDetermineFeasibility::test_every_declared_rule_matches_lookup_table[key3-expected3]",
+      "duration_ms": 0.565,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestCalculateAutosettle::test_ifr_below_threshold_is_no",
+      "duration_ms": 0.552,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_runway_processor_exhaustive.py::TestCreateArcWedge::test_arc_points_stay_within_radius_of_center",
+      "duration_ms": 0.547,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestGenerateNotes::test_generate_mod_note_known_types[NO_NOC-No NOC required from MoD]",
+      "duration_ms": 0.543,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestFindMostRestrictiveZone::test_mod_special_handler_overrides_priority_order[SPECIAL_ALLOWED]",
+      "duration_ms": 0.533,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestBuildCombinedAnalysis::test_min_height_bad_numeric_string_falls_back_to_not_applicable",
+      "duration_ms": 0.533,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_report_processor_exhaustive.py::TestGenerateReportNoResultsAndFallback::test_partial_results_does_not_trigger_nearest_airport_lookup",
+      "duration_ms": 0.531,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestCalculateAutosettle::test_radio_none_raises_typeerror",
+      "duration_ms": 0.519,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestDetermineFeasibility::test_every_declared_rule_matches_lookup_table[key21-expected21]",
+      "duration_ms": 0.514,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestFindMostRestrictiveZone::test_get_zone_value_fallback_branch_when_field_not_in_query_fields",
+      "duration_ms": 0.512,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_report_processor_exhaustive.py::TestGetNearestAirportData::test_returns_none_when_no_rows_found",
+      "duration_ms": 0.507,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestDetermineFeasibility::test_every_declared_rule_matches_lookup_table[key6-expected6]",
+      "duration_ms": 0.501,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestGenerateNotes::test_generate_airport_note_known_types[middle-NOC required in middle zone]",
+      "duration_ms": 0.501,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_report_processor_exhaustive.py::TestGenerateReportResponseTime::test_response_time_with_single_zone_per_layer",
+      "duration_ms": 0.5,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestDetermineFeasibility::test_every_declared_rule_matches_lookup_table[key2-expected2]",
+      "duration_ms": 0.497,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestBuildCombinedAnalysis::test_zone_counts_reflect_report_list_lengths",
+      "duration_ms": 0.488,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestLayerConfig::test_only_mod_layer_declares_special_handlers",
+      "duration_ms": 0.487,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestDetermineFeasibility::test_every_declared_rule_matches_lookup_table[key20-expected20]",
+      "duration_ms": 0.472,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestFormatZoneDescription::test_empty_dict_zone_dict_is_falsy_and_returns_no_zones_exist",
+      "duration_ms": 0.47,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestGenerateNotes::test_generate_mod_note_known_types[NOC-NOC required from MoD]",
+      "duration_ms": 0.466,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_runway_processor_exhaustive.py::TestCreateArcWedge::test_zero_arc_width_collapses_to_a_line",
+      "duration_ms": 0.461,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestDetermineFeasibility::test_unmapped_combination_defaults_to_yes_green",
+      "duration_ms": 0.439,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestBuildAirportZoneReport::test_middle_zone_computes_min_height_via_formula",
+      "duration_ms": 0.439,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestBuildModZoneReport::test_all_mod_zone_types[NO_WTG-No-Restricted]",
+      "duration_ms": 0.435,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestGenerateNotes::test_generate_airport_note_known_types[inner-No WTGs allowed in inner zone]",
+      "duration_ms": 0.422,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestDetermineFeasibility::test_every_declared_rule_matches_lookup_table[key24-expected24]",
+      "duration_ms": 0.402,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestDetermineFeasibility::test_every_declared_rule_matches_lookup_table[key16-expected16]",
+      "duration_ms": 0.397,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestFormatZoneDescription::test_formats_known_layer_with_name",
+      "duration_ms": 0.39,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestFindMostRestrictiveZone::test_airport_priority_order_picks_most_restrictive[present_order0-middle]",
+      "duration_ms": 0.389,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestBuildCombinedAnalysis::test_total_inner_zone_zones_present_when_tuple_supplied_even_if_reports_none",
+      "duration_ms": 0.388,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_report_processor_exhaustive.py::TestGetNearestAirportData::test_static_fields_are_always_the_same",
+      "duration_ms": 0.384,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestLayerConfig::test_every_layer_has_required_keys[inner_zones]",
+      "duration_ms": 0.383,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestGenerateCombinedNote::test_noc_feasibility_lists_middle_or_outer_airport_and_mod_noc",
+      "duration_ms": 0.38,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestBuildForestZoneReport::test_missing_name_defaults_to_unknown_forest",
+      "duration_ms": 0.377,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestDetermineFeasibility::test_every_declared_rule_matches_lookup_table[key25-expected25]",
+      "duration_ms": 0.374,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestFindMostRestrictiveZone::test_airport_priority_order_picks_most_restrictive[present_order2-inner]",
+      "duration_ms": 0.369,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestBuildModZoneReport::test_all_mod_zone_types[something_else-N/A-N/A]",
+      "duration_ms": 0.369,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestDetermineFeasibility::test_every_declared_rule_matches_lookup_table[key0-expected0]",
+      "duration_ms": 0.361,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestBuildCombinedAnalysis::test_contributing_restrictions_ordering_inner_airport_mod_forest",
+      "duration_ms": 0.361,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestGenerateCombinedNote::test_no_feasibility_single_reason_has_no_and_conjunction",
+      "duration_ms": 0.36,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestDetermineFeasibility::test_inner_zone_overrides_every_other_input",
+      "duration_ms": 0.356,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestDetermineFeasibility::test_every_declared_rule_matches_lookup_table[key4-expected4]",
+      "duration_ms": 0.355,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestDetermineFeasibility::test_forest_zone_overrides_airport_and_mod",
+      "duration_ms": 0.354,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestFindMostRestrictiveZone::test_mod_priority_order_without_special_handlers",
+      "duration_ms": 0.346,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestGenerateNotes::test_generate_mod_note_known_types[NO_WTG-No WTGs allowed in MoD restricted zone]",
+      "duration_ms": 0.342,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestLayerConfig::test_every_layer_has_required_keys[mod]",
+      "duration_ms": 0.341,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestDetermineFeasibility::test_every_declared_rule_matches_lookup_table[key10-expected10]",
+      "duration_ms": 0.337,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestBuildCombinedAnalysis::test_min_height_not_required_when_no_heights_and_feasible",
+      "duration_ms": 0.325,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestDetermineFeasibility::test_every_declared_rule_matches_lookup_table[key27-expected27]",
+      "duration_ms": 0.323,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestFindMostRestrictiveZone::test_duplicate_zone_types_returns_first_match_in_list_order",
+      "duration_ms": 0.32,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestBuildCombinedAnalysis::test_min_height_takes_max_of_numeric_values_with_m_suffix",
+      "duration_ms": 0.309,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestFindMostRestrictiveZone::test_airport_priority_order_picks_most_restrictive[present_order4-outer]",
+      "duration_ms": 0.306,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestBuildAirportZoneReport::test_funnel_zone_is_not_feasible_restricted",
+      "duration_ms": 0.306,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestDetermineFeasibility::test_every_declared_rule_matches_lookup_table[key5-expected5]",
+      "duration_ms": 0.305,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestFormatZoneDescription::test_missing_name_key_on_nonempty_dict_defaults_to_unknown",
+      "duration_ms": 0.296,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestDetermineFeasibility::test_every_declared_rule_matches_lookup_table[key11-expected11]",
+      "duration_ms": 0.295,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestBuildCombinedAnalysis::test_total_inner_zone_zones_present_when_reports_list_supplied",
+      "duration_ms": 0.295,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestDetermineFeasibility::test_every_declared_rule_matches_lookup_table[key13-expected13]",
+      "duration_ms": 0.294,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestDetermineFeasibility::test_every_declared_rule_matches_lookup_table[key29-expected29]",
+      "duration_ms": 0.294,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestDetermineFeasibility::test_every_declared_rule_matches_lookup_table[key14-expected14]",
+      "duration_ms": 0.293,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestDetermineFeasibility::test_every_declared_rule_matches_lookup_table[key22-expected22]",
+      "duration_ms": 0.293,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestCalcMinHeight::test_distance_exactly_4000_uses_base_45m_margin",
+      "duration_ms": 0.292,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestBuildCombinedAnalysis::test_min_height_falls_back_to_first_value_when_none_are_numeric",
+      "duration_ms": 0.292,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestFindMostRestrictiveZone::test_empty_zone_list_returns_none_none",
+      "duration_ms": 0.289,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestDetermineFeasibility::test_every_declared_rule_matches_lookup_table[key15-expected15]",
+      "duration_ms": 0.287,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestFindMostRestrictiveZone::test_forest_layer_only_recognizes_inner",
+      "duration_ms": 0.283,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestGenerateNotes::test_generate_mod_note_known_types[SPECIAL_LIMITED_HEIGHT-83.5m AGL]",
+      "duration_ms": 0.28,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestDetermineFeasibility::test_no_restrictions_at_all_defaults_permissive",
+      "duration_ms": 0.276,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestLayerConfig::test_every_layer_has_required_keys[forest]",
+      "duration_ms": 0.273,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestGenerateCombinedNote::test_no_feasibility_mod_reason_only_included_when_mod_is_no_wtg",
+      "duration_ms": 0.27,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestGenerateNotes::test_generate_airport_note_known_types[outer-Feasible in outer zone]",
+      "duration_ms": 0.265,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestDetermineFeasibility::test_every_declared_rule_matches_lookup_table[key9-expected9]",
+      "duration_ms": 0.26,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestGenerateCombinedNote::test_yes_feasibility_lists_mod_then_forest_then_airport",
+      "duration_ms": 0.258,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestBuildForestZoneReport::test_empty_string_name_also_defaults_to_unknown_forest",
+      "duration_ms": 0.257,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestBuildModZoneReport::test_all_mod_zone_types[SPECIAL_ALLOWED-Yes-Not Required]",
+      "duration_ms": 0.256,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestDetermineFeasibility::test_every_declared_rule_matches_lookup_table[key19-expected19]",
+      "duration_ms": 0.253,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestCalculateAutosettle::test_ifr_exactly_at_threshold_is_no",
+      "duration_ms": 0.249,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestBuildCombinedAnalysis::test_restricted_feasibility_forces_min_height_restricted",
+      "duration_ms": 0.248,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestBuildForestZoneReport::test_named_forest",
+      "duration_ms": 0.246,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestBuildCombinedAnalysis::test_note_field_matches_generate_combined_note_output",
+      "duration_ms": 0.246,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestDetermineFeasibility::test_every_declared_rule_matches_lookup_table[key17-expected17]",
+      "duration_ms": 0.238,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestBuildCombinedAnalysis::test_no_inputs_at_all_is_feasible_with_zero_counts",
+      "duration_ms": 0.237,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestCalculateAutosettle::test_vfr_just_above_threshold_is_yes",
+      "duration_ms": 0.231,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestBuildAirportZoneReport::test_cczm_value_is_passed_through",
+      "duration_ms": 0.23,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestDetermineFeasibility::test_every_declared_rule_matches_lookup_table[key12-expected12]",
+      "duration_ms": 0.219,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestGenerateNotes::test_generate_airport_note_unknown_type_returns_na",
+      "duration_ms": 0.219,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestFindMostRestrictiveZone::test_mod_special_handler_overrides_priority_order[SPECIAL_LIMITED_HEIGHT]",
+      "duration_ms": 0.215,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestFormatZoneDescription::test_both_none_returns_no_zones_exist",
+      "duration_ms": 0.213,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestGenerateCombinedNote::test_noc_feasibility_ignores_funnel_or_inner_airport_zone",
+      "duration_ms": 0.213,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestBuildModZoneReport::test_all_mod_zone_types[NOC-NOC-Not Applicable]",
+      "duration_ms": 0.212,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestCalcMinHeight::test_air_elev_accepts_numeric_string",
+      "duration_ms": 0.21,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestGenerateNotes::test_generate_airport_note_known_types[funnel-No WTGs allowed in funnel zone]",
+      "duration_ms": 0.209,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestBuildAirportZoneReport::test_cczm_none_defaults_to_na_string",
+      "duration_ms": 0.208,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestDetermineFeasibility::test_every_declared_rule_matches_lookup_table[key8-expected8]",
+      "duration_ms": 0.206,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestDetermineFeasibility::test_inner_zone_checked_before_forest_zone",
+      "duration_ms": 0.203,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestDetermineFeasibility::test_every_declared_rule_matches_lookup_table[key28-expected28]",
+      "duration_ms": 0.202,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestBuildAirportZoneReport::test_distance_and_autosettle_field_defaults",
+      "duration_ms": 0.202,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestCalculateAutosettle::test_unrecognized_radio_type_is_no_regardless_of_distance",
+      "duration_ms": 0.201,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestDetermineFeasibility::test_every_declared_rule_matches_lookup_table[key23-expected23]",
+      "duration_ms": 0.199,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestFindMostRestrictiveZone::test_mod_special_allowed_checked_before_special_limited_height",
+      "duration_ms": 0.198,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestCalculateAutosettle::test_radio_substring_match_for_ifr_variants",
+      "duration_ms": 0.198,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestBuildAirportZoneReport::test_unknown_zone_type_is_na",
+      "duration_ms": 0.195,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestCalcMinHeight::test_negative_result_is_clamped_to_zero",
+      "duration_ms": 0.192,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestBuildInnerZoneReport::test_missing_category_key_raises_keyerror",
+      "duration_ms": 0.19,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestBuildInnerZoneReport::test_missing_name_defaults_to_unknown_inner_zone",
+      "duration_ms": 0.184,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestFormatZoneDescription::test_unknown_layer_key_still_formats_using_zone_type_and_name",
+      "duration_ms": 0.183,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestCalculateAutosettle::test_vfr_below_threshold_is_no",
+      "duration_ms": 0.183,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestCalcMinHeight::test_result_is_capped_at_300",
+      "duration_ms": 0.182,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestGenerateCombinedNote::test_yes_feasibility_with_no_zones_mentioned",
+      "duration_ms": 0.182,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestBuildModZoneReport::test_all_mod_zone_types[NO_NOC-Yes-Not Required]",
+      "duration_ms": 0.182,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestGenerateCombinedNote::test_no_feasibility_lists_all_active_reasons",
+      "duration_ms": 0.178,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestGenerateNotes::test_generate_mod_note_unknown_type_returns_na",
+      "duration_ms": 0.177,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestCalculateAutosettle::test_vfr_exactly_at_threshold_is_no",
+      "duration_ms": 0.176,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestFormatZoneDescription::test_none_zone_dict_returns_no_zones_exist",
+      "duration_ms": 0.174,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestBuildModZoneReport::test_all_mod_zone_types[SPECIAL_LIMITED_HEIGHT-Yes-83.5m AGL]",
+      "duration_ms": 0.174,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestCalcMinHeight::test_matches_documented_formula",
+      "duration_ms": 0.17,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestBuildInnerZoneReport::test_named_inner_zone",
+      "duration_ms": 0.169,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestFormatZoneDescription::test_none_zone_type_returns_no_zones_exist",
+      "duration_ms": 0.167,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestDetermineFeasibility::test_every_declared_rule_matches_lookup_table[key18-expected18]",
+      "duration_ms": 0.166,
+      "outcome": "passed"
+    },
+    {
+      "nodeid": "exhaustive_tests/test_feasibility_engine_exhaustive.py::TestCalculateAutosettle::test_ifr_just_above_threshold_is_yes",
+      "duration_ms": 0.148,
+      "outcome": "passed"
+    }
+  ]
+}

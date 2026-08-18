@@ -1,4 +1,5 @@
 import uuid
+import logging
 from datetime import datetime, timezone
 
 from fastapi import APIRouter, Depends, HTTPException
@@ -10,6 +11,7 @@ from app.db.connect_db import get_db
 
 
 router = APIRouter(tags=["feedback"])
+logger = logging.getLogger(__name__)
 
 
 class FeedbackRequest(BaseModel):
@@ -26,6 +28,7 @@ class FeedbackResponse(BaseModel):
 
 async def create_feedback_table(db: AsyncSession):
     """Create feedback table in GisDB schema if it does not exist."""
+    logger.info("Ensuring GisDB.feedback table and index exist")
     try:
         await db.execute(text('CREATE SCHEMA IF NOT EXISTS "GisDB";'))
         await db.execute(text('''
@@ -41,8 +44,10 @@ async def create_feedback_table(db: AsyncSession):
             ON "GisDB".feedback(created_at DESC);
         '''))
         await db.commit()
+        logger.info("GisDB.feedback table ready")
     except Exception:
         await db.rollback()
+        logger.exception("Failed to create GisDB.feedback table")
         raise
 
 
@@ -54,6 +59,10 @@ async def submit_feedback(
     """Store user feedback from frontend form."""
     feedback_id = str(uuid.uuid4())
     created_at = datetime.now(timezone.utc)
+    logger.info(
+        "POST /feedback name=%r message_length=%d feedback_id=%s",
+        request_body.name, len(request_body.message), feedback_id,
+    )
 
     try:
         await db.execute(text('''
@@ -66,8 +75,10 @@ async def submit_feedback(
             "created_at": created_at,
         })
         await db.commit()
+        logger.info("Feedback stored successfully feedback_id=%s", feedback_id)
     except Exception:
         await db.rollback()
+        logger.exception("Failed to store feedback feedback_id=%s", feedback_id)
         raise HTTPException(status_code=500, detail="Failed to store feedback")
 
     return FeedbackResponse(
