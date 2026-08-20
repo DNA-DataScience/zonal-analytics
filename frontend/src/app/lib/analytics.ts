@@ -115,11 +115,8 @@ class AnalyticsClient {
   private startHeartbeat(): void {
     if (this.heartbeatInterval) {
       clearInterval(this.heartbeatInterval);
+      this.heartbeatInterval = null;
     }
-
-    this.heartbeatInterval = setInterval(() => {
-      void this.sendHeartbeat();
-    }, 30000);
   }
 
   private stopHeartbeat(): void {
@@ -180,28 +177,9 @@ class AnalyticsClient {
     endpoint: string | null = null,
     metadata: EventMetadata = null,
   ): Promise<void> {
-    if (!this.sessionId) {
-      return;
-    }
-
-    try {
-      const response = await fetch(`${this.apiBaseUrl}/analytics/event`, {
-        method: "POST",
-        headers: this.getHeaders(),
-        body: JSON.stringify({
-          session_id: this.sessionId,
-          event_type: eventType,
-          endpoint,
-          metadata,
-        }),
-      });
-
-      if (!response.ok) {
-        console.warn("[Analytics] Failed to track event:", response.statusText);
-      }
-    } catch (error) {
-      console.error("[Analytics] Error tracking event:", error);
-    }
+    void eventType;
+    void endpoint;
+    void metadata;
   }
 
   getSessionId(): string | null {
@@ -240,4 +218,3 @@ export function getSessionId(): string | null {
 export function getAnonymousId(): string | null {
   return analyticsClient?.getAnonymousId() ?? null;
 }
-
