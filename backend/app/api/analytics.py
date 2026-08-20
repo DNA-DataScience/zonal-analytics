@@ -1,22 +1,16 @@
 import os
 import uuid
-import asyncio
 import logging
-import time
 from datetime import datetime, timezone
 from typing import Optional
 from fastapi import APIRouter, Depends, Request
 from pydantic import BaseModel
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import text
-from sqlalchemy.exc import DBAPIError, InterfaceError, OperationalError
-from app.db.connect_db import get_db, reset_db_pool_if_needed
+from app.db.connect_db import get_db
 
 router = APIRouter(prefix="/analytics", tags=["analytics"])
 logger = logging.getLogger(__name__)
-
-HEARTBEAT_RETRY_BUDGET_SECONDS = 12.0
-HEARTBEAT_RETRY_DELAYS_SECONDS = (0.5, 1.0, 2.0, 3.0)
 
 
 # Pydantic models
@@ -46,24 +40,6 @@ class EventRequest(BaseModel):
 
 class SessionStartResponse(BaseModel):
     session_id: str
-
-
-def _is_transient_db_error(exc: Exception) -> bool:
-    """Detect DB/network failures that are safe to retry for heartbeat writes."""
-    if isinstance(exc, (OSError, TimeoutError, OperationalError, InterfaceError, DBAPIError)):
-        return True
-
-    error_text = str(exc).lower()
-    transient_markers = (
-        "connect call failed",
-        "connection",
-        "timeout",
-        "could not connect",
-        "server closed",
-        "connection reset",
-        "temporarily unavailable",
-    )
-    return any(marker in error_text for marker in transient_markers)
 
 
 # Helper function to detect if request is from dev environment
@@ -199,58 +175,8 @@ async def heartbeat(
     request: Request,
     db: AsyncSession = Depends(get_db)
 ):
-    """Update session heartbeat with transient DB failure tolerance."""
-    started = time.monotonic()
-    attempts = 0
-    now = datetime.utcnow()
-
-    while True:
-        attempts += 1
-        try:
-            await db.execute(text("""
-                UPDATE analytics_sessions 
-                SET last_heartbeat_at = :now
-                WHERE id = :session_id AND anonymous_id = :anonymous_id
-            """), {
-                "now": now,
-                "session_id": request_body.session_id,
-                "anonymous_id": request_body.anonymous_id,
-            })
-
-            await db.commit()
-            return {
-                "status": "ok",
-                "persisted": True,
-                "attempts": attempts,
-            }
-        except Exception as exc:
-            await db.rollback()
-
-            if not _is_transient_db_error(exc):
-                raise
-
-            elapsed = time.monotonic() - started
-            next_delay = HEARTBEAT_RETRY_DELAYS_SECONDS[min(attempts - 1, len(HEARTBEAT_RETRY_DELAYS_SECONDS) - 1)]
-            if elapsed + next_delay > HEARTBEAT_RETRY_BUDGET_SECONDS:
-                pool_reset_triggered = await reset_db_pool_if_needed()
-                logger.warning(
-                    "Heartbeat persisted=false after transient DB failures",
-                    extra={
-                        "event": "analytics_heartbeat_db_fallback",
-                        "attempts": attempts,
-                        "elapsed_seconds": round(elapsed, 3),
-                        "pool_reset_triggered": pool_reset_triggered,
-                        "error": str(exc),
-                    },
-                )
-                return {
-                    "status": "ok",
-                    "persisted": False,
-                    "degraded": True,
-                    "attempts": attempts,
-                }
-
-            await asyncio.sleep(next_delay)
+    """Heartbeat writes are intentionally disabled to reduce DB load."""
+    return {"status": "ok", "persisted": False, "disabled": True}
 
 
 @router.post("/session/end")
@@ -261,7 +187,7 @@ async def session_end(
 ):
     """End an analytics session"""
     try:
-        now = datetime.utcnow()
+        now = datetime.now(timezone.utc)
         
         # Get session to calculate duration
         result = await db.execute(text("""
@@ -310,29 +236,5 @@ async def event(
     request: Request,
     db: AsyncSession = Depends(get_db)
 ):
-    """Log an analytics event"""
-    try:
-        now = datetime.utcnow()
-        import json
-        
-        # Convert metadata to JSON string
-        metadata_json = json.dumps(request_body.metadata) if request_body.metadata else "{}"
-        
-        # Insert event
-        await db.execute(text("""
-            INSERT INTO analytics_events 
-            (session_id, event_type, endpoint, occurred_at, metadata)
-            VALUES (:session_id, :event_type, :endpoint, :occurred_at, :metadata)
-        """), {
-            "session_id": request_body.session_id,
-            "event_type": request_body.event_type,
-            "endpoint": request_body.endpoint,
-            "occurred_at": now,
-            "metadata": metadata_json,
-        })
-        
-        await db.commit()
-        return {"status": "ok"}
-    except Exception as e:
-        await db.rollback()
-        raise
+    """Event writes are intentionally disabled to reduce DB load."""
+    return {"status": "ok", "persisted": False, "disabled": True}

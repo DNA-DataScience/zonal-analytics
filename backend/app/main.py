@@ -34,17 +34,17 @@ from app.api.feedback import router as feedback_router, create_feedback_table
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Initialize app tables on startup"""
-    db = None
-    try:
-        from app.db.connect_db import AsyncSessionLocal
-        db = AsyncSessionLocal()
-        await create_tables(db)
-        await create_feedback_table(db)
-    except Exception as e:
-        print(f"Failed to create startup tables: {str(e)}")
-    finally:
-        if db:
-            await db.close()
+    # db = None
+    # try:
+    #     from app.db.connect_db import AsyncSessionLocal
+    #     # db = AsyncSessionLocal()
+    #     # await create_tables(db)
+    #     # await create_feedback_table(db)
+    # except Exception as e:
+    #     print(f"Failed to create startup tables: {str(e)}")
+    # finally:
+    #     # if db:
+    #     #     await db.close()
     yield
     # Shutdown logic here if needed (runs on app shutdown)
 
