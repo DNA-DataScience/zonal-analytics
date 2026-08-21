@@ -1,0 +1,205 @@
+
+=== DIRECTORY TREE (max depth 3, source files only) ===
+.idea
+.idea\.gitignore
+.idea\inspectionProfiles
+.idea\inspectionProfiles\Project_Default.xml
+.idea\IntelliLang.xml
+.idea\misc.xml
+.idea\modules.xml
+.idea\vcs.xml
+.idea\workspace.xml
+.idea\zonal-analytics.iml
+backend
+backend\.gitignore
+backend\.python-version
+backend\app
+backend\app\__init__.py
+backend\app\api
+backend\app\api\__init__.py
+backend\app\api\airport.py
+backend\app\api\analytics.py
+backend\app\api\feedback.py
+backend\app\api\points.py
+backend\app\api\tiles.py
+backend\app\db
+backend\app\db\__init__.py
+backend\app\db\connect_db.py
+backend\app\engine
+backend\app\engine\__init__.py
+backend\app\engine\feasibility_engine.py
+backend\app\main.py
+backend\app\processors
+backend\app\processors\__init__.py
+backend\app\processors\batches
+backend\app\processors\reports
+backend\data
+backend\data\Airports_Radio.pdf
+backend\data\data.geojson
+backend\data\in-airports.csv
+backend\data\India_States.cpg
+backend\data\India_States.dbf
+backend\data\India_States.prj
+backend\data\India_States.shp
+backend\data\India_States.shx
+backend\data\MoD Zones
+backend\data\MoD Zones\_extracted_kml
+backend\data\MoD Zones\AP.kmz
+backend\data\MoD Zones\GJ.kmz
+backend\data\MoD Zones\KA.kmz
+backend\data\MoD Zones\MH.kmz
+backend\data\MoD Zones\MP.kmz
+backend\data\MoD Zones\RJ.kmz
+backend\data\MoD Zones\TN.kmz
+backend\data\runway_funnel.json
+backend\db.env
+backend\env-Template
+backend\MoD_processor.ipynb
+backend\new_processor.ipynb
+backend\processor.ipynb
+backend\pyproject.toml
+backend\README.md
+backend\test_notebooks
+backend\test_notebooks\CMS.ipynb
+backend\test_notebooks\Forest.ipynb
+backend\test_notebooks\Forests_KMZ.ipynb
+backend\test_notebooks\reserve_forests_map.html
+backend\uv.lock
+backend\zones_preview.html
+docs
+docs\codebase
+docs\codebase\.codebase-scan.txt
+frontend
+frontend\.gitignore
+frontend\.idea
+frontend\.idea\.gitignore
+frontend\.idea\inspectionProfiles
+frontend\.idea\inspectionProfiles\Project_Default.xml
+frontend\.idea\map-overlay.iml
+frontend\.idea\modules.xml
+frontend\.idea\prettier.xml
+frontend\.idea\vcs.xml
+frontend\Dockerfile
+frontend\eslint.config.mjs
+frontend\next-env.d.ts
+frontend\next.config.ts
+frontend\package-lock.json
+frontend\package.json
+frontend\postcss.config.mjs
+frontend\public
+frontend\public\file.svg
+frontend\public\globe.svg
+frontend\public\next.svg
+frontend\public\vercel.svg
+frontend\public\window.svg
+frontend\README.md
+frontend\src
+frontend\src\app
+frontend\src\app\components
+frontend\src\app\favicon.ico
+frontend\src\app\globals.css
+frontend\src\app\layout.tsx
+frontend\src\app\lib
+frontend\src\app\page.tsx
+frontend\src\app\pages
+frontend\src\app\ui-theme.css
+frontend\src\middleware.ts
+frontend\tsconfig.json
+
+=== STACK DETECTION (manifest files) ===
+No recognized manifest files found in project root.
+
+=== ENTRY POINTS ===
+No common entry points found. Check 'main' or 'scripts.start' in manifest files above.
+
+=== LINTING AND FORMATTING CONFIG ===
+No linting or formatting config files found in project root.
+
+=== ENVIRONMENT VARIABLE TEMPLATES ===
+No .env.example or .env.template found. Identify required environment variables by searching the code and config for environment variable reads.
+
+=== TODO / FIXME / HACK (production code only, test dirs excluded) ===
+None found.
+
+=== GIT RECENT COMMITS (last 20) ===
+c920240 Merge pull request #3 from DNA-DataScience/suzman6-backend-app-refactor
+4ab1f24 Reorganize backend into app/ package
+6614847 feat: combine backend and frontend agenting branches into monorepo
+29c7cba chore: reorganize into frontend/ subdirectory
+231105f chore: reorganize into backend/ subdirectory
+7ed0c28 CCZM Link Updated
+9aa3a57 Improved UI changes
+6588616 Modified the sources button ui
+ad62f16 Merging the feedback api
+b3c6de0 Added feedbacks
+a36cafd Added middleware for basic login
+5b1dbe9 Fixed datetime error
+351955d Merged forest zones
+8eaa432 Fully integrated forests
+c746b74 Added points with geojson
+c77608d Points to geojson
+f44fa2e Added CMS Stations and WTG Sites API
+377e6ad Many Changes
+a6b7f72 Added analytics
+05759ba Fixing db issues
+
+=== HIGH-CHURN FILES (last 90 days, top 20) ===
+   4 src/app/lib/FeedbackButton.tsx
+   4 src/app/lib/Layerer.tsx
+   3 src/app/components/BatchProcessingControl.tsx
+   3 main.py
+   3 analytics_router.py
+   2 backend/pytest.ini
+   2 backend/tests/__init__.py
+   2 backend/tests/conftest.py
+   2 backend/tests/test_api_endpoints.py
+   2 backend/tests/test_app_config.py
+   2 backend/tests/test_cors_middleware.py
+   2 backend/tests/test_database.py
+   2 backend/tests/test_edge_cases.py
+   2 backend/tests/test_funnel_generation.py
+   2 backend/tests/test_performance.py
+   2 backend/tests/test_report_generator.py
+   2 backend/tests/test_report_processor.py
+   2 backend/tests/test_router.py
+   2 backend/tests/test_runway_processor.py
+   2 backend/tests/test_semaphore.py
+
+=== MONOREPO SIGNALS ===
+No monorepo signals detected.
+
+=== CODE METRICS ===
+Total files scanned: 102
+Total lines of code: 13273
+
+Files by language:
+  Other: 62
+  TypeScript/React: 18
+  Python: 17
+  TypeScript: 5
+
+Top 10 largest files:
+backend\data\India_States.shp: 16741.0KB
+backend\test_notebooks\reserve_forests_map.html: 7847.0KB
+backend\zones_preview.html: 1113.4KB
+backend\data\MoD Zones\_extracted_kml\GJ.kml: 717.3KB
+backend\test_notebooks\Forest.ipynb: 432.0KB
+backend\uv.lock: 394.1KB
+backend\processor.ipynb: 346.0KB
+backend\data\MoD Zones\GJ.kmz: 265.3KB
+frontend\package-lock.json: 231.1KB
+backend\data\Airports_Radio.pdf: 225.5KB
+
+=== CI/CD PIPELINES ===
+No CI/CD pipelines detected.
+
+=== CONTAINERS & ORCHESTRATION ===
+No containerization configs detected.
+
+=== SECURITY & COMPLIANCE ===
+No security configs detected.
+
+=== PERFORMANCE & TESTING ===
+No performance testing configs detected.
+
+=== SCAN COMPLETE ===

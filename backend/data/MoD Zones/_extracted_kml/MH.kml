@@ -1,0 +1,2015 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>MH-Updation.kmz</name>
+	<StyleMap id="msn_ylw-pushpin">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_ylw-pushpin0</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_ylw-pushpin</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="msn_ylw-pushpin0">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_ylw-pushpin</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_ylw-pushpin0</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="sh_ylw-pushpin">
+		<IconStyle>
+			<scale>1.3</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<BalloonStyle>
+		</BalloonStyle>
+		<LineStyle>
+			<color>ff000000</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>ffffff00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="sh_ylw-pushpin0">
+		<IconStyle>
+			<scale>1.3</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0</scale>
+		</LabelStyle>
+		<BalloonStyle>
+		</BalloonStyle>
+		<LineStyle>
+			<color>ffff5500</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>ff000000</color>
+			<fill>0</fill>
+		</PolyStyle>
+	</Style>
+	<Style id="sn_ylw-pushpin">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0</scale>
+		</LabelStyle>
+		<BalloonStyle>
+		</BalloonStyle>
+		<LineStyle>
+			<color>ffff5500</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>ff000000</color>
+			<fill>0</fill>
+		</PolyStyle>
+	</Style>
+	<Style id="sn_ylw-pushpin0">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<BalloonStyle>
+		</BalloonStyle>
+		<LineStyle>
+			<color>ff000000</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>ffffff00</color>
+		</PolyStyle>
+	</Style>
+	<Folder>
+		<name>MH</name>
+		<Placemark>
+			<name>Block A</name>
+			<styleUrl>#msn_ylw-pushpin0</styleUrl>
+			<Polygon>
+				<tessellate>1</tessellate>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							75.49000053382052,18.57002154942133,0 75.55000294979006,18.57002128452695,0 75.54999807241205,18.92999034230028,0 75.48001580508752,18.94002199910192,0 75.49000053382052,18.57002154942133,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Block B</name>
+			<styleUrl>#msn_ylw-pushpin</styleUrl>
+			<Polygon>
+				<tessellate>1</tessellate>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							75.2399963616777,18.86002196657979,0 75.25002113278342,18.83002949880356,0 75.39997067082656,18.73999562962851,0 75.41999439568343,18.77003627415881,0 75.38000699618267,18.91000612711632,0 75.2399963616777,18.86002196657979,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Document id="Ahmednagar" xsi:schemaLocation="http://www.opengis.net/kml/2.2 http://schemas.opengis.net/kml/2.2.0/ogckml22.xsd http://www.google.com/kml/ext/2.2 http://code.google.com/apis/kml/schema/kml22gx.xsd">
+			<name>Ahmednagar</name>
+			<Snippet maxLines="0"></Snippet>
+			<Style id="PolyStyle00">
+				<LabelStyle>
+					<color>00000000</color>
+					<scale>0</scale>
+				</LabelStyle>
+				<LineStyle>
+					<color>ff000000</color>
+					<width>2</width>
+				</LineStyle>
+				<PolyStyle>
+					<color>00f0f0f0</color>
+				</PolyStyle>
+			</Style>
+			<Folder id="FeatureLayer0">
+				<name>Ahmednagar</name>
+				<Snippet maxLines="0"></Snippet>
+				<Placemark id="ID_00000">
+					<name>0</name>
+					<Snippet maxLines="0"></Snippet>
+					<description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+
+<head>
+
+<META http-equiv="Content-Type" content="text/html">
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+</head>
+
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+
+<td>0</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+
+<tr>
+
+<td>FID</td>
+
+<td>0</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>Id</td>
+
+<td>0</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</body>
+
+</html>]]></description>
+					<styleUrl>#PolyStyle00</styleUrl>
+					<MultiGeometry>
+						<Polygon>
+							<outerBoundaryIs>
+								<LinearRing>
+									<coordinates>
+										74.33250000000004,19.15083333333331,0 74.67177579076463,19.1361623600036,0 74.68250000000012,19.38416666666677,0 74.34322420923553,19.39883763999643,0 74.33250000000004,19.15083333333331,0 
+									</coordinates>
+								</LinearRing>
+							</outerBoundaryIs>
+						</Polygon>
+					</MultiGeometry>
+				</Placemark>
+			</Folder>
+		</Document>
+		<Document id="Ahmednagar_10NM" xsi:schemaLocation="http://www.opengis.net/kml/2.2 http://schemas.opengis.net/kml/2.2.0/ogckml22.xsd http://www.google.com/kml/ext/2.2 http://code.google.com/apis/kml/schema/kml22gx.xsd">
+			<name>Ahmednagar_10NM</name>
+			<Snippet maxLines="0"></Snippet>
+			<Style id="PolyStyle000">
+				<LabelStyle>
+					<color>00000000</color>
+					<scale>0</scale>
+				</LabelStyle>
+				<LineStyle>
+					<color>ff000000</color>
+					<width>2</width>
+				</LineStyle>
+				<PolyStyle>
+					<color>00f0f0f0</color>
+				</PolyStyle>
+			</Style>
+			<Folder id="FeatureLayer0">
+				<name>Ahmednagar_10NM</name>
+				<Snippet maxLines="0"></Snippet>
+				<Placemark id="ID_00000">
+					<name>19 13 03 074 35 37</name>
+					<Snippet maxLines="0"></Snippet>
+					<description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+
+<head>
+
+<META http-equiv="Content-Type" content="text/html">
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+</head>
+
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+
+<td>19 13 03 074 35 37</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+
+<tr>
+
+<td>NAME</td>
+
+<td>19 13 03 074 35 37</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>LAYER</td>
+
+<td>Unknown Point Feature</td>
+
+</tr>
+
+<tr>
+
+<td>BUFF_DIST</td>
+
+<td>10</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>ORIG_FID</td>
+
+<td>0</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</body>
+
+</html>]]></description>
+					<styleUrl>#PolyStyle000</styleUrl>
+					<MultiGeometry>
+						<Polygon>
+							<outerBoundaryIs>
+								<LinearRing>
+									<coordinates>
+										74.59361111126384,19.38492024167584,0 74.58546335155251,19.38474141958091,0 74.57733303329292,19.38420533820585,0 74.56923755926601,19.38331314418633,0 74.56119425670965,19.38206674678298,0 74.55322034134571,19.38046881428443,0 74.5453328778101,19.3785227668123,0 74.53754874547826,19.37623276912706,0 74.52988459979451,19.37360372343312,0 74.52235683719834,19.37064125409063,0 74.51498156005101,19.36735170131999,0 74.50777454066258,19.3637421059135,0 74.5007511889163,19.35982018945026,0 74.4939265189937,19.35559434350421,0 74.48731511699913,19.35107360985927,0 74.48093110768451,19.34626765982472,0 74.47478812657084,19.34118677175218,0 74.46889929116941,19.33584181394861,0 74.46327716950583,19.33024421769653,0 74.45793375763685,19.32440595387175,0 74.45288045087216,19.31833950506416,0 74.44812802039189,19.31205784129639,0 74.44368659166292,19.30557439214454,0 74.43956562015728,19.29890301616132,0 74.43577387426495,19.29205797029914,0 74.43231941640801,19.28505388472905,0 74.42920958415505,19.2779057241699,0 74.42645097583193,19.27062876000935,0 74.42404943793127,19.26323853882758,0 74.42201005162264,19.2557508437265,0 74.42033712196064,19.24818166735014,0 74.41903417248915,19.24054717051558,0 74.41810393175109,19.23286365523353,0 74.41754833328901,19.22514752333956,0 74.41736851204723,19.21741524411829,0 74.41756479807702,19.20968332012916,0 74.41813672013359,19.2019682494352,0 74.41908300567621,19.19428649412646,0 74.42040158356627,19.18665444074986,0 74.42208959036236,19.17908836973254,0 74.42414337571626,19.17160441491188,0 74.42655851136624,19.16421853835493,0 74.42932980013023,19.15694648539204,0 74.4324512875969,19.14980376033532,0 74.43591627471636,19.14280558870701,0 74.43971733488718,19.1359668857632,0 74.4438463265468,19.12930222591706,0 74.44829441385616,19.12282580856424,0 74.45305208198806,19.11655143470102,0 74.45810916320738,19.11049246915218,0 74.46345485215977,19.10466181808846,0 74.46907773464977,19.09907190204672,0 74.47496580922478,19.0937346235541,0 74.48110651235572,19.088661349142,0 74.48748674901429,19.08386288146687,0 74.49409291335735,19.07934943772642,0 74.50091092559882,19.07513062447879,0 74.50792625629174,19.07121542415257,0 74.51512396140174,19.06761216986581,0 74.52248870928656,19.06432853283559,0 74.53000481756834,19.06137149899553,0 74.53765628281127,19.05874736359999,0 74.54542681649446,19.05646171053957,0 74.55329988008543,19.05451940424717,0 74.56125871831523,19.0529245771076,0 74.56928639245308,19.05168062226295,0 74.57736582257473,19.05079018821664,0 74.58547981634052,19.05025516894096,0 74.59361111126384,19.05007670297749,0 74.60174240528784,19.05025516894096,0 74.60985639995295,19.05079018821664,0 74.61793582917522,19.05168062226295,0 74.62596350421239,19.0529245771076,0 74.63392234154287,19.05451940424717,0 74.64179540513391,19.05646171053957,0 74.64956593971641,19.05874736359999,0 74.65721740495934,19.06137149899553,0 74.66473351324112,19.06432853283559,0 74.67209826112588,19.06761216986581,0 74.67929596533656,19.07121542415257,0 74.68631129692886,19.07513062447879,0 74.69312930917033,19.07934943772642,0 74.69973547351333,19.08386288146687,0 74.70611570927264,19.088661349142,0 74.7122564133029,19.0937346235541,0 74.71814448787785,19.09907190204672,0 74.72376737036791,19.10466181808846,0 74.7291130593203,19.11049246915218,0 74.7341701396403,19.11655143470102,0 74.73892780867146,19.12282580856424,0 74.74337589508156,19.12930222591706,0 74.74750488674118,19.1359668857632,0 74.75130594781132,19.14280558870701,0 74.75477093493078,19.14980376033532,0 74.75789242239745,19.15694648539204,0 74.76066371116138,19.16421853835493,0 74.76307884681137,19.17160441491188,0 74.76513263216532,19.17908836973254,0 74.76682063896135,19.18665444074986,0 74.76813921685141,19.19428649412646,0 74.76908550239409,19.2019682494352,0 74.76965742445066,19.20968332012916,0 74.76985371048039,19.21741524411829,0 74.76967388833936,19.22514752333956,0 74.76911829077653,19.23286365523353,0 74.76818805003853,19.24054717051558,0 74.76688509966766,19.24818166735014,0 74.76521217090504,19.2557508437265,0 74.76317278459641,19.26323853882758,0 74.76077124669575,19.27062876000935,0 74.75801263837263,19.2779057241699,0 74.75490280611967,19.28505388472905,0 74.75144834826273,19.29205797029914,0 74.74765660237034,19.29890301616132,0 74.74353563086476,19.30557439214454,0 74.73909420213579,19.31205784129639,0 74.73434177165552,19.31833950506416,0 74.72928846399145,19.32440595387175,0 74.72394505212253,19.33024421769653,0 74.71832293135827,19.33584181394861,0 74.71243409595684,19.34118677175218,0 74.70629111484311,19.34626765982472,0 74.69990710552855,19.35107360985927,0 74.6932957026346,19.35559434350421,0 74.68647103361138,19.35982018945026,0 74.6794476818651,19.3637421059135,0 74.67224066247667,19.36735170131999,0 74.66486538443002,19.37064125409063,0 74.65733762183385,19.37360372343312,0 74.64967347615004,19.37623276912706,0 74.64188934471753,19.3785227668123,0 74.63400188118192,19.38046881428443,0 74.62602796581803,19.38206674678298,0 74.61798466326167,19.38331314418633,0 74.60988918833544,19.38420533820585,0 74.60175887007586,19.38474141958091,0 74.59361111126384,19.38492024167584,0 
+									</coordinates>
+								</LinearRing>
+							</outerBoundaryIs>
+						</Polygon>
+					</MultiGeometry>
+				</Placemark>
+			</Folder>
+		</Document>
+		<Document id="Beed" xsi:schemaLocation="http://www.opengis.net/kml/2.2 http://schemas.opengis.net/kml/2.2.0/ogckml22.xsd http://www.google.com/kml/ext/2.2 http://code.google.com/apis/kml/schema/kml22gx.xsd">
+			<name>Beed</name>
+			<Snippet maxLines="0"></Snippet>
+			<Style id="PolyStyle0000">
+				<LabelStyle>
+					<color>00000000</color>
+					<scale>0</scale>
+				</LabelStyle>
+				<LineStyle>
+					<color>ff000000</color>
+					<width>2</width>
+				</LineStyle>
+				<PolyStyle>
+					<color>00f0f0f0</color>
+				</PolyStyle>
+			</Style>
+			<Folder id="FeatureLayer0">
+				<name>Beed</name>
+				<Snippet maxLines="0"></Snippet>
+				<Placemark id="ID_00000">
+					<name>0</name>
+					<Snippet maxLines="0"></Snippet>
+					<description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+
+<head>
+
+<META http-equiv="Content-Type" content="text/html">
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+</head>
+
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+
+<td>0</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+
+<tr>
+
+<td>FID</td>
+
+<td>0</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>Id</td>
+
+<td>0</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</body>
+
+</html>]]></description>
+					<styleUrl>#PolyStyle0000</styleUrl>
+					<MultiGeometry>
+						<Polygon>
+							<outerBoundaryIs>
+								<LinearRing>
+									<coordinates>
+										75.16666666666669,19.13333333333344,0 75.16666666666669,18.35000000000002,0 75.55000000000013,18.35000000000002,0 75.55000000000013,19.13333333333344,0 75.16666666666669,19.13333333333344,0 
+									</coordinates>
+								</LinearRing>
+							</outerBoundaryIs>
+						</Polygon>
+					</MultiGeometry>
+				</Placemark>
+			</Folder>
+		</Document>
+		<Document id="Identified Wind Potential Blocks" xsi:schemaLocation="http://www.opengis.net/kml/2.2 http://schemas.opengis.net/kml/2.2.0/ogckml22.xsd http://www.google.com/kml/ext/2.2 http://code.google.com/apis/kml/schema/kml22gx.xsd">
+			<name>Identified Wind Potential Blocks</name>
+			<Snippet maxLines="0"></Snippet>
+			<Style id="PolyStyle001">
+				<LabelStyle>
+					<color>00000000</color>
+					<scale>0</scale>
+				</LabelStyle>
+				<LineStyle>
+					<color>ffe65c00</color>
+					<width>2</width>
+				</LineStyle>
+				<PolyStyle>
+					<color>00f0f0f0</color>
+				</PolyStyle>
+			</Style>
+			<Style id="PolyStyle0010">
+				<LabelStyle>
+					<color>00000000</color>
+					<scale>0</scale>
+				</LabelStyle>
+				<LineStyle>
+					<color>ffcbe600</color>
+					<width>2</width>
+				</LineStyle>
+				<PolyStyle>
+					<color>00f0f0f0</color>
+				</PolyStyle>
+			</Style>
+			<Style id="PolyStyle0011">
+				<LabelStyle>
+					<color>00000000</color>
+					<scale>0</scale>
+				</LabelStyle>
+				<LineStyle>
+					<color>ffcbe600</color>
+					<width>2</width>
+				</LineStyle>
+				<PolyStyle>
+					<color>00f0f0f0</color>
+				</PolyStyle>
+			</Style>
+			<StyleMap id="PolyStyle0012">
+				<Pair>
+					<key>normal</key>
+					<styleUrl>#PolyStyle0010</styleUrl>
+				</Pair>
+				<Pair>
+					<key>highlight</key>
+					<styleUrl>#PolyStyle0011</styleUrl>
+				</Pair>
+			</StyleMap>
+			<Folder id="FeatureLayer0">
+				<name>Identified Wind Potential Blocks</name>
+				<Snippet maxLines="0"></Snippet>
+				<Placemark id="ID_00000">
+					<name>Nashik</name>
+					<Snippet maxLines="0"></Snippet>
+					<description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+
+<head>
+
+<META http-equiv="Content-Type" content="text/html">
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+</head>
+
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+
+<td>Nashik</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+
+<tr>
+
+<td>FID</td>
+
+<td>0</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>SHAPE_Leng</td>
+
+<td>669836.946937</td>
+
+</tr>
+
+<tr>
+
+<td>SHAPE_Area</td>
+
+<td>27150283535.099998</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>Blocks</td>
+
+<td>Block 1</td>
+
+</tr>
+
+<tr>
+
+<td>Block_Name</td>
+
+<td>Nashik</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</body>
+
+</html>]]></description>
+					<styleUrl>#PolyStyle001</styleUrl>
+					<MultiGeometry>
+						<Polygon>
+							<outerBoundaryIs>
+								<LinearRing>
+									<coordinates>
+										74.92325872402169,19.56098353457658,0 74.96682524151748,21.3326885821209,0 73.6558497724827,21.3649256836506,0 73.61228325484728,19.59322063658316,0 74.92325872402169,19.56098353457658,0 
+									</coordinates>
+								</LinearRing>
+							</outerBoundaryIs>
+						</Polygon>
+					</MultiGeometry>
+				</Placemark>
+				<Placemark id="ID_00001">
+					<name>Beed</name>
+					<Snippet maxLines="0"></Snippet>
+					<description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+
+<head>
+
+<META http-equiv="Content-Type" content="text/html">
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+</head>
+
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+
+<td>Beed</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+
+<tr>
+
+<td>FID</td>
+
+<td>1</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>SHAPE_Leng</td>
+
+<td>544165.780296</td>
+
+</tr>
+
+<tr>
+
+<td>SHAPE_Area</td>
+
+<td>18390758911.400002</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>Blocks</td>
+
+<td>Block 3</td>
+
+</tr>
+
+<tr>
+
+<td>Block_Name</td>
+
+<td>Beed</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</body>
+
+</html>]]></description>
+					<styleUrl>#PolyStyle001</styleUrl>
+					<MultiGeometry>
+						<Polygon>
+							<outerBoundaryIs>
+								<LinearRing>
+									<coordinates>
+										75.19190123880398,19.14190121245736,0 75.20391944424864,17.81989854586512,0 76.38594650704073,17.83064424683,0 76.3739283009624,19.15264691262938,0 75.19190123880398,19.14190121245736,0 
+									</coordinates>
+								</LinearRing>
+							</outerBoundaryIs>
+						</Polygon>
+					</MultiGeometry>
+				</Placemark>
+				<Placemark id="ID_00002">
+					<name>Pune</name>
+					<Snippet maxLines="0"></Snippet>
+					<description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+
+<head>
+
+<META http-equiv="Content-Type" content="text/html">
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+</head>
+
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+
+<td>Pune</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+
+<tr>
+
+<td>FID</td>
+
+<td>2</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>SHAPE_Leng</td>
+
+<td>690009.709483</td>
+
+</tr>
+
+<tr>
+
+<td>SHAPE_Area</td>
+
+<td>29682141910.400002</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>Blocks</td>
+
+<td>Block 2</td>
+
+</tr>
+
+<tr>
+
+<td>Block_Name</td>
+
+<td>Pune</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</body>
+
+</html>]]></description>
+					<styleUrl>#PolyStyle0012</styleUrl>
+					<MultiGeometry>
+						<Polygon>
+							<outerBoundaryIs>
+								<LinearRing>
+									<coordinates>
+										73.48333484759883,19.53949213329795,0 73.49289222847801,18.06765556282855,0 75.20156624170095,18.07875084903422,0 75.19200886089398,19.55058741962494,0 73.48333484759883,19.53949213329795,0 
+									</coordinates>
+								</LinearRing>
+							</outerBoundaryIs>
+						</Polygon>
+					</MultiGeometry>
+				</Placemark>
+				<Placemark id="ID_00003">
+					<name>Kolhapur</name>
+					<Snippet maxLines="0"></Snippet>
+					<description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+
+<head>
+
+<META http-equiv="Content-Type" content="text/html">
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+</head>
+
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+
+<td>Kolhapur</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+
+<tr>
+
+<td>FID</td>
+
+<td>3</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>SHAPE_Leng</td>
+
+<td>564552.921941</td>
+
+</tr>
+
+<tr>
+
+<td>SHAPE_Area</td>
+
+<td>17624357005.099998</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>Blocks</td>
+
+<td>Block 4</td>
+
+</tr>
+
+<tr>
+
+<td>Block_Name</td>
+
+<td>Kolhapur</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</body>
+
+</html>]]></description>
+					<styleUrl>#PolyStyle001</styleUrl>
+					<MultiGeometry>
+						<Polygon>
+							<outerBoundaryIs>
+								<LinearRing>
+									<coordinates>
+										73.59079185374728,17.94912844944182,0 73.61174449620266,16.25196442209802,0 74.48214624219838,16.26271012317893,0 74.46119360008241,17.95987414938878,0 73.59079185374728,17.94912844944182,0 
+									</coordinates>
+								</LinearRing>
+							</outerBoundaryIs>
+						</Polygon>
+					</MultiGeometry>
+				</Placemark>
+				<Placemark id="ID_00004">
+					<name>Solapur</name>
+					<Snippet maxLines="0"></Snippet>
+					<description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+
+<head>
+
+<META http-equiv="Content-Type" content="text/html">
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+</head>
+
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+
+<td>Solapur</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+
+<tr>
+
+<td>FID</td>
+
+<td>4</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>SHAPE_Leng</td>
+
+<td>470836.114246</td>
+
+</tr>
+
+<tr>
+
+<td>SHAPE_Area</td>
+
+<td>13554027265</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>Blocks</td>
+
+<td>Block 5</td>
+
+</tr>
+
+<tr>
+
+<td>Block_Name</td>
+
+<td>Solapur</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</body>
+
+</html>]]></description>
+					<styleUrl>#PolyStyle001</styleUrl>
+					<MultiGeometry>
+						<Polygon>
+							<outerBoundaryIs>
+								<LinearRing>
+									<coordinates>
+										74.46517779520906,17.63715433128238,0 74.46542687840699,16.73451258637617,0 75.72943534936358,16.73486138768175,0 75.7291862671845,17.63750313265131,0 74.46517779520906,17.63715433128238,0 
+									</coordinates>
+								</LinearRing>
+							</outerBoundaryIs>
+						</Polygon>
+					</MultiGeometry>
+				</Placemark>
+			</Folder>
+		</Document>
+		<Document id="puneandNDAAirfeld_20km" xsi:schemaLocation="http://www.opengis.net/kml/2.2 http://schemas.opengis.net/kml/2.2.0/ogckml22.xsd http://www.google.com/kml/ext/2.2 http://code.google.com/apis/kml/schema/kml22gx.xsd">
+			<name>puneandNDAAirfeld_20km</name>
+			<Snippet maxLines="0"></Snippet>
+			<Style id="PolyStyle002">
+				<LabelStyle>
+					<color>00000000</color>
+					<scale>0</scale>
+				</LabelStyle>
+				<LineStyle>
+					<color>ff000000</color>
+					<width>2</width>
+				</LineStyle>
+				<PolyStyle>
+					<color>00f0f0f0</color>
+				</PolyStyle>
+			</Style>
+			<Folder id="FeatureLayer0">
+				<name>puneandNDAAirfeld_20km</name>
+				<Snippet maxLines="0"></Snippet>
+				<Placemark id="ID_00000">
+					<name>Pune Airfield</name>
+					<Snippet maxLines="0"></Snippet>
+					<description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+
+<head>
+
+<META http-equiv="Content-Type" content="text/html">
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+</head>
+
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+
+<td>Pune Airfield</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+
+<tr>
+
+<td>NAME</td>
+
+<td>Pune Airfield</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>LAYER</td>
+
+<td>Unknown Point Feature</td>
+
+</tr>
+
+<tr>
+
+<td>KML_FOLDER</td>
+
+<td>pune and nda Airfield</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>BUFF_DIST</td>
+
+<td>20</td>
+
+</tr>
+
+<tr>
+
+<td>ORIG_FID</td>
+
+<td>0</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</body>
+
+</html>]]></description>
+					<styleUrl>#PolyStyle002</styleUrl>
+					<MultiGeometry>
+						<Polygon>
+							<outerBoundaryIs>
+								<LinearRing>
+									<coordinates>
+										73.92027777759739,18.76346552331529,0 73.91182808579759,18.76328596557488,0 73.90339522301122,18.76274765118319,0 73.89499598497679,18.76185165123275,0 73.88664709998375,18.76059975087787,0 73.87836519559738,18.75899444393849,0 73.87016676268598,18.7570389257059,0 73.86206812574346,18.75473709114391,0 73.85408540961402,18.75209352499621,0 73.84623450351955,18.74911349099489,0 73.83853103408001,18.74580292196731,0 73.83099033113893,18.74216840994421,0 73.82362739718667,18.73821719177005,0 73.81645687858213,18.73395713291541,0 73.80949303497562,18.72939671398723,0 73.80274971053075,18.72454501274217,0 73.79624030964266,18.7194116861005,0 73.78997776366293,18.71400694946118,0 73.78397451291352,18.70834155871603,0 73.77824247610943,18.7024267868668,0 73.77279302967463,18.69627440244176,0 73.76763698256076,18.68989664431473,0 73.76278455826082,18.68330619922176,0 73.75824537322546,18.676516175681,0 73.75402841527921,18.66954007611366,0 73.75014203192927,18.66239177346165,0 73.74659390608394,18.65508547971115,0 73.74339104885786,18.647635720712,0 73.74053978068639,18.64005730290228,0 73.73804572233229,18.63236528902689,0 73.7359137795973,18.6245749648628,0 73.73414814062426,18.61670180954093,0 73.73275226060838,18.60876146407037,0 73.73172886269691,18.60076970166045,0 73.73107992539832,18.59274239444602,0 73.73080668617968,18.5846954847089,0 73.73090963337296,18.57664494890531,0 73.73138850977199,18.56860676978664,0 73.73224231353203,18.56059690492327,0 73.73346929637097,18.552631251631,0 73.73506697166346,18.54472561639415,0 73.73703211893718,18.53689568788576,0 73.7393607901684,18.52915699829691,0 73.74204831607699,18.52152489995422,0 73.74508932051577,18.51401453024641,0 73.74847772496707,18.50664078374524,0 73.75220676832777,18.49941828252776,0 73.75626901500311,18.49236134559965,0 73.76065637019536,18.48548396371399,0 73.76536010058823,18.47879976879432,0 73.77037084783643,18.47232200965306,0 73.77567864745168,18.46606352231373,0 73.78127295128576,18.46003670932674,0 73.78714264641604,18.4542535118901,0 73.79327607672963,18.44872538646746,0 73.79966106900321,18.44346328500268,0 73.80628495448713,18.4384776306382,0 73.81313459408631,18.43377829703081,0 73.82019640444059,18.42937459126443,0 73.82745638850156,18.42527523496415,0 73.834900155318,18.42148834451155,0 73.84251295780683,18.41802141755443,0 73.85027971253874,18.41488131951735,0 73.85818503661022,18.41207426741357,0 73.86621327552228,18.4096058163554,0 73.87434853105992,18.40748085505749,0 73.88257469816386,18.40570358874965,0 73.89087549101117,18.40427753557987,0 73.89923447898809,18.40320551851994,0 73.90763511546828,18.40248965996989,0 73.91606077468504,18.40213137546266,0 73.92449478050975,18.40213137546266,0 73.93292043972656,18.40248965996989,0 73.94132107710607,18.40320551851994,0 73.94968006418367,18.40427753557987,0 73.95798085703098,18.40570358874965,0 73.96620702413492,18.40748085505749,0 73.97434228057188,18.4096058163554,0 73.98237051858462,18.41207426741357,0 73.99027584355537,18.41488131951735,0 73.99804259828733,18.41802141755443,0 74.00565539987684,18.42148834451155,0 74.01309916759254,18.42527523496415,0 74.02035915075425,18.42937459126443,0 74.02742096200785,18.43377829703081,0 74.03427060070771,18.4384776306382,0 74.04089448619163,18.44346328500268,0 74.04727947846521,18.44872538646746,0 74.0534129087788,18.4542535118901,0 74.05928260390908,18.46003670932674,0 74.06487690774316,18.46606352231373,0 74.07018470735841,18.47232200965306,0 74.07519545460661,18.47879976879432,0 74.07989918499942,18.48548396371399,0 74.08428654109105,18.49236134559965,0 74.08834878686707,18.49941828252776,0 74.09207783022777,18.50664078374524,0 74.09546623557839,18.51401453024641,0 74.09850723911785,18.52152489995422,0 74.10119476592575,18.52915699829691,0 74.10352343625766,18.53689568788576,0 74.10548858353138,18.54472561639415,0 74.10708625972319,18.552631251631,0 74.10831324256213,18.56059690492327,0 74.10916704542285,18.56860676978664,0 74.1096459227212,18.57664494890531,0 74.10974886991448,18.5846954847089,0 74.10947562979652,18.59274239444602,0 74.10882669249793,18.60076970166045,0 74.10780329458646,18.60876146407037,0 74.1064074154699,18.61670180954093,0 74.10464177559754,18.6245749648628,0 74.10250983376187,18.63236528902689,0 74.10001577450845,18.64005730290228,0 74.09716450633698,18.647635720712,0 74.09396164911089,18.65508547971115,0 74.09041352416489,18.66239177346165,0 74.08652713991563,18.66954007611366,0 74.0823101828687,18.676516175681,0 74.07777099693402,18.68330619922176,0 74.07291857263408,18.68989664431473,0 74.06776252641953,18.69627440244176,0 74.06231307908541,18.7024267868668,0 74.05658104228132,18.70834155871603,0 74.05057779153191,18.71400694946118,0 74.0443152464515,18.7194116861005,0 74.03780584466404,18.72454501274217,0 74.03106252111849,18.72939671398723,0 74.02409867661271,18.73395713291541,0 74.01692815800817,18.73821719177005,0 74.00956522495522,18.74216840994421,0 74.00202452201415,18.74580292196731,0 73.99432105257455,18.74911349099489,0 73.98647014648014,18.75209352499621,0 73.97848742945138,18.75473709114391,0 73.9703887925088,18.7570389257059,0 73.96219036049678,18.75899444393849,0 73.95390845521109,18.76059975087787,0 73.94555957021805,18.76185165123275,0 73.93716033308294,18.76274765118319,0 73.92872747029656,18.76328596557488,0 73.92027777759739,18.76346552331529,0 
+									</coordinates>
+								</LinearRing>
+							</outerBoundaryIs>
+						</Polygon>
+					</MultiGeometry>
+				</Placemark>
+				<Placemark id="ID_00001">
+					<name>NDA Airfield</name>
+					<Snippet maxLines="0"></Snippet>
+					<description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+
+<head>
+
+<META http-equiv="Content-Type" content="text/html">
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+</head>
+
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+
+<td>NDA Airfield</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+
+<tr>
+
+<td>NAME</td>
+
+<td>NDA Airfield</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>LAYER</td>
+
+<td>Unknown Point Feature</td>
+
+</tr>
+
+<tr>
+
+<td>KML_FOLDER</td>
+
+<td>pune and nda Airfield</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>BUFF_DIST</td>
+
+<td>20</td>
+
+</tr>
+
+<tr>
+
+<td>ORIG_FID</td>
+
+<td>1</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</body>
+
+</html>]]></description>
+					<styleUrl>#PolyStyle002</styleUrl>
+					<MultiGeometry>
+						<Polygon>
+							<outerBoundaryIs>
+								<LinearRing>
+									<coordinates>
+										73.77944444430574,18.65346763262522,0 73.77100021049137,18.65328807398549,0 73.76257279579795,18.65274975689579,0 73.75417898247412,18.65185375244874,0 73.74583548981605,18.65060184579858,0 73.73755893189923,18.648996529866,0 73.72936579059882,18.64704100174089,0 73.72127237871734,18.64473915548768,0 73.71329481030733,18.64209557495087,0 73.70544896469801,18.63911552386236,0 73.69775045771752,18.63580493684839,0 73.6902146093168,18.63217040414088,0 73.68285641209383,18.62821916258434,0 73.67569050251473,18.62395907854869,0 73.66873113123677,18.61939863084217,0 73.66199213432958,18.61454689902024,0 73.65548690449708,18.60941353820425,0 73.64922836859438,18.60400876559208,0 73.64322895705078,18.59834333527675,0 73.63750058048748,18.5924285220587,0 73.63205460813373,18.5862760917683,0 73.62690184264596,18.57989828507783,0 73.62205250212133,18.57330778872353,0 73.6175161949165,18.56651770942477,0 73.61330190525877,18.55954155230086,0 73.60941797256146,18.55239318849488,0 73.60587207973276,18.54508682999324,0 73.60267122979349,18.53763700174631,0 73.59982174138031,18.53005851289009,0 73.59732922986012,18.52236642527038,0 73.59519860103467,18.51457602376456,0 73.59343403944939,18.50670278750368,0 73.59203899940036,18.49876235839616,0 73.59101620043737,18.49077050965133,0 73.59036762196826,18.48274311340401,0 73.59009450056078,18.47469611103674,0 73.59019732634562,18.46664548080435,0 73.59067584031783,18.45860720635756,0 73.59152904243143,18.45059724256873,0 73.59275518710228,18.44263148855242,0 73.59435178860423,18.43472575259148,0 73.59631563006235,18.42689571976172,0 73.5986427634528,18.41915692675082,0 73.60132852669022,18.41152472318748,0 73.60436754452661,18.40401424915831,0 73.60775374563889,18.39664039743644,0 73.61148036982325,18.38941779099832,0 73.61553998867959,18.38236074974884,0 73.61992451370543,18.37548326444113,0 73.62462521608091,18.36879896699878,0 73.62963274285687,18.36232110713343,0 73.63493713763887,18.3560625208687,0 73.64052785767456,18.35003561165422,0 73.64639379813531,18.3442523206881,0 73.65252331100208,18.33872410443394,0 73.65890422934677,18.33346191573486,0 73.6655238925137,18.32847617683416,0 73.67236917040094,18.32377676408646,0 73.67942648864158,18.319372982777,0 73.68668185828119,18.31527355543028,0 73.69412089826091,18.31148659842785,0 73.70172886779307,18.30801961121614,0 73.70949069693819,18.30487945832039,0 73.71739100998718,18.30207235585459,0 73.72541416143446,18.29960386072963,0 73.73354426475606,18.29747886076086,0 73.74176522298671,18.29570156297677,0 73.75006076199463,18.29427548372667,0 73.75841445925994,18.29320344688159,0 73.76680978074683,18.29248757484174,0 73.7752301096819,18.2921292849386,0 73.78365877892958,18.2921292849386,0 73.79207910786459,18.29248757484174,0 73.80047442935148,18.29320344688159,0 73.80882812751611,18.29427548372667,0 73.81712366562471,18.29570156297677,0 73.82534462475468,18.29747886076086,0 73.83347472807628,18.29960386072963,0 73.84149787952356,18.30207235585459,0 73.84939819257261,18.30487945832039,0 73.85716002081836,18.30801961121614,0 73.86476799124983,18.31148659842785,0 73.87220703033023,18.31527355543028,0 73.87946239996984,18.319372982777,0 73.88651971821048,18.32377676408646,0 73.89336499609777,18.32847617683416,0 73.89998466016397,18.33346191573486,0 73.90636557850871,18.33872410443394,0 73.91249509047611,18.3442523206881,0 73.91836103093686,18.35003561165422,0 73.92395175187193,18.3560625208687,0 73.92925614665393,18.36232110713343,0 73.93426367342983,18.36879896699878,0 73.93896437490605,18.37548326444113,0 73.94334889993183,18.38236074974884,0 73.94740851878817,18.38941779099832,0 73.95113514387185,18.39664039743644,0 73.95452134408481,18.40401424915831,0 73.9575603619212,18.41152472318748,0 73.96024612515862,18.41915692675082,0 73.96257325944845,18.42689571976172,0 73.96453710000719,18.43472575259148,0 73.96613370150919,18.44263148855242,0 73.96735984617999,18.45059724256873,0 73.96821304829359,18.45860720635756,0 73.96869156316518,18.46664548080435,0 73.96879438805064,18.47469611103674,0 73.96852126664322,18.48274311340401,0 73.96787268907337,18.49077050965133,0 73.96684989011038,18.49876235839616,0 73.96545484916203,18.50670278750368,0 73.96369028757675,18.51457602376456,0 73.9615596587513,18.52236642527038,0 73.95906714813043,18.53005851289009,0 73.95621765971725,18.53763700174631,0 73.95301680977798,18.54508682999324,0 73.94947091605002,18.55239318849488,0 73.94558698425197,18.55954155230086,0 73.94137269459424,18.56651770942477,0 73.93683638738941,18.57330778872353,0 73.93198704596546,18.57989828507783,0 73.92683428137707,18.5862760917683,0 73.92138830902331,18.5924285220587,0 73.91565993245996,18.59834333527675,0 73.90966052001704,18.60400876559208,0 73.90340198411434,18.60941353820425,0 73.89689675518116,18.61454689902024,0 73.89015775737465,18.61939863084217,0 73.88319838609669,18.62395907854869,0 73.87603247651765,18.62821916258434,0 73.86867428019394,18.63217040414088,0 73.86113843179322,18.63580493684839,0 73.85343992481273,18.63911552386236,0 73.84559407920347,18.64209557495087,0 73.83761650989408,18.64473915548768,0 73.82952309891192,18.64704100174089,0 73.82132995671219,18.648996529866,0 73.81305339879538,18.65060184579858,0 73.8047099061373,18.65185375244874,0 73.79631609371279,18.65274975689579,0 73.78788867812005,18.65328807398549,0 73.77944444430574,18.65346763262522,0 
+									</coordinates>
+								</LinearRing>
+							</outerBoundaryIs>
+						</Polygon>
+					</MultiGeometry>
+				</Placemark>
+			</Folder>
+		</Document>
+		<Document id="pune_and_nda_airfield_56km_NEW" xsi:schemaLocation="http://www.opengis.net/kml/2.2 http://schemas.opengis.net/kml/2.2.0/ogckml22.xsd http://www.google.com/kml/ext/2.2 http://code.google.com/apis/kml/schema/kml22gx.xsd">
+			<name>pune_and_nda_airfield_56km_NEW</name>
+			<Snippet maxLines="0"></Snippet>
+			<StyleMap id="PolyStyle003">
+				<Pair>
+					<key>normal</key>
+					<styleUrl>#PolyStyle005</styleUrl>
+				</Pair>
+				<Pair>
+					<key>highlight</key>
+					<styleUrl>#PolyStyle004</styleUrl>
+				</Pair>
+			</StyleMap>
+			<Style id="PolyStyle004">
+				<LabelStyle>
+					<color>00000000</color>
+					<scale>0</scale>
+				</LabelStyle>
+				<LineStyle>
+					<color>ffc5ff00</color>
+					<width>2</width>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffa2ff00</color>
+					<fill>0</fill>
+				</PolyStyle>
+			</Style>
+			<Style id="PolyStyle005">
+				<LabelStyle>
+					<color>00000000</color>
+					<scale>0</scale>
+				</LabelStyle>
+				<LineStyle>
+					<color>ffc5ff00</color>
+					<width>2</width>
+				</LineStyle>
+				<PolyStyle>
+					<color>ffa2ff00</color>
+					<fill>0</fill>
+				</PolyStyle>
+			</Style>
+			<Folder id="FeatureLayer0">
+				<name>pune_and_nda_airfield_56km_NEW</name>
+				<Snippet maxLines="0"></Snippet>
+				<Placemark id="ID_00000">
+					<name>Pune Airfield</name>
+					<Snippet maxLines="0"></Snippet>
+					<description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+
+<head>
+
+<META http-equiv="Content-Type" content="text/html">
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+</head>
+
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+
+<td>Pune Airfield</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+
+<tr>
+
+<td>FID</td>
+
+<td>0</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>NAME</td>
+
+<td>Pune Airfield</td>
+
+</tr>
+
+<tr>
+
+<td>LAYER</td>
+
+<td>Unknown Point Feature</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>KML_FOLDER</td>
+
+<td>pune and nda Airfield</td>
+
+</tr>
+
+<tr>
+
+<td>BUFF_DIST</td>
+
+<td>56</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>ORIG_FID</td>
+
+<td>0</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</body>
+
+</html>]]></description>
+					<styleUrl>#PolyStyle003</styleUrl>
+					<MultiGeometry>
+						<Polygon>
+							<outerBoundaryIs>
+								<LinearRing>
+									<coordinates>
+										73.9202777777778,19.08869465646747,0 73.90611221668127,19.08851483485516,0 73.89195678665226,19.08797549861476,0 73.877821611312,19.0870770334424,0 73.86371679939526,19.08582008184976,0 73.84965243732226,19.08420554269192,0 73.83563858178887,19.08223457050678,0 73.82168525238107,19.07990857466658,0 73.80780242421962,19.0772292183424,0 73.79400002064114,19.07419841728227,0 73.78028790592118,19.07081833840412,0 73.76667587804559,19.06709139820451,0 73.75317366153563,19.0630202609846,0 73.73979090033288,19.05860783689468,0 73.72653715074959,19.05385727979893,0 73.71342187448998,19.04877198496222,0 73.7004544317482,19.04335558656054,0 73.68764407438833,19.0376119550175,0 73.67499993921192,19.0315451941687,0 73.66253104131809,19.02515963825641,0 73.6502462675618,19.01845984875703,0 73.63815437011483,19.01145061104381,0 73.62626396013502,19.00413693088746,0 73.61458350154801,18.9965240307977,0 73.6031213049468,18.98861734620831,0 73.59188552161328,18.98042252150909,0 73.5808841376664,18.97194540592762,0 73.57012496834135,18.96319204926433,0 73.55961565240383,18.95416869748394,0 73.54936364670365,18.94488178816716,0 73.53937622087133,18.93533794582588,0 73.52966045216178,18.9255439770858,0 73.52022322044839,18.91550686574003,0 73.51107120337136,18.90523376767778,0 73.50221087164321,18.89473200569182,0 73.49364848451489,18.88400906416914,0 73.48539008540548,18.87307258366839,0 73.47744149769838,18.86193035538875,0 73.46980832070643,18.85059031553429,0 73.46249592580892,18.83906053957811,0 73.45550945276258,18.82734923643073,0 73.44885380618881,18.81546474251714,0 73.4425336522394,18.80341551576697,0 73.4365534154424,18.79121012952239,0 73.43091727573011,18.77885726636833,0 73.42562916565058,18.76636571188949,0 73.42069276776428,18.75374434835914,0 73.41611151222699,18.74100214836405,0 73.41188857456018,18.72814816837052,0 73.40802687360981,18.7151915422362,0 73.40452906969432,18.7021414746725,0 73.40139756294248,18.68900723466232,0 73.39863449182168,18.675798148838,0 73.39624173185692,18.66252359482433,0 73.39422089454075,18.64919299455131,0 73.3925733264343,18.63581580754167,0 73.39130010845918,18.62240152417787,0 73.39040205538008,18.6089596589535,0 73.3898797154779,18.59549974371378,0 73.38973337041267,18.5820313208901,0 73.38996303527558,18.56856393673338,0 73.39056845882989,18.55510713455091,0 73.39154912393909,18.54167044795162,0 73.39290424818184,18.52826339410438,0 73.39463278465244,18.5148954670141,0 73.39673342294543,18.50157613082028,0 73.39920459032314,18.48831481312277,0 73.40204445306445,18.4751208983391,0 73.40525091799357,18.46200372109833,0 73.40882163418675,18.44897255967556,0 73.41275399485522,18.43603662947191,0 73.41704513940257,18.42320507654424,0 73.42169195565441,18.41048697118908,0 73.42669108225826,18.39789130158498,0 73.43203891125142,18.38542696749788,0 73.43773159079458,18.37310277405335,0 73.4437650280687,18.36092742558017,0 73.45013489233276,18.34890951952919,0 73.45683661813972,18.33705754047168,0 73.46386540870819,18.32537985418093,0 73.47121623944687,18.31388470180137,0 73.47888386162921,18.3025801941086,0 73.48686280621523,18.29147430586462,0 73.4951473878175,18.28057487027147,0 73.50373170880863,18.2698895735274,0 73.51260966356674,18.25942594948868,0 73.5217749428559,18.24919137444084,0 73.5312210383386,18.23919306198265,0 73.54094124721655,18.22943805802605,0 73.55092867699683,18.21993323591548,0 73.56117625037984,18.21068529166953,0 73.57167671026556,18.20170073934816,0 73.58242262487485,18.19298590654837,0 73.5934063929821,18.18454693003121,0 73.60462024925559,18.17638975148302,0 73.6160562697021,18.16852011341346,0 73.62770637721194,18.1609435551931,0 73.63956234720094,18.15366540923295,0 73.6516158133452,18.14669079730853,0 73.66385827340537,18.14002462703063,0 73.67628109513612,18.13367158846508,0 73.68887552227739,18.12763615090378,0 73.70163268062315,18.12192255978873,0 73.71454358416406,18.11653483379138,0 73.72759914129986,18.11147676204885,0 73.7407901611176,18.10675190155884,0 73.75410735973188,18.10236357473499,0 73.76754136668269,18.09831486712405,0 73.78108273138722,18.09460862528632,0 73.79472192964131,18.09124745484086,0 73.80844937016657,18.0882337186765,0 73.82225540119904,18.08556953532984,0 73.83613031711538,18.08325677753123,0 73.85006436509212,18.08129707091974,0 73.86404775179449,18.07969179292778,0 73.87807065008982,18.07844207183617,0 73.89212320578224,18.07754878600016,0 73.90619554436368,18.07701256324703,0 73.9202777777778,18.07683378044549,0 73.93436001119191,18.07701256324703,0 73.94843234977336,18.07754878600016,0 73.96248490546577,18.07844207183617,0 73.97650780376111,18.07969179292778,0 73.99049119046347,18.08129707091974,0 74.00442523844022,18.08325677753123,0 74.01830015435655,18.08556953532984,0 74.03210618538903,18.0882337186765,0 74.04583362591428,18.09124745484086,0 74.05947282416838,18.09460862528632,0 74.0730141888729,18.09831486712405,0 74.08644819582372,18.10236357473499,0 74.09976539443799,18.10675190155884,0 74.11295641425573,18.11147676204885,0 74.12601197139153,18.11653483379138,0 74.13892287493245,18.12192255978873,0 74.15168003327821,18.12763615090378,0 74.16427446041948,18.13367158846509,0 74.17669728215023,18.14002462703063,0 74.18893974221039,18.14669079730853,0 74.20099320835466,18.15366540923295,0 74.21284917834366,18.1609435551931,0 74.2244992858535,18.16852011341346,0 74.23593530630001,18.17638975148302,0 74.24714916257349,18.18454693003121,0 74.25813293068074,18.19298590654837,0 74.26887884529003,18.20170073934816,0 74.27937930517575,18.21068529166953,0 74.28962687855876,18.21993323591548,0 74.29961430833905,18.22943805802605,0 74.309334517217,18.23919306198265,0 74.3187806126997,18.24919137444084,0 74.32794589198886,18.25942594948868,0 74.33682384674697,18.2698895735274,0 74.3454081677381,18.28057487027147,0 74.35369274934037,18.29147430586462,0 74.36167169392638,18.3025801941086,0 74.36933931610872,18.31388470180137,0 74.37669014684741,18.32537985418093,0 74.38371893741588,18.33705754047168,0 74.39042066322284,18.34890951952919,0 74.3967905274869,18.36092742558017,0 74.40282396476101,18.37310277405335,0 74.40851664430417,18.38542696749788,0 74.41386447329734,18.39789130158498,0 74.41886359990119,18.41048697118908,0 74.42351041615302,18.42320507654424,0 74.42780156070037,18.43603662947191,0 74.43173392136885,18.44897255967556,0 74.43530463756203,18.46200372109833,0 74.43851110249115,18.4751208983391,0 74.44135096523246,18.48831481312277,0 74.44382213261017,18.50157613082029,0 74.44592277090315,18.5148954670141,0 74.44765130737376,18.52826339410438,0 74.44900643161651,18.54167044795162,0 74.44998709672571,18.55510713455091,0 74.45059252028001,18.56856393673338,0 74.45082218514293,18.5820313208901,0 74.45067584007769,18.59549974371378,0 74.45015350017552,18.6089596589535,0 74.44925544709642,18.62240152417787,0 74.44798222912129,18.63581580754167,0 74.44633466101484,18.64919299455131,0 74.44431382369868,18.66252359482433,0 74.44192106373391,18.675798148838,0 74.43915799261312,18.68900723466232,0 74.43602648586128,18.7021414746725,0 74.43252868194578,18.7151915422362,0 74.42866698099542,18.72814816837052,0 74.42444404332861,18.74100214836405,0 74.41986278779132,18.75374434835914,0 74.41492638990502,18.76636571188949,0 74.40963827982549,18.77885726636832,0 74.40400214011319,18.79121012952239,0 74.39802190331619,18.80341551576697,0 74.39170174936679,18.81546474251714,0 74.38504610279301,18.82734923643074,0 74.37805962974667,18.83906053957811,0 74.37074723484916,18.85059031553429,0 74.36311405785722,18.86193035538875,0 74.35516547015011,18.87307258366839,0 74.3469070710407,18.88400906416914,0 74.33834468391238,18.89473200569182,0 74.32948435218424,18.90523376767778,0 74.32033233510721,18.91550686574003,0 74.31089510339382,18.9255439770858,0 74.30117933468426,18.93533794582588,0 74.29119190885194,18.94488178816715,0 74.28093990315176,18.95416869748394,0 74.27043058721425,18.96319204926433,0 74.25967141788919,18.97194540592763,0 74.24867003394232,18.98042252150909,0 74.2374342506088,18.98861734620831,0 74.22597205400758,18.9965240307977,0 74.21429159542058,19.00413693088746,0 74.20240118544076,19.01145061104381,0 74.1903092879938,19.01845984875704,0 74.17802451423751,19.02515963825641,0 74.16555561634368,19.0315451941687,0 74.15291148116727,19.0376119550175,0 74.1401011238074,19.04335558656054,0 74.12713368106562,19.04877198496222,0 74.114018404806,19.05385727979893,0 74.10076465522272,19.05860783689468,0 74.08738189401997,19.0630202609846,0 74.07387967751001,19.06709139820451,0 74.06026764963441,19.07081833840412,0 74.04655553491446,19.07419841728227,0 74.03275313133598,19.0772292183424,0 74.01887030317452,19.07990857466658,0 74.00491697376673,19.08223457050678,0 73.99090311823332,19.08420554269192,0 73.97683875616033,19.08582008184976,0 73.9627339442436,19.0870770334424,0 73.94859876890334,19.08797549861476,0 73.93444333887433,19.08851483485516,0 73.9202777777778,19.08869465646747,0 
+									</coordinates>
+								</LinearRing>
+							</outerBoundaryIs>
+						</Polygon>
+					</MultiGeometry>
+				</Placemark>
+				<Placemark id="ID_00001">
+					<name>NDA Airfield</name>
+					<Snippet maxLines="0"></Snippet>
+					<description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+
+<head>
+
+<META http-equiv="Content-Type" content="text/html">
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+</head>
+
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+
+<td>NDA Airfield</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+
+<tr>
+
+<td>FID</td>
+
+<td>1</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>NAME</td>
+
+<td>NDA Airfield</td>
+
+</tr>
+
+<tr>
+
+<td>LAYER</td>
+
+<td>Unknown Point Feature</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>KML_FOLDER</td>
+
+<td>pune and nda Airfield</td>
+
+</tr>
+
+<tr>
+
+<td>BUFF_DIST</td>
+
+<td>56</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>ORIG_FID</td>
+
+<td>1</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</body>
+
+</html>]]></description>
+					<styleUrl>#PolyStyle003</styleUrl>
+					<MultiGeometry>
+						<Polygon>
+							<outerBoundaryIs>
+								<LinearRing>
+									<coordinates>
+										73.77944444444445,18.97870060611124,0 73.76528820572062,18.97852078573772,0 73.75114209082794,18.97798145320579,0 73.73701621615821,18.97708299418747,0 73.72292068323061,18.97582605115443,0 73.70886557127066,18.97421152290595,0 73.69486092980719,18.97224056390845,0 73.68091677129365,18.96991458344732,0 73.66704306375968,18.96723524459167,0 73.65324972349877,18.96420446297278,0 73.63954660779814,18.96082440537744,0 73.62594350771657,18.95709748815714,0 73.61245014091611,18.95302637545442,0 73.59907614455329,18.94861397724808,0 73.58583106823585,18.94386344721837,0 73.57272436705006,18.93877818043445,0 73.55976539466489,18.93336181086552,0 73.54696339651788,18.92761820871792,0 73.53432750308828,18.92155147760025,0 73.52186672326303,18.91516595151886,0 73.50958993780026,18.90846619170603,0 73.4975058928957,18.90145698328353,0 73.48562319385699,18.89414333176409,0 73.47395029889044,18.8865304593938,0 73.46249551300522,18.87862380133804,0 73.45126698203958,18.87042900171435,0 73.44027268681343,18.86195190947517,0 73.4295204374116,18.8531985741437,0 73.41901786760221,18.84417524140647,0 73.40877242939395,18.83488834856586,0 73.39879138773635,18.8253445198563,0 73.38908181536679,18.81555056162782,0 73.37965058780777,18.80551345740068,0 73.37050437851812,18.79524036279492,0 73.36164965420122,18.78473860033888,0 73.35309267027374,18.77401565416064,0 73.34483946649752,18.76307916456653,0 73.33689586277782,18.75193692251085,0 73.32926745513039,18.74059686396109,0 73.32195961181998,18.72906706416299,0 73.31497746967285,18.71735573180974,0 73.30832593056522,18.70547120311985,0 73.30200965808979,18.69342193582813,0 73.29603307440266,18.68121650309437,0 73.29040035725168,18.66886358733417,0 73.28511543718841,18.6563719739768,0 73.28018199496495,18.64375054515455,0 73.27560345911677,18.63100827332827,0 73.27138300373286,18.61815421485404,0 73.26752354641415,18.60519750349548,0 73.26402774642082,18.5921473438866,0 73.26089800300947,18.57901300495003,0 73.25813645396039,18.56580381327536,0 73.25574497429537,18.55252914646244,0 73.25372517518647,18.53919842643449,0 73.25207840305551,18.5258211127258,0 73.25080573886432,18.51240669574899,0 73.24990799759577,18.49896469004647,0 73.24938572792479,18.4855046275311,0 73.24923921207936,18.47203605072072,0 73.24946846589047,18.45856850597146,0 73.25007323903053,18.44511153671458,0 73.25105301543938,18.43167467670156,0 73.25240701393656,18.41826744326221,0 73.25413418901928,18.40489933058059,0 73.25623323184423,18.39157980299326,0 73.2587025713924,18.37831828831461,0 73.261540375815,18.36512417119399,0 73.26474455395929,18.35200678650893,0 73.26831275707212,18.33897541279929,0 73.27224238068005,18.32603926574672,0 73.27653056664344,18.3132074917037,0 73.281174205383,18.30048916127691,0 73.28616993827632,18.28789326296899,0 73.29151416022272,18.27542869688308,0 73.29720302237337,18.2631042684944,0 73.30323243502492,18.25092868249303,0 73.30959807067396,18.23891053670197,0 73.31629536722953,18.22705831607463,0 73.3233195313815,18.21538038677558,0 73.33066554212166,18.20388499034873,0 73.33832815441495,18.19258023797648,0 73.34630190301789,18.18147410483395,0 73.3545811064414,18.17057442454172,0 73.36315987105473,18.15988888372091,0 73.3720320953277,18.14942501665409,0 73.38119147420784,18.13919020005544,0 73.39063150362959,18.12919164795372,0 73.40034548515182,18.11943640669119,0 73.41032653072072,18.10993135004186,0 73.42056756755466,18.10068317445215,0 73.43106134314721,18.09169839440703,0 73.44180043038534,18.08298333792468,0 73.45277723277901,18.07454414218248,0 73.46398398979844,18.06638674927723,0 73.47541278231569,18.05851690212214,0 73.48705553814689,18.05094014048346,0 73.49890403769106,18.04366179715909,0 73.51094991966221,18.0366869943016,0 73.5231846869106,18.03002063988812,0 73.53559971232957,18.0236674243392,0 73.54818624484388,18.01763181728892,0 73.56093541547592,18.01191806450817,0 73.57383824348555,18.0065301849831,0 73.58688564257996,18.00147196815057,0 73.60006842718929,17.99674697129235,0 73.61337731880421,17.99235851708977,0 73.62680295237145,17.98830969134018,0 73.64033588274289,17.9846033408368,0 73.65396659117471,17.9812420714134,0 73.66768549187201,17.97822824615466,0 73.68148293857514,17.97556398377379,0 73.69534923118339,17.97325115715799,0 73.70927462241208,17.9712913920831,0 73.72324932447884,17.96968606609782,0 73.73726351581492,17.96843630757853,0 73.75130734779732,17.96754299495504,0 73.76537095149786,17.96700675610802,0 73.77944444444445,17.96682796793831,0 73.79351793739106,17.96700675610802,0 73.80758154109159,17.96754299495504,0 73.821625373074,17.96843630757853,0 73.83563956441007,17.96968606609782,0 73.84961426647683,17.9712913920831,0 73.86353965770553,17.97325115715799,0 73.87740595031377,17.97556398377379,0 73.89120339701691,17.97822824615466,0 73.90492229771421,17.9812420714134,0 73.91855300614603,17.9846033408368,0 73.93208593651747,17.98830969134018,0 73.94551157008469,17.99235851708978,0 73.95882046169963,17.99674697129236,0 73.97200324630896,18.00147196815057,0 73.98505064540336,18.0065301849831,0 73.99795347341299,18.01191806450817,0 74.01070264404504,18.01763181728892,0 74.02328917655935,18.0236674243392,0 74.03570420197831,18.03002063988812,0 74.04793896922671,18.0366869943016,0 74.05998485119785,18.04366179715909,0 74.07183335074203,18.05094014048346,0 74.08347610657323,18.05851690212214,0 74.09490489909048,18.06638674927723,0 74.10611165610989,18.07454414218248,0 74.11708845850356,18.08298333792468,0 74.12782754574171,18.09169839440703,0 74.13832132133426,18.10068317445215,0 74.14856235816818,18.10993135004186,0 74.1585434037371,18.11943640669119,0 74.16825738525932,18.12919164795372,0 74.17769741468106,18.13919020005545,0 74.18685679356122,18.14942501665409,0 74.19572901783418,18.15988888372091,0 74.20430778244751,18.17057442454172,0 74.21258698587103,18.18147410483395,0 74.22056073447396,18.19258023797648,0 74.22822334676725,18.20388499034873,0 74.23556935750742,18.21538038677558,0 74.24259352165939,18.22705831607463,0 74.24929081821496,18.23891053670197,0 74.25565645386399,18.25092868249303,0 74.26168586651555,18.2631042684944,0 74.2673747286662,18.27542869688308,0 74.2727189506126,18.28789326296899,0 74.27771468350592,18.30048916127691,0 74.28235832224546,18.3132074917037,0 74.28664650820885,18.32603926574672,0 74.29057613181679,18.33897541279929,0 74.29414433492963,18.35200678650893,0 74.2973485130739,18.36512417119399,0 74.30018631749651,18.37831828831462,0 74.30265565704468,18.39157980299326,0 74.30475469986963,18.40489933058059,0 74.30648187495235,18.41826744326221,0 74.30783587344953,18.43167467670156,0 74.30881564985837,18.44511153671458,0 74.30942042299844,18.45856850597146,0 74.30964967680956,18.47203605072072,0 74.30950316096413,18.4855046275311,0 74.30898089129315,18.49896469004647,0 74.3080831500246,18.51240669574899,0 74.30681048583341,18.5258211127258,0 74.30516371370244,18.53919842643449,0 74.30314391459355,18.55252914646245,0 74.30075243492853,18.56580381327536,0 74.29799088587944,18.57901300495003,0 74.29486114246809,18.59214734388659,0 74.29136534247476,18.60519750349548,0 74.28750588515604,18.61815421485405,0 74.28328542977214,18.63100827332827,0 74.27870689392395,18.64375054515455,0 74.27377345170049,18.6563719739768,0 74.26848853163723,18.66886358733417,0 74.26285581448626,18.68121650309437,0 74.25687923079913,18.69342193582813,0 74.2505629583237,18.70547120311985,0 74.24391141921606,18.71735573180974,0 74.23692927706894,18.72906706416299,0 74.22962143375852,18.74059686396108,0 74.22199302611109,18.75193692251085,0 74.2140494223914,18.76307916456653,0 74.20579621861518,18.77401565416064,0 74.1972392346877,18.78473860033888,0 74.1883845103708,18.79524036279492,0 74.17923830108113,18.80551345740068,0 74.16980707352211,18.81555056162782,0 74.16009750115256,18.8253445198563,0 74.15011645949497,18.83488834856586,0 74.13987102128671,18.84417524140647,0 74.12936845147732,18.8531985741437,0 74.11861620207549,18.86195190947517,0 74.10762190684933,18.87042900171435,0 74.09639337588369,18.87862380133804,0 74.08493858999847,18.88653045939379,0 74.07326569503192,18.89414333176409,0 74.06138299599321,18.90145698328352,0 74.04929895108866,18.90846619170603,0 74.03702216562588,18.91516595151886,0 74.02456138580062,18.92155147760025,0 74.01192549237103,18.92761820871792,0 73.99912349422402,18.93336181086552,0 73.98616452183886,18.93877818043445,0 73.97305782065307,18.94386344721837,0 73.95981274433562,18.94861397724808,0 73.94643874797281,18.95302637545442,0 73.93294538117235,18.95709748815714,0 73.91934228109076,18.96082440537744,0 73.90563916539014,18.96420446297278,0 73.89184582512924,18.96723524459167,0 73.87797211759526,18.96991458344732,0 73.86402795908172,18.97224056390845,0 73.85002331761824,18.97421152290595,0 73.8359682056583,18.97582605115444,0 73.82187267273071,18.97708299418747,0 73.80774679806098,18.97798145320579,0 73.79360068316828,18.97852078573772,0 73.77944444444445,18.97870060611124,0 
+									</coordinates>
+								</LinearRing>
+							</outerBoundaryIs>
+						</Polygon>
+					</MultiGeometry>
+				</Placemark>
+			</Folder>
+		</Document>
+		<Document id="Pune_1" xsi:schemaLocation="http://www.opengis.net/kml/2.2 http://schemas.opengis.net/kml/2.2.0/ogckml22.xsd http://www.google.com/kml/ext/2.2 http://code.google.com/apis/kml/schema/kml22gx.xsd">
+			<name>Pune_1</name>
+			<Snippet maxLines="0"></Snippet>
+			<Style id="PolyStyle0040">
+				<LabelStyle>
+					<color>00000000</color>
+					<scale>0</scale>
+				</LabelStyle>
+				<LineStyle>
+					<color>ff000000</color>
+					<width>2</width>
+				</LineStyle>
+				<PolyStyle>
+					<color>00f0f0f0</color>
+				</PolyStyle>
+			</Style>
+			<Folder id="FeatureLayer0">
+				<name>Pune_1</name>
+				<Snippet maxLines="0"></Snippet>
+				<Placemark id="ID_00000">
+					<name>0</name>
+					<Snippet maxLines="0"></Snippet>
+					<description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+
+<head>
+
+<META http-equiv="Content-Type" content="text/html">
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+</head>
+
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+
+<td>0</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+
+<tr>
+
+<td>FID</td>
+
+<td>0</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>Id</td>
+
+<td>0</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</body>
+
+</html>]]></description>
+					<styleUrl>#PolyStyle0040</styleUrl>
+					<MultiGeometry>
+						<Polygon>
+							<outerBoundaryIs>
+								<LinearRing>
+									<coordinates>
+										75.33333333333337,17.60000000000002,0 75.33333333333337,17.21666666666675,0 75.83333333333326,17.21666666666675,0 75.83333333333326,17.60000000000002,0 75.33333333333337,17.60000000000002,0 
+									</coordinates>
+								</LinearRing>
+							</outerBoundaryIs>
+						</Polygon>
+					</MultiGeometry>
+				</Placemark>
+				<Placemark id="ID_00001">
+					<name>0</name>
+					<Snippet maxLines="0"></Snippet>
+					<description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+
+<head>
+
+<META http-equiv="Content-Type" content="text/html">
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+</head>
+
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+
+<td>0</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+
+<tr>
+
+<td>FID</td>
+
+<td>1</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>Id</td>
+
+<td>0</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</body>
+
+</html>]]></description>
+					<styleUrl>#PolyStyle0040</styleUrl>
+					<MultiGeometry>
+						<Polygon>
+							<outerBoundaryIs>
+								<LinearRing>
+									<coordinates>
+										75,19.14999999999992,0 75,18.53333333333342,0 75.53333333333325,19.14999999999992,0 75,19.14999999999992,0 
+									</coordinates>
+								</LinearRing>
+							</outerBoundaryIs>
+						</Polygon>
+					</MultiGeometry>
+				</Placemark>
+				<Placemark id="ID_00002">
+					<name>0</name>
+					<Snippet maxLines="0"></Snippet>
+					<description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+
+<head>
+
+<META http-equiv="Content-Type" content="text/html">
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+</head>
+
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+
+<td>0</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+
+<tr>
+
+<td>FID</td>
+
+<td>2</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>Id</td>
+
+<td>0</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</body>
+
+</html>]]></description>
+					<styleUrl>#PolyStyle0040</styleUrl>
+					<MultiGeometry>
+						<Polygon>
+							<outerBoundaryIs>
+								<LinearRing>
+									<coordinates>
+										74.36666666666679,19.1666666666668,0 74.36666666666679,19.00000000000011,0 74.96666666666681,19.11666666666673,0 74.96071641369645,19.25923257052062,0 74.36666666666679,19.1666666666668,0 
+									</coordinates>
+								</LinearRing>
+							</outerBoundaryIs>
+						</Polygon>
+					</MultiGeometry>
+				</Placemark>
+				<Placemark id="ID_00003">
+					<name>0</name>
+					<Snippet maxLines="0"></Snippet>
+					<description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+
+<head>
+
+<META http-equiv="Content-Type" content="text/html">
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+</head>
+
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+
+<td>0</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+
+<tr>
+
+<td>FID</td>
+
+<td>3</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>Id</td>
+
+<td>0</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</body>
+
+</html>]]></description>
+					<styleUrl>#PolyStyle0040</styleUrl>
+					<MultiGeometry>
+						<Polygon>
+							<outerBoundaryIs>
+								<LinearRing>
+									<coordinates>
+										74.4666666666667,18.98333333333341,0 74.4666666666667,18.53333333333342,0 74.9500000000001,18.53333333333342,0 74.9500000000001,18.98333333333341,0 74.4666666666667,18.98333333333341,0 
+									</coordinates>
+								</LinearRing>
+							</outerBoundaryIs>
+						</Polygon>
+					</MultiGeometry>
+				</Placemark>
+				<Placemark id="ID_00004">
+					<name>0</name>
+					<Snippet maxLines="0"></Snippet>
+					<description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+
+<head>
+
+<META http-equiv="Content-Type" content="text/html">
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+</head>
+
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+
+<td>0</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+
+<tr>
+
+<td>FID</td>
+
+<td>4</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>Id</td>
+
+<td>0</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</body>
+
+</html>]]></description>
+					<styleUrl>#PolyStyle0040</styleUrl>
+					<MultiGeometry>
+						<Polygon>
+							<outerBoundaryIs>
+								<LinearRing>
+									<coordinates>
+										73.83333333333331,19.0333333333333,0 73.83333333333331,18.71666666666681,0 74.30000000000001,18.7000000000001,0 74.30000000000001,19.0333333333333,0 73.83333333333331,19.0333333333333,0 
+									</coordinates>
+								</LinearRing>
+							</outerBoundaryIs>
+						</Polygon>
+					</MultiGeometry>
+				</Placemark>
+				<Placemark id="ID_00005">
+					<name>0</name>
+					<Snippet maxLines="0"></Snippet>
+					<description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+
+<head>
+
+<META http-equiv="Content-Type" content="text/html">
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+</head>
+
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+
+<td>0</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+
+<tr>
+
+<td>FID</td>
+
+<td>5</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>Id</td>
+
+<td>0</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</body>
+
+</html>]]></description>
+					<styleUrl>#PolyStyle0040</styleUrl>
+					<MultiGeometry>
+						<Polygon>
+							<outerBoundaryIs>
+								<LinearRing>
+									<coordinates>
+										73.93333333333345,18.53333333333342,0 73.88333333333338,18.31666666666666,0 74.2000000000001,18.18333333333334,0 74.28333333333336,18.38333333333338,0 73.93333333333345,18.53333333333342,0 
+									</coordinates>
+								</LinearRing>
+							</outerBoundaryIs>
+						</Polygon>
+					</MultiGeometry>
+				</Placemark>
+			</Folder>
+		</Document>
+		<Document id="Solapur" xsi:schemaLocation="http://www.opengis.net/kml/2.2 http://schemas.opengis.net/kml/2.2.0/ogckml22.xsd http://www.google.com/kml/ext/2.2 http://code.google.com/apis/kml/schema/kml22gx.xsd">
+			<name>Solapur</name>
+			<Snippet maxLines="0"></Snippet>
+			<Style id="PolyStyle0050">
+				<LabelStyle>
+					<color>00000000</color>
+					<scale>0</scale>
+				</LabelStyle>
+				<LineStyle>
+					<color>ff000000</color>
+					<width>2</width>
+				</LineStyle>
+				<PolyStyle>
+					<color>00f0f0f0</color>
+				</PolyStyle>
+			</Style>
+			<Folder id="FeatureLayer0">
+				<name>Solapur</name>
+				<Snippet maxLines="0"></Snippet>
+				<Placemark id="ID_00000">
+					<name>0</name>
+					<Snippet maxLines="0"></Snippet>
+					<description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+
+<head>
+
+<META http-equiv="Content-Type" content="text/html">
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+</head>
+
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+
+<td>0</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+
+<tr>
+
+<td>FID</td>
+
+<td>0</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>Id</td>
+
+<td>0</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</body>
+
+</html>]]></description>
+					<styleUrl>#PolyStyle0050</styleUrl>
+					<MultiGeometry>
+						<Polygon>
+							<outerBoundaryIs>
+								<LinearRing>
+									<coordinates>
+										75.43333333333334,17.60000000000002,0 75.33333333333337,17.60000000000002,0 75.33333333333337,17.20000000000005,0 75.43333333333334,17.20000000000005,0 75.43333333333334,17.60000000000002,0 
+									</coordinates>
+								</LinearRing>
+							</outerBoundaryIs>
+						</Polygon>
+					</MultiGeometry>
+				</Placemark>
+			</Folder>
+		</Document>
+		<Document id="Stara" xsi:schemaLocation="http://www.opengis.net/kml/2.2 http://schemas.opengis.net/kml/2.2.0/ogckml22.xsd http://www.google.com/kml/ext/2.2 http://code.google.com/apis/kml/schema/kml22gx.xsd">
+			<name>Stara</name>
+			<Snippet maxLines="0"></Snippet>
+			<Style id="PolyStyle006">
+				<LabelStyle>
+					<color>00000000</color>
+					<scale>0</scale>
+				</LabelStyle>
+				<LineStyle>
+					<color>ffc5ff00</color>
+					<width>2</width>
+				</LineStyle>
+				<PolyStyle>
+					<color>00f0f0f0</color>
+				</PolyStyle>
+			</Style>
+			<Folder id="FeatureLayer0">
+				<name>Stara</name>
+				<Snippet maxLines="0"></Snippet>
+				<Placemark id="ID_00000">
+					<name>0</name>
+					<Snippet maxLines="0"></Snippet>
+					<description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+
+<head>
+
+<META http-equiv="Content-Type" content="text/html">
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+</head>
+
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+
+<td>0</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+
+<tr>
+
+<td>FID</td>
+
+<td>0</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>Id</td>
+
+<td>0</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</body>
+
+</html>]]></description>
+					<styleUrl>#PolyStyle006</styleUrl>
+					<MultiGeometry>
+						<Polygon>
+							<outerBoundaryIs>
+								<LinearRing>
+									<coordinates>
+										73.96666666666681,18.04166666666674,0 73.61666666666673,18.04166666666674,0 73.58333333333337,17.90000000000003,0 73.80000000000013,17.93333333333339,0 73.96666666666681,18.04166666666674,0 
+									</coordinates>
+								</LinearRing>
+							</outerBoundaryIs>
+						</Polygon>
+					</MultiGeometry>
+				</Placemark>
+			</Folder>
+		</Document>
+	</Folder>
+</Document>
+</kml>

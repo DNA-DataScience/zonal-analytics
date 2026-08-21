@@ -7,6 +7,7 @@ import { ReportPanelControl } from "@/app/components/ReportPanelControl";
 import { CoordinateSearchControl } from "@/app/components/CoordinateSearchControl";
 import { addLayers } from "@/app/lib/Layerer";
 import { BatchProcessingControl } from "@/app/components/BatchProcessingControl";
+import { attachPointHoverTooltip } from "@/app/lib/PointHoverTooltip";
 import { initAnalytics, trackEvent } from "@/app/lib/analytics";
 import "maplibre-gl/dist/maplibre-gl.css";
 import "@watergis/maplibre-gl-terradraw/dist/maplibre-gl-terradraw.css";
@@ -38,6 +39,7 @@ const Map: React.FC = () => {
       maxBounds: INDIA_BOUNDS,
     });
     mapRef.current = map;
+    let detachPointHoverTooltip: (() => void) | null = null;
 
     // const cleanupControls = () => {
     //   if (!mapRef.current) return;
@@ -160,6 +162,7 @@ const Map: React.FC = () => {
       map.addControl(new BatchProcessingControl(), "top-right");
 
       addLayers(map);
+      detachPointHoverTooltip = attachPointHoverTooltip(map);
 
       // Initialize drawing controls
       //initializeControls();
@@ -179,6 +182,8 @@ const Map: React.FC = () => {
       isInitializingRef.current = false;
 
       if (mapRef.current) {
+        detachPointHoverTooltip?.();
+        detachPointHoverTooltip = null;
         //cleanupControls();
         mapRef.current.remove();
         mapRef.current = null;

@@ -21,10 +21,10 @@ DB_URL = f"postgresql+asyncpg://{USER}:{PASSWORD}@{HOST}:{PORT}/{DBNAME}"
 
 engine = create_async_engine(
     DB_URL,
-    pool_size = 5,
-    max_overflow = 5,
+    pool_size = 3,
+    max_overflow = 0,
     pool_timeout = 30,
-    pool_recycle = 300,
+    pool_recycle = 100,
     pool_pre_ping = True,
     echo = False,
     connect_args={

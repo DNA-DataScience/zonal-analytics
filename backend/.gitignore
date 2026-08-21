@@ -3,3 +3,35 @@ db.env
 *.env
 __pycache__/
 *.pyc
+# Coverage
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+ap_zones_debug.html
+descriptions.html
+final_regulatory_map.html
+gj_zones_debug.html
+mh_zones_debug.html
+ka_zones_debug.html
+mp_zones_debug.html
+rj_zones_debug.html
+tn_zones_debug.html
+zones_preview.html
+REPORT_API_DOCS.md
+batches/
+htmlcov/
+test_notebooks/extracted_kmz/
+test_notebooks/ESZ_Windy_States.kmz
+BATCH_DOWNLOAD_API.md
+batch_processing.md
+test_notebooks/ESZ Windy States.kmz
+test_notebooks/esz_combined.gpkg
+test_notebooks/esz_combined2.gpkg
+ANALYTICS_API_DOCS.md
+analytics.js
+test_notebooks/AP Forest Boundary.KMZ
+*.KMZ
+*.kml
+*.html
+*.xlsx

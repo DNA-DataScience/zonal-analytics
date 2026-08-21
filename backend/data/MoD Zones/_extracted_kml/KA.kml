@@ -1,0 +1,1474 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Folder>
+	<name>Karnataka</name>
+	<Document>
+		<name>NO-WTG-ZONE(Updated on 21.06.2024)</name>
+		<StyleMap id="m_ylw-pushpin">
+			<Pair>
+				<key>normal</key>
+				<styleUrl>#s_ylw-pushpin</styleUrl>
+			</Pair>
+			<Pair>
+				<key>highlight</key>
+				<styleUrl>#s_ylw-pushpin_hl</styleUrl>
+			</Pair>
+		</StyleMap>
+		<Style id="s_ylw-pushpin">
+			<IconStyle>
+				<color>00ffffff</color>
+				<scale>1.1</scale>
+				<Icon>
+					<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+				</Icon>
+				<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+			</IconStyle>
+			<LabelStyle>
+				<color>00ffffff</color>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff000000</color>
+				<width>3.1</width>
+			</LineStyle>
+			<PolyStyle>
+				<fill>0</fill>
+			</PolyStyle>
+		</Style>
+		<Style id="s_ylw-pushpin_hl">
+			<IconStyle>
+				<color>00ffffff</color>
+				<scale>1.3</scale>
+				<Icon>
+					<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+				</Icon>
+				<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+			</IconStyle>
+			<LabelStyle>
+				<color>00ffffff</color>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff000000</color>
+				<width>3.1</width>
+			</LineStyle>
+			<PolyStyle>
+				<fill>0</fill>
+			</PolyStyle>
+		</Style>
+		<Folder>
+			<name>Block 7 Karnataka</name>
+			<Placemark>
+				<name>1</name>
+				<LookAt>
+					<longitude>78.6529129078551</longitude>
+					<latitude>14.08564143491047</latitude>
+					<altitude>0</altitude>
+					<heading>-2.592042479008426</heading>
+					<tilt>1.967655257150675</tilt>
+					<range>1121129.021829599</range>
+					<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+				</LookAt>
+				<styleUrl>#m_ylw-pushpin</styleUrl>
+				<Point>
+					<gx:drawOrder>1</gx:drawOrder>
+					<coordinates>76.13333333333334,13.46666666666667,0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>2</name>
+				<LookAt>
+					<longitude>77.32971873275338</longitude>
+					<latitude>13.82968674877804</latitude>
+					<altitude>0</altitude>
+					<heading>-2.90618932170681</heading>
+					<tilt>1.784940150915078</tilt>
+					<range>424707.0369651343</range>
+					<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+				</LookAt>
+				<styleUrl>#m_ylw-pushpin</styleUrl>
+				<Point>
+					<gx:drawOrder>1</gx:drawOrder>
+					<coordinates>76.18333333333334,13.7,0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>3</name>
+				<LookAt>
+					<longitude>77.32971873275338</longitude>
+					<latitude>13.82968674877804</latitude>
+					<altitude>0</altitude>
+					<heading>-2.90618932170681</heading>
+					<tilt>1.784940150915078</tilt>
+					<range>424707.0369651343</range>
+					<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+				</LookAt>
+				<styleUrl>#m_ylw-pushpin</styleUrl>
+				<Point>
+					<gx:drawOrder>1</gx:drawOrder>
+					<coordinates>76.29166666666667,13.91666666666667,0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>4</name>
+				<LookAt>
+					<longitude>77.32971873275338</longitude>
+					<latitude>13.82968674877804</latitude>
+					<altitude>0</altitude>
+					<heading>-2.90618932170681</heading>
+					<tilt>1.784940150915078</tilt>
+					<range>424707.0369651343</range>
+					<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+				</LookAt>
+				<styleUrl>#m_ylw-pushpin</styleUrl>
+				<Point>
+					<gx:drawOrder>1</gx:drawOrder>
+					<coordinates>76.49166666666667,14.16666666666667,0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>5</name>
+				<LookAt>
+					<longitude>77.32971873275338</longitude>
+					<latitude>13.82968674877804</latitude>
+					<altitude>0</altitude>
+					<heading>-2.90618932170681</heading>
+					<tilt>1.784940150915078</tilt>
+					<range>424707.0369651343</range>
+					<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+				</LookAt>
+				<styleUrl>#m_ylw-pushpin</styleUrl>
+				<Point>
+					<gx:drawOrder>1</gx:drawOrder>
+					<coordinates>76.7,14.33333333333333,0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>6</name>
+				<LookAt>
+					<longitude>77.32971873275338</longitude>
+					<latitude>13.82968674877804</latitude>
+					<altitude>0</altitude>
+					<heading>-2.90618932170681</heading>
+					<tilt>1.784940150915078</tilt>
+					<range>424707.0369651343</range>
+					<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+				</LookAt>
+				<styleUrl>#m_ylw-pushpin</styleUrl>
+				<Point>
+					<gx:drawOrder>1</gx:drawOrder>
+					<coordinates>76.88333333333334,14.41666666666667,0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>7</name>
+				<LookAt>
+					<longitude>77.32971873275338</longitude>
+					<latitude>13.82968674877804</latitude>
+					<altitude>0</altitude>
+					<heading>-2.90618932170681</heading>
+					<tilt>1.784940150915078</tilt>
+					<range>424707.0369651343</range>
+					<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+				</LookAt>
+				<styleUrl>#m_ylw-pushpin</styleUrl>
+				<Point>
+					<gx:drawOrder>1</gx:drawOrder>
+					<coordinates>76.88333333333334,13.46666666666667,0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>1</name>
+				<LookAt>
+					<longitude>77.32971873275338</longitude>
+					<latitude>13.82968674877804</latitude>
+					<altitude>0</altitude>
+					<heading>-2.90618932170681</heading>
+					<tilt>1.784940150915078</tilt>
+					<range>424707.0369651343</range>
+					<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+				</LookAt>
+				<styleUrl>#m_ylw-pushpin</styleUrl>
+				<Point>
+					<gx:drawOrder>1</gx:drawOrder>
+					<coordinates>76.03333333333333,14.66666666666667,0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>2</name>
+				<Camera>
+					<longitude>76.34523404957426</longitude>
+					<latitude>14.708802362486</latitude>
+					<altitude>234366.5491260216</altitude>
+					<heading>-2.850965859589012</heading>
+					<tilt>0.8448255648239356</tilt>
+					<roll>0.5812914617638064</roll>
+					<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+				</Camera>
+				<styleUrl>#m_ylw-pushpin</styleUrl>
+				<Point>
+					<gx:drawOrder>1</gx:drawOrder>
+					<coordinates>76.90000000000001,14.68333333333333,0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>3</name>
+				<Camera>
+					<longitude>76.40825129163339</longitude>
+					<latitude>14.95081917278243</latitude>
+					<altitude>302850.1909627759</altitude>
+					<heading>-3.502080085115293</heading>
+					<tilt>0</tilt>
+					<roll>0</roll>
+					<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+				</Camera>
+				<styleUrl>#m_ylw-pushpin</styleUrl>
+				<Point>
+					<gx:drawOrder>1</gx:drawOrder>
+					<coordinates>76.84434444444445,14.21171388888889,0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>4</name>
+				<Camera>
+					<longitude>76.40825129163339</longitude>
+					<latitude>14.95081917278243</latitude>
+					<altitude>302850.1909627759</altitude>
+					<heading>-3.502080085115293</heading>
+					<tilt>0</tilt>
+					<roll>0</roll>
+					<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+				</Camera>
+				<styleUrl>#m_ylw-pushpin</styleUrl>
+				<Point>
+					<gx:drawOrder>1</gx:drawOrder>
+					<coordinates>76.02669166666666,14.1975,0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>NW BNDRY</name>
+				<Camera>
+					<longitude>76.60292277077193</longitude>
+					<latitude>14.12403330233764</latitude>
+					<altitude>342376.015901733</altitude>
+					<heading>-41.61260290618301</heading>
+					<tilt>0.05283855748610482</tilt>
+					<roll>-41.79908622184555</roll>
+					<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+				</Camera>
+				<styleUrl>#m_ylw-pushpin</styleUrl>
+				<Point>
+					<gx:drawOrder>1</gx:drawOrder>
+					<coordinates>76.02669166666666,14.1975,0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>NE BNDRY</name>
+				<Camera>
+					<longitude>76.60292277077193</longitude>
+					<latitude>14.12403330233764</latitude>
+					<altitude>342376.015901733</altitude>
+					<heading>-41.61260290618301</heading>
+					<tilt>0.05283855748610482</tilt>
+					<roll>-41.79908622184555</roll>
+					<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+				</Camera>
+				<styleUrl>#m_ylw-pushpin</styleUrl>
+				<Point>
+					<gx:drawOrder>1</gx:drawOrder>
+					<coordinates>76.84434444444445,14.21171388888889,0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>SW BNDRY</name>
+				<Camera>
+					<longitude>76.60292277077193</longitude>
+					<latitude>14.12403330233764</latitude>
+					<altitude>342376.015901733</altitude>
+					<heading>-41.61260290618301</heading>
+					<tilt>0.05283855748610482</tilt>
+					<roll>-41.79908622184555</roll>
+					<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+				</Camera>
+				<styleUrl>#m_ylw-pushpin</styleUrl>
+				<Point>
+					<gx:drawOrder>1</gx:drawOrder>
+					<coordinates>76.05,13.47,0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>SE BNDRY</name>
+				<Camera>
+					<longitude>76.60292277077193</longitude>
+					<latitude>14.12403330233764</latitude>
+					<altitude>342376.015901733</altitude>
+					<heading>-41.61260290618301</heading>
+					<tilt>0.05283855748610482</tilt>
+					<roll>-41.79908622184555</roll>
+					<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+				</Camera>
+				<styleUrl>#m_ylw-pushpin</styleUrl>
+				<Point>
+					<gx:drawOrder>1</gx:drawOrder>
+					<coordinates>76.86,13.47,0</coordinates>
+				</Point>
+			</Placemark>
+			<Placemark>
+				<name>NO WTG area_1</name>
+				<styleUrl>#m_ylw-pushpin</styleUrl>
+				<Polygon>
+					<tessellate>1</tessellate>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>
+								76.88336065431697,13.46671404237927,0 76.88340873201793,14.41680071047416,0 76.70003083219397,14.33341342223068,0 76.49165725122948,14.1668236484214,0 76.29167659052912,13.91665919820139,0 76.18338501260243,13.70020034103772,0 76.13337966300462,13.466793095663,0 76.88336065431697,13.46671404237927,0 
+							</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>NO WTG area_2</name>
+				<styleUrl>#m_ylw-pushpin</styleUrl>
+				<Polygon>
+					<tessellate>1</tessellate>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>
+								76.02669271147836,14.19750360410727,0 76.84435849544117,14.21171714449129,0 76.89997100356634,14.68335371512014,0 76.03333536190932,14.66670082791424,0 76.02669271147836,14.19750360410727,0 
+							</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+		</Folder>
+	</Document>
+	<Document id="Tumkur" xsi:schemaLocation="http://www.opengis.net/kml/2.2 http://schemas.opengis.net/kml/2.2.0/ogckml22.xsd http://www.google.com/kml/ext/2.2 http://code.google.com/apis/kml/schema/kml22gx.xsd">
+		<name>Tumkur</name>
+		<Snippet maxLines="0"></Snippet>
+		<Style id="PolyStyle00">
+			<LabelStyle>
+				<color>00000000</color>
+				<scale>0</scale>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff000000</color>
+				<width>2</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>00f0f0f0</color>
+			</PolyStyle>
+		</Style>
+		<Folder id="FeatureLayer0">
+			<name>Tumkur</name>
+			<Snippet maxLines="0"></Snippet>
+			<Placemark id="ID_00000">
+				<name>0</name>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+
+<head>
+
+<META http-equiv="Content-Type" content="text/html">
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+</head>
+
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+
+<td>0</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+
+<tr>
+
+<td>FID</td>
+
+<td>0</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>Id</td>
+
+<td>0</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</body>
+
+</html>]]></description>
+				<styleUrl>#PolyStyle00</styleUrl>
+				<MultiGeometry>
+					<Polygon>
+						<outerBoundaryIs>
+							<LinearRing>
+								<coordinates>
+									77.00000000000011,13.94999999999999,0 77.10000000000008,13.94999999999999,0 77.00000000000011,14.09999999999997,0 77.00000000000011,13.94999999999999,0 
+								</coordinates>
+							</LinearRing>
+						</outerBoundaryIs>
+					</Polygon>
+				</MultiGeometry>
+			</Placemark>
+		</Folder>
+	</Document>
+	<Document id="Identified Wind Potential Blocks" xsi:schemaLocation="http://www.opengis.net/kml/2.2 http://schemas.opengis.net/kml/2.2.0/ogckml22.xsd http://www.google.com/kml/ext/2.2 http://code.google.com/apis/kml/schema/kml22gx.xsd">
+		<name>Identified Wind Potential Blocks</name>
+		<open>1</open>
+		<Snippet maxLines="0"></Snippet>
+		<Style id="PolyStyle000">
+			<LabelStyle>
+				<color>00000000</color>
+				<scale>0</scale>
+			</LabelStyle>
+			<LineStyle>
+				<color>ffe65c00</color>
+				<width>2</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>00f0f0f0</color>
+			</PolyStyle>
+		</Style>
+		<StyleMap id="PolyStyle0000">
+			<Pair>
+				<key>normal</key>
+				<styleUrl>#PolyStyle0002</styleUrl>
+			</Pair>
+			<Pair>
+				<key>highlight</key>
+				<styleUrl>#PolyStyle00010</styleUrl>
+			</Pair>
+		</StyleMap>
+		<StyleMap id="PolyStyle0001">
+			<Pair>
+				<key>normal</key>
+				<styleUrl>#PolyStyle000</styleUrl>
+			</Pair>
+			<Pair>
+				<key>highlight</key>
+				<styleUrl>#PolyStyle0005</styleUrl>
+			</Pair>
+		</StyleMap>
+		<Style id="PolyStyle0002">
+			<LabelStyle>
+				<color>00000000</color>
+				<scale>0</scale>
+			</LabelStyle>
+			<LineStyle>
+				<color>ffe65c00</color>
+				<width>2</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>00f0f0f0</color>
+			</PolyStyle>
+		</Style>
+		<Style id="PolyStyle0003">
+			<LabelStyle>
+				<color>00000000</color>
+				<scale>0</scale>
+			</LabelStyle>
+			<LineStyle>
+				<color>ffe65c00</color>
+				<width>2</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>00f0f0f0</color>
+			</PolyStyle>
+		</Style>
+		<Style id="PolyStyle0004">
+			<LabelStyle>
+				<color>00000000</color>
+				<scale>0</scale>
+			</LabelStyle>
+			<LineStyle>
+				<color>ffe65c00</color>
+				<width>2</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>00f0f0f0</color>
+			</PolyStyle>
+		</Style>
+		<Style id="PolyStyle0005">
+			<LabelStyle>
+				<color>00000000</color>
+				<scale>0</scale>
+			</LabelStyle>
+			<LineStyle>
+				<color>ffe65c00</color>
+				<width>2</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>00f0f0f0</color>
+			</PolyStyle>
+		</Style>
+		<StyleMap id="PolyStyle0006">
+			<Pair>
+				<key>normal</key>
+				<styleUrl>#PolyStyle0004</styleUrl>
+			</Pair>
+			<Pair>
+				<key>highlight</key>
+				<styleUrl>#PolyStyle00011</styleUrl>
+			</Pair>
+		</StyleMap>
+		<StyleMap id="PolyStyle0007">
+			<Pair>
+				<key>normal</key>
+				<styleUrl>#PolyStyle00012</styleUrl>
+			</Pair>
+			<Pair>
+				<key>highlight</key>
+				<styleUrl>#PolyStyle0003</styleUrl>
+			</Pair>
+		</StyleMap>
+		<StyleMap id="PolyStyle0008">
+			<Pair>
+				<key>normal</key>
+				<styleUrl>#PolyStyle00013</styleUrl>
+			</Pair>
+			<Pair>
+				<key>highlight</key>
+				<styleUrl>#PolyStyle00014</styleUrl>
+			</Pair>
+		</StyleMap>
+		<Style id="PolyStyle0009">
+			<LabelStyle>
+				<color>00000000</color>
+				<scale>0</scale>
+			</LabelStyle>
+			<LineStyle>
+				<color>ffe65c00</color>
+				<width>2</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>00f0f0f0</color>
+			</PolyStyle>
+		</Style>
+		<Style id="PolyStyle00010">
+			<LabelStyle>
+				<color>00000000</color>
+				<scale>0</scale>
+			</LabelStyle>
+			<LineStyle>
+				<color>ffe65c00</color>
+				<width>2</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>00f0f0f0</color>
+			</PolyStyle>
+		</Style>
+		<Style id="PolyStyle00011">
+			<LabelStyle>
+				<color>00000000</color>
+				<scale>0</scale>
+			</LabelStyle>
+			<LineStyle>
+				<color>ffe65c00</color>
+				<width>2</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>00f0f0f0</color>
+			</PolyStyle>
+		</Style>
+		<Style id="PolyStyle00012">
+			<LabelStyle>
+				<color>00000000</color>
+				<scale>0</scale>
+			</LabelStyle>
+			<LineStyle>
+				<color>ffe65c00</color>
+				<width>2</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>00f0f0f0</color>
+			</PolyStyle>
+		</Style>
+		<Style id="PolyStyle00013">
+			<LabelStyle>
+				<color>00000000</color>
+				<scale>0</scale>
+			</LabelStyle>
+			<LineStyle>
+				<color>ffe65c00</color>
+				<width>2</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>00f0f0f0</color>
+			</PolyStyle>
+		</Style>
+		<Style id="PolyStyle00014">
+			<LabelStyle>
+				<color>00000000</color>
+				<scale>0</scale>
+			</LabelStyle>
+			<LineStyle>
+				<color>ffe65c00</color>
+				<width>2</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>00f0f0f0</color>
+			</PolyStyle>
+		</Style>
+		<Folder id="FeatureLayer0">
+			<name>Identified Wind Potential Blocks</name>
+			<Snippet maxLines="0"></Snippet>
+			<Placemark id="ID_00000">
+				<name>Tumkur</name>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+
+<head>
+
+<META http-equiv="Content-Type" content="text/html">
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+</head>
+
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+
+<td>Tumkur</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+
+<tr>
+
+<td>FID</td>
+
+<td>0</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>SHAPE_Leng</td>
+
+<td>210553.548855</td>
+
+</tr>
+
+<tr>
+
+<td>SHAPE_Area</td>
+
+<td>2699158275.54</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>Blocks</td>
+
+<td>Block 8</td>
+
+</tr>
+
+<tr>
+
+<td>Block_name</td>
+
+<td>Tumkur</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</body>
+
+</html>]]></description>
+				<styleUrl>#PolyStyle0001</styleUrl>
+				<MultiGeometry>
+					<Polygon>
+						<outerBoundaryIs>
+							<LinearRing>
+								<coordinates>
+									76.95252041995079,14.39784116370448,0 76.95671598037967,13.99926299206953,0 77.52183796918794,14.00521164398707,0 77.51764240903223,14.40378981651417,0 76.95252041995079,14.39784116370448,0 
+								</coordinates>
+							</LinearRing>
+						</outerBoundaryIs>
+					</Polygon>
+				</MultiGeometry>
+			</Placemark>
+			<Placemark id="ID_00001">
+				<name>Chithradurga</name>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+
+<head>
+
+<META http-equiv="Content-Type" content="text/html">
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+</head>
+
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+
+<td>Chithradurga</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+
+<tr>
+
+<td>FID</td>
+
+<td>1</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>SHAPE_Leng</td>
+
+<td>427620.443568</td>
+
+</tr>
+
+<tr>
+
+<td>SHAPE_Area</td>
+
+<td>10799216114.5</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>Blocks</td>
+
+<td>Block 7</td>
+
+</tr>
+
+<tr>
+
+<td>Block_name</td>
+
+<td>Chithradurga</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</body>
+
+</html>]]></description>
+				<styleUrl>#PolyStyle0000</styleUrl>
+				<MultiGeometry>
+					<Polygon>
+						<outerBoundaryIs>
+							<LinearRing>
+								<coordinates>
+									75.96504410321782,14.65363322245059,0 75.96504410333402,13.46390271876423,0 76.72052297260974,13.46390271959528,0 76.72052297207597,14.65363322174808,0 75.96504410321782,14.65363322245059,0 
+								</coordinates>
+							</LinearRing>
+						</outerBoundaryIs>
+					</Polygon>
+				</MultiGeometry>
+			</Placemark>
+			<Placemark id="ID_00002">
+				<name>Bellary</name>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+
+<head>
+
+<META http-equiv="Content-Type" content="text/html">
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+</head>
+
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+
+<td>Bellary</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+
+<tr>
+
+<td>FID</td>
+
+<td>2</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>SHAPE_Leng</td>
+
+<td>258281.397598</td>
+
+</tr>
+
+<tr>
+
+<td>SHAPE_Area</td>
+
+<td>4025901938.33</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>Blocks</td>
+
+<td>Block 5</td>
+
+</tr>
+
+<tr>
+
+<td>Block_name</td>
+
+<td>Bellary</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</body>
+
+</html>]]></description>
+				<styleUrl>#PolyStyle0009</styleUrl>
+				<MultiGeometry>
+					<Polygon>
+						<outerBoundaryIs>
+							<LinearRing>
+								<coordinates>
+									76.23273346574797,15.3436769133174,0 76.23273346609243,14.65363322146283,0 76.72052297207597,14.65363322174808,0 76.72052297224305,15.34367691342883,0 76.23273346574797,15.3436769133174,0 
+								</coordinates>
+							</LinearRing>
+						</outerBoundaryIs>
+					</Polygon>
+				</MultiGeometry>
+			</Placemark>
+			<Placemark id="ID_00003">
+				<name>Gadag/Haveri</name>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+
+<head>
+
+<META http-equiv="Content-Type" content="text/html">
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+</head>
+
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+
+<td>Gadag/Haveri</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+
+<tr>
+
+<td>FID</td>
+
+<td>3</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>SHAPE_Leng</td>
+
+<td>376671.405344</td>
+
+</tr>
+
+<tr>
+
+<td>SHAPE_Area</td>
+
+<td>8560558458.96</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>Blocks</td>
+
+<td>Block 4</td>
+
+</tr>
+
+<tr>
+
+<td>Block_name</td>
+
+<td>Gadag/Haveri</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</body>
+
+</html>]]></description>
+				<styleUrl>#PolyStyle0006</styleUrl>
+				<MultiGeometry>
+					<Polygon>
+						<outerBoundaryIs>
+							<LinearRing>
+								<coordinates>
+									75.0667975728547,15.4507526593508,0 75.06679757337953,14.76070896758469,0 76.10186311044124,14.76070896717563,0 76.10186311069182,15.4507526590601,0 75.0667975728547,15.4507526593508,0 
+								</coordinates>
+							</LinearRing>
+						</outerBoundaryIs>
+					</Polygon>
+				</MultiGeometry>
+			</Placemark>
+			<Placemark id="ID_00004">
+				<name>Haveri/Davangere</name>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+
+<head>
+
+<META http-equiv="Content-Type" content="text/html">
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+</head>
+
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+
+<td>Haveri/Davangere</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+
+<tr>
+
+<td>FID</td>
+
+<td>4</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>SHAPE_Leng</td>
+
+<td>280514.459955</td>
+
+</tr>
+
+<tr>
+
+<td>SHAPE_Area</td>
+
+<td>4916500496.11</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>Blocks</td>
+
+<td>Block 6</td>
+
+</tr>
+
+<tr>
+
+<td>Block_name</td>
+
+<td>Haveri/Davangere</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</body>
+
+</html>]]></description>
+				<styleUrl>#PolyStyle0007</styleUrl>
+				<MultiGeometry>
+					<Polygon>
+						<outerBoundaryIs>
+							<LinearRing>
+								<coordinates>
+									75.23335984357099,14.76070896736002,0 75.23335984327123,14.11825449573067,0 75.86986566226122,14.11825449554727,0 75.86986566272353,14.76070896723827,0 75.23335984357099,14.76070896736002,0 
+								</coordinates>
+							</LinearRing>
+						</outerBoundaryIs>
+					</Polygon>
+				</MultiGeometry>
+			</Placemark>
+			<Placemark id="ID_00005">
+				<name>Belagavi</name>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+
+<head>
+
+<META http-equiv="Content-Type" content="text/html">
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+</head>
+
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+
+<td>Belagavi</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+
+<tr>
+
+<td>FID</td>
+
+<td>5</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>SHAPE_Leng</td>
+
+<td>324881.473807</td>
+
+</tr>
+
+<tr>
+
+<td>SHAPE_Area</td>
+
+<td>5938289170.86</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>Blocks</td>
+
+<td>Block 2</td>
+
+</tr>
+
+<tr>
+
+<td>Block_name</td>
+
+<td>Belagavi</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</body>
+
+</html>]]></description>
+				<styleUrl>#PolyStyle0009</styleUrl>
+				<MultiGeometry>
+					<Polygon>
+						<outerBoundaryIs>
+							<LinearRing>
+								<coordinates>
+									74.47193232208571,16.17053961317863,0 74.47193232209025,15.67085280200837,0 75.46535729197275,15.67085280251387,0 75.46535729191616,16.17053961323602,0 74.47193232208571,16.17053961317863,0 
+								</coordinates>
+							</LinearRing>
+						</outerBoundaryIs>
+					</Polygon>
+				</MultiGeometry>
+			</Placemark>
+			<Placemark id="ID_00006">
+				<name>Koppal</name>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+
+<head>
+
+<META http-equiv="Content-Type" content="text/html">
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+</head>
+
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+
+<td>Koppal</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+
+<tr>
+
+<td>FID</td>
+
+<td>6</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>SHAPE_Leng</td>
+
+<td>346914.347339</td>
+
+</tr>
+
+<tr>
+
+<td>SHAPE_Area</td>
+
+<td>7303128684.26</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>Blocks</td>
+
+<td>Block 3</td>
+
+</tr>
+
+<tr>
+
+<td>Block_name</td>
+
+<td>Koppal</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</body>
+
+</html>]]></description>
+				<styleUrl>#PolyStyle0009</styleUrl>
+				<MultiGeometry>
+					<Polygon>
+						<outerBoundaryIs>
+							<LinearRing>
+								<coordinates>
+									75.92935218775537,16.28951266366973,0 75.92935218824188,15.64110953938758,0 76.87518793725543,15.64110953946591,0 76.8751879372317,16.28951266329903,0 75.92935218775537,16.28951266366973,0 
+								</coordinates>
+							</LinearRing>
+						</outerBoundaryIs>
+					</Polygon>
+				</MultiGeometry>
+			</Placemark>
+			<Placemark id="ID_00007">
+				<name>Chikkaballapura</name>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+
+<head>
+
+<META http-equiv="Content-Type" content="text/html">
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+</head>
+
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+
+<td>Chikkaballapura</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+
+<tr>
+
+<td>FID</td>
+
+<td>7</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>SHAPE_Leng</td>
+
+<td>296169.122952</td>
+
+</tr>
+
+<tr>
+
+<td>SHAPE_Area</td>
+
+<td>4778569604.59</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>Blocks</td>
+
+<td>Block 9</td>
+
+</tr>
+
+<tr>
+
+<td>Block_name</td>
+
+<td>Chikkaballapura</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</body>
+
+</html>]]></description>
+				<styleUrl>#PolyStyle0008</styleUrl>
+				<MultiGeometry>
+					<Polygon>
+						<outerBoundaryIs>
+							<LinearRing>
+								<coordinates>
+									77.5295397146613,13.33303236367293,0 78.45752950643366,13.35682697418073,0 78.44653114355764,13.78576312274078,0 77.51854135176173,13.76196851287169,0 77.5295397146613,13.33303236367293,0 
+								</coordinates>
+							</LinearRing>
+						</outerBoundaryIs>
+					</Polygon>
+				</MultiGeometry>
+			</Placemark>
+			<Placemark id="ID_00008">
+				<name>Bagalkot</name>
+				<Snippet maxLines="0"></Snippet>
+				<description><![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+
+<head>
+
+<META http-equiv="Content-Type" content="text/html">
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+</head>
+
+<body style="margin:0px 0px 0px 0px;overflow:auto;background:#FFFFFF;">
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-collapse:collapse;padding:3px 3px 3px 3px">
+
+<tr style="text-align:center;font-weight:bold;background:#9CBCE2">
+
+<td>Bagalkot</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<table style="font-family:Arial,Verdana,Times;font-size:12px;text-align:left;width:100%;border-spacing:0px; padding:3px 3px 3px 3px">
+
+<tr>
+
+<td>FID</td>
+
+<td>8</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>SHAPE_Leng</td>
+
+<td>306497.788833</td>
+
+</tr>
+
+<tr>
+
+<td>SHAPE_Area</td>
+
+<td>5808553014.34</td>
+
+</tr>
+
+<tr bgcolor="#D4E4F3">
+
+<td>Blocks</td>
+
+<td>Block 1</td>
+
+</tr>
+
+<tr>
+
+<td>Block_name</td>
+
+<td>Bagalkot</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</body>
+
+</html>]]></description>
+				<styleUrl>#PolyStyle0009</styleUrl>
+				<MultiGeometry>
+					<Polygon>
+						<outerBoundaryIs>
+							<LinearRing>
+								<coordinates>
+									76.18514424603667,16.43822897629317,0 76.18514424637326,17.19965649819811,0 75.54268977433492,17.19965649837436,0 75.54268977438261,16.43822897667022,0 76.18514424603667,16.43822897629317,0 
+								</coordinates>
+							</LinearRing>
+						</outerBoundaryIs>
+					</Polygon>
+				</MultiGeometry>
+			</Placemark>
+		</Folder>
+	</Document>
+</Folder>
+</kml>
