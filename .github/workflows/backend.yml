@@ -9,6 +9,11 @@ on:
     paths:
       - 'backend/**'
       - '.github/workflows/backend.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: backend-deploy-main
+  cancel-in-progress: true
 
 jobs:
   build-and-deploy:
@@ -50,7 +55,7 @@ jobs:
       - name: Deploy to App Service
         uses: azure/webapps-deploy@v2
         with:
-          app-name: ${{ secrets.APP_SERVICE_NAME }}
+          app-name: ${{ secrets.BACKEND_APP_SERVICE_NAME }}
           images: ${{ secrets.ACR_LOGIN_SERVER }}/map-backend:${{ github.sha }}
 
       # -----------------------
