@@ -106,6 +106,10 @@ INNER_ZONES_REPORT_QUERY = text("""
                        AND ST_Intersects(z.geom3857, p.geom3857);
                     """)
 
+# UAT toggle (2026-08-24): keep report feasibility scoped to Airport + MoD only.
+# Revert by setting this to False.
+UAT_REPORT_AIRPORT_MOD_ONLY = True
+
 async def generate_report(lat: float, lng: float, elev: float = 0, db: AsyncSession = None):
     
     # Fetch airport zones
@@ -130,27 +134,30 @@ async def generate_report(lat: float, lng: float, elev: float = 0, db: AsyncSess
         print(f"Error retrieving MoD zone data: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
-    # Fetch forest zones
-    try:
-        result = await db.execute(FOREST_REPORT_QUERY, {
-            "lat": lat,
-            "lon": lng
-        })
-        forest_rows = result.fetchall()
-    except Exception as e:
-        print(f"Error retrieving forest zone data: {str(e)}")
-        raise HTTPException(status_code=500, detail=str(e))
+    forest_rows = []
+    inner_zone_rows = []
+    if not UAT_REPORT_AIRPORT_MOD_ONLY:
+        # Fetch forest zones
+        try:
+            result = await db.execute(FOREST_REPORT_QUERY, {
+                "lat": lat,
+                "lon": lng
+            })
+            forest_rows = result.fetchall()
+        except Exception as e:
+            print(f"Error retrieving forest zone data: {str(e)}")
+            raise HTTPException(status_code=500, detail=str(e))
 
-    # Fetch Inner Zones
-    try:
-        result = await db.execute(INNER_ZONES_REPORT_QUERY, {
-            "lat": lat,
-            "lon": lng
-        })
-        inner_zone_rows = result.fetchall()
-    except Exception as e:
-        print(f"Error retrieving Inner Zones data: {str(e)}")
-        raise HTTPException(status_code=500, detail=str(e))
+        # Fetch Inner Zones
+        try:
+            result = await db.execute(INNER_ZONES_REPORT_QUERY, {
+                "lat": lat,
+                "lon": lng
+            })
+            inner_zone_rows = result.fetchall()
+        except Exception as e:
+            print(f"Error retrieving Inner Zones data: {str(e)}")
+            raise HTTPException(status_code=500, detail=str(e))
     
     report = []
     

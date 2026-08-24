@@ -24,18 +24,17 @@ class FakeSession:
 
 
 @pytest.mark.asyncio
-async def test_report_includes_inner_zone_and_returns_not_feasible():
+async def test_report_uat_mode_excludes_forest_and_inner_layers():
     response = await generate_report(
         20.0,
         73.0,
         db=FakeSession(
-            results=[[], [], [], [("Reservoir", "Nagarjuna Sagar", "TS", "Telangana")]]
+            results=[[("outer", "Pune Airport", "Civil", 4500, 560, None, 9000.0)], []]
         ),
     )
 
     report = json.loads(response.body)
     assert report[0]["layer"] == "combined"
-    assert report[0]["feasibility"] == "No"
-    assert report[0]["total_inner_zone_zones"] == 1
-    assert report[-1]["layer"] == "inner_zones"
-    assert report[-1]["zone"] == "Reservoir"
+    assert report[0]["total_forest_zones"] == 0
+    assert report[0]["total_inner_zone_zones"] == 0
+    assert all(item["layer"] in {"combined", "airport", "mod"} for item in report)

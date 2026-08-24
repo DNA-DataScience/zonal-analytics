@@ -2,6 +2,9 @@ import maplibregl from "maplibre-gl";
 
 export function addLayers(map: maplibregl.Map) {
   const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:8000";
+  // UAT toggle (2026-08-24): keep map overlays scoped to Airport + MoD only.
+  // Revert by setting this to false.
+  const UAT_AIRPORT_MOD_ONLY = true;
 
   const layers = map.getStyle().layers;
   let labelLayerId = "";
@@ -135,31 +138,33 @@ export function addLayers(map: maplibregl.Map) {
     labelLayerId,
   );
 
-  if (!map.getSource("forest-tiles")) {
-    console.log("Adding forest tiles");
-    map.addSource("forest-tiles", {
-      type: "vector",
-      tiles: [`${apiBaseUrl}/tiles/forest/{z}/{x}/{y}.mvt`],
-      minzoom: 0,
-      maxzoom: 15,
-    });
-  }
+  if (!UAT_AIRPORT_MOD_ONLY) {
+    if (!map.getSource("forest-tiles")) {
+      console.log("Adding forest tiles");
+      map.addSource("forest-tiles", {
+        type: "vector",
+        tiles: [`${apiBaseUrl}/tiles/forest/{z}/{x}/{y}.mvt`],
+        minzoom: 0,
+        maxzoom: 15,
+      });
+    }
 
-  // Forest polygons are a single category, so use one consistent fill style.
-  addBelowLabels(
-    {
-      id: "forest-zones",
-      type: "fill",
-      source: "forest-tiles",
-      "source-layer": "reserve_forests",
-      paint: {
-        "fill-color": "#f43f5e",
-        "fill-opacity": 0.35,
-        "fill-outline-color": "#be123c",
+    // Forest polygons are a single category, so use one consistent fill style.
+    addBelowLabels(
+      {
+        id: "forest-zones",
+        type: "fill",
+        source: "forest-tiles",
+        "source-layer": "reserve_forests",
+        paint: {
+          "fill-color": "#f43f5e",
+          "fill-opacity": 0.35,
+          "fill-outline-color": "#be123c",
+        },
       },
-    },
-    labelLayerId,
-  );
+      labelLayerId,
+    );
+  }
 
   if (!map.getSource("mod-tiles")) {
     console.log("Adding mod tiles");
@@ -226,63 +231,65 @@ export function addLayers(map: maplibregl.Map) {
     labelLayerId,
   );
 
-  if (!map.getSource("inner-zones-tiles")) {
-    console.log("Adding inner zones tiles");
-    map.addSource("inner-zones-tiles", {
-      type: "vector",
-      tiles: [`${apiBaseUrl}/tiles/inner-zones/{z}/{x}/{y}.mvt`],
-      minzoom: 0,
-      maxzoom: 15,
-    });
-  }
+  if (!UAT_AIRPORT_MOD_ONLY) {
+    if (!map.getSource("inner-zones-tiles")) {
+      console.log("Adding inner zones tiles");
+      map.addSource("inner-zones-tiles", {
+        type: "vector",
+        tiles: [`${apiBaseUrl}/tiles/inner-zones/{z}/{x}/{y}.mvt`],
+        minzoom: 0,
+        maxzoom: 15,
+      });
+    }
 
-  if (!map.getLayer("inner-zones")) {
-    addBelowLabels(
-      {
-        id: "inner-zones",
-        type: "fill",
-        source: "inner-zones-tiles",
-        "source-layer": "inner_zones",
-        paint: {
-          "fill-color": [
-            "match",
-            ["get", "category"],
-            "Animal/Bird Migratory Path",
-            "#fecaca",
-            "Coastal Regulatory Zone",
-            "#fb7185",
-            "Heritage",
-            "#f43f5e",
-            "Reservoir",
-            "#e11d48",
-            "Sanctuary",
-            "#dc2626",
-            "Defence Protected Area",
-            "#991b1b",
-            "#f3f4f6",
-          ],
-          "fill-opacity": 0.5,
-          "fill-outline-color": [
-            "match",
-            ["get", "category"],
-            "Animal/Bird Migratory Path",
-            "#fb7185",
-            "Coastal Regulatory Zone",
-            "#e11d48",
-            "Heritage",
-            "#be123c",
-            "Reservoir",
-            "#be123c",
-            "Sanctuary",
-            "#991b1b",
-            "Defence Protected Area",
-            "#7f1d1d",
-            "#9ca3af",
-          ],
+    if (!map.getLayer("inner-zones")) {
+      addBelowLabels(
+        {
+          id: "inner-zones",
+          type: "fill",
+          source: "inner-zones-tiles",
+          "source-layer": "inner_zones",
+          paint: {
+            "fill-color": [
+              "match",
+              ["get", "category"],
+              "Animal/Bird Migratory Path",
+              "#fecaca",
+              "Coastal Regulatory Zone",
+              "#fb7185",
+              "Heritage",
+              "#f43f5e",
+              "Reservoir",
+              "#e11d48",
+              "Sanctuary",
+              "#dc2626",
+              "Defence Protected Area",
+              "#991b1b",
+              "#f3f4f6",
+            ],
+            "fill-opacity": 0.5,
+            "fill-outline-color": [
+              "match",
+              ["get", "category"],
+              "Animal/Bird Migratory Path",
+              "#fb7185",
+              "Coastal Regulatory Zone",
+              "#e11d48",
+              "Heritage",
+              "#be123c",
+              "Reservoir",
+              "#be123c",
+              "Sanctuary",
+              "#991b1b",
+              "Defence Protected Area",
+              "#7f1d1d",
+              "#9ca3af",
+            ],
+          },
         },
-      },
-      labelLayerId,
-    );
+        labelLayerId,
+      );
+    }
   }
 
   // Add CMS tiles

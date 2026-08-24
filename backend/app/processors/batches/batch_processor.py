@@ -19,6 +19,11 @@ from app.engine.feasibility_engine import (
     format_zone_description
 )
 
+# UAT toggle (2026-08-24): keep batch feasibility scoped to Airport + MoD only.
+# Revert by setting this to False.
+UAT_REPORT_AIRPORT_MOD_ONLY = True
+UAT_EXCLUDED_LAYER_LABEL = "Excluded for UAT"
+
 
 async def get_batch_airport_zones(coordinates: List[Dict], db: AsyncSession) -> List[Dict[str, Any]]:
     """
@@ -277,8 +282,16 @@ def save_batch_to_csv(
             result.get("feasibility", ""),  # Feasibility (Yes/NOC/No)
             result.get("most_restrictive_airport", "No zones exist"),  # Airport Zone
             result.get("most_restrictive_mod", "No zones exist"),  # MoD Zone
-            result.get("most_restrictive_forest", "No zones exist"),  # Forest Zone
-            result.get("most_restrictive_inner_zone", "No zones exist"),  # Inner Zone
+            (
+                UAT_EXCLUDED_LAYER_LABEL
+                if UAT_REPORT_AIRPORT_MOD_ONLY
+                else result.get("most_restrictive_forest", "No zones exist")
+            ),  # Forest Zone
+            (
+                UAT_EXCLUDED_LAYER_LABEL
+                if UAT_REPORT_AIRPORT_MOD_ONLY
+                else result.get("most_restrictive_inner_zone", "No zones exist")
+            ),  # Inner Zone
         ]
         writer.writerow(row)
     
@@ -318,8 +331,12 @@ async def generate_batch_report(coordinates: List[Dict], db: AsyncSession) -> Di
         # Execute both batch queries
         airport_zones = await get_batch_airport_zones(coordinates, db)
         mod_zones = await get_batch_mod_zones(coordinates, db)
-        forest_zones = await get_batch_forest_zones(coordinates, db)
-        inner_zones = await get_batch_inner_zones(coordinates, db)
+        if UAT_REPORT_AIRPORT_MOD_ONLY:
+            forest_zones = []
+            inner_zones = []
+        else:
+            forest_zones = await get_batch_forest_zones(coordinates, db)
+            inner_zones = await get_batch_inner_zones(coordinates, db)
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Database query failed: {str(e)}")
     

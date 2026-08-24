@@ -162,7 +162,7 @@ async def get_mod_tile(z: int, x: int, y: int, db: AsyncSession = Depends(get_db
             raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.get("/forest/{z}/{x}/{y}.mvt")
+# @router.get("/forest/{z}/{x}/{y}.mvt")
 async def get_forest_tile(z: int, x: int, y: int, db: AsyncSession = Depends(get_db)):
     if z > MAX_ZOOM:
         return Response(status_code=204)
@@ -181,7 +181,7 @@ async def get_forest_tile(z: int, x: int, y: int, db: AsyncSession = Depends(get
             raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.get("/inner-zones/{z}/{x}/{y}.mvt")
+# @router.get("/inner-zones/{z}/{x}/{y}.mvt")
 async def get_inner_zones_tile(z: int, x: int, y: int, db: AsyncSession = Depends(get_db)):
     if z > MAX_ZOOM:
         return Response(status_code=204)

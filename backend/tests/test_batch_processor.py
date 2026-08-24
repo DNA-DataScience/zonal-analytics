@@ -40,22 +40,19 @@ def test_batch_csv_includes_inner_zone_column():
     )
 
     assert "Most Restrictive Inner Zone" in csv_content.splitlines()[0]
-    assert "Reservoir - Nagarjuna Sagar" in csv_content
+    assert "Excluded for UAT" in csv_content
 
 
 @pytest.mark.asyncio
-async def test_batch_inner_zone_forces_no_feasibility():
+async def test_batch_uses_only_airport_and_mod_queries_in_uat_mode():
     db = FakeSession(
         results=[
             [],  # airport zones
             [],  # mod zones
-            [],  # forest zones
-            [(1, "Reservoir", "Nagarjuna Sagar", "TS", "Telangana")],  # inner zones
         ]
     )
 
     result = await generate_batch_report([{"id": 1, "lat": 20, "lon": 73}], db)
 
-    assert ",No," in result["csv_content"]
-    assert "Reservoir - Nagarjuna Sagar" in result["csv_content"]
-    assert len(db.calls) == 4
+    assert "Excluded for UAT" in result["csv_content"]
+    assert len(db.calls) == 2
